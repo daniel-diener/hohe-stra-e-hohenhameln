@@ -1,21 +1,27 @@
 import Link from "next/link";
 import { formatFlaeche, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { bilderVon, type Objekt } from "@/lib/objekte";
-import { Bild } from "./Bild";
+import type { Objekt } from "@/lib/objekte";
+import { Plan } from "./Bild";
 
-export function ObjektKarte({ objekt }: { objekt: Objekt }) {
+export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {
   return (
-    <Link href={`/objekte/${objekt.slug}`} className={`objekt-karte status-${objekt.status}`}>
-      <Bild bild={bilderVon(objekt)[0]} titel={objekt.titel} />
+    <Link href={`/objekte/${o.slug}`} className={`objekt-karte status-${o.status}`}>
+      <Plan
+        src={o.grundriss.src}
+        alt={`Grundriss ${o.titel}`}
+        breite={o.grundriss.breite}
+        hoehe={o.grundriss.hoehe}
+        sizes="(max-width: 700px) 100vw, 360px"
+      />
       <div className="objekt-text">
-        <span className={`marke ${objekt.status}`}>{objektStatusLabel[objekt.status]}</span>
-        <h3>{objekt.titel}</h3>
+        <span className={`marke ${o.status}`}>{objektStatusLabel[o.status]}</span>
+        <h3>{o.titel}</h3>
         <p className="eckdaten">
-          {objekt.zimmer} Zi. · {formatFlaeche(objekt.wohnflaeche)} · {objekt.lage}
-          {objekt.freisitz ? ` · ${objekt.freisitz.art}` : ""}
+          {o.zimmer} Zi. · {formatFlaeche(o.wohnflaeche)} · {o.freisitz.art} {o.freisitz.seite}
+          {o.garten ? " · Garten" : ""}
         </p>
-        <p className="preis">{preisText(objekt)}</p>
+        <p className="preis">{preisText(o)}</p>
       </div>
     </Link>
   );

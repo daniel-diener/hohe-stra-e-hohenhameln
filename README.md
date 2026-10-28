@@ -26,12 +26,16 @@ supabase/migrations/      Schema und Zeilensicherheit
 
 ## Objekte pflegen
 
-Alles steht in `src/lib/objekte.ts`. Ändern, committen, pushen — Vercel
+Alles steht in `src/lib/objekte.ts` — 16 Wohnungen, Werte aus dem Exposé
+(04/2026). `npm test` rechnet für jede Wohnung nach, ob Räume plus halber
+Freisitz die angegebene Wohnfläche ergeben. Grundrisse liegen unter
+`public/grundrisse/` (aus dem Exposé geschnitten), Visualisierungen unter
+`public/projekt/`. Ändern, committen, pushen — Vercel
 deployt `main` automatisch. Ein Objekt auf `status: "reserviert"` oder
 `"verkauft"` setzen, statt es zu löschen: Leads verweisen über den `slug`
 darauf, und der Link in alten Anzeigen soll weiter funktionieren.
 
-Alles mit **TODO** ist Platzhalter — Texte, Preise, Flächen, Energiewerte,
+Alles mit **TODO** fehlt noch — Preise, Energieausweis, Provision,
 Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 
 ## Einrichten
