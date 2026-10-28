@@ -1,4 +1,6 @@
 import { AnfrageFormular } from "@/components/AnfrageFormular";
+import Image from "next/image";
+import { Bild } from "@/components/Bild";
 import { ObjektKarte } from "@/components/ObjektKarte";
 import { objekte, projekt } from "@/lib/objekte";
 
@@ -9,6 +11,7 @@ export default function Start() {
   return (
     <main>
       <section className="held">
+        <Image src={projekt.bilder[0].src} alt={projekt.bilder[0].alt} fill priority sizes="100vw" className="held-bild" />
         <div className="breite">
           <p className="ueber">{projekt.adresse}</p>
           <h1>{projekt.claim}</h1>
@@ -34,6 +37,10 @@ export default function Start() {
           <ul className="liste">
             {projekt.haus.map((punkt) => <li key={punkt}>{punkt}</li>)}
           </ul>
+          <div className="haus-galerie">
+            {projekt.bilder.slice(1).map((b) => <Bild key={b.src} bild={b} titel={b.alt} />)}
+          </div>
+          <p className="klein bildhinweis">Visualisierungen, unverbindlich. Abweichungen in Ausführung und Bepflanzung möglich.</p>
         </div>
       </section>
 

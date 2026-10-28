@@ -52,6 +52,13 @@ export const projekt = {
   einleitung:
     "In der Hohen Straße 11 entsteht ein Mehrfamilienhaus mit Aufzug, Photovoltaik auf dem Dach und " +
     "begrüntem Grundstück. Jede Wohnung hat eine eigene Terrasse oder Loggia und einen Hauswirtschaftsraum.",
+  /** Visualisierungen des Hauses. Das erste ist das Titelbild der Startseite. */
+  bilder: [
+    { src: "/projekt/eingang.jpg", alt: "Visualisierung: Hauseingang mit Treppenhaus, Fahrradplätzen und Garten" },
+    { src: "/projekt/luftbild.jpg", alt: "Visualisierung: Luftbild des Hauses mit Staffelgeschoss, Dachterrassen und Stellplätzen" },
+    { src: "/projekt/garten.jpg", alt: "Visualisierung: Gartenseite mit Balkonen und Loggien" },
+    { src: "/projekt/zufahrt-abend.jpg", alt: "Visualisierung: Zufahrt am Abend mit Stellplätzen" },
+  ],
   // Aus der Genehmigungsplanung; Stand 19.01.2026.
   haus: [
     "Neubau eines Mehrfamilienhauses: Erdgeschoss, Obergeschoss und Staffelgeschoss",
@@ -202,6 +209,17 @@ export const objekte: Objekt[] = [
     ausstattung: ["Terrasse", "Rollstuhlgerecht geplant", ...HAUS],
   }),
 ];
+
+/**
+ * Bilder eines Objekts — oder, solange es keine eigenen gibt, die
+ * Visualisierungen des Hauses, je Objekt um eins versetzt, damit die Karten
+ * auf der Startseite nicht alle gleich aussehen.
+ */
+export function bilderVon(o: Objekt): Objekt["bilder"] {
+  if (o.bilder.length > 0) return o.bilder;
+  const i = objekte.indexOf(o) % projekt.bilder.length;
+  return [...projekt.bilder.slice(i), ...projekt.bilder.slice(0, i)];
+}
 
 export function objektNach(slug: string | null | undefined): Objekt | undefined {
   return slug ? objekte.find((o) => o.slug === slug) : undefined;

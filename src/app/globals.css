@@ -50,8 +50,18 @@ p { margin: 0 0 1em; }
 .fuss { border-top: 1px solid var(--linie); padding: 28px 0; margin-top: 64px; color: var(--leise); font-size: 0.9rem; }
 
 /* Abschnitte */
-.held { padding: clamp(56px, 10vw, 120px) 0; background: linear-gradient(160deg, var(--hell), var(--grund)); }
-.held .ueber { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--leise); }
+.held {
+  position: relative; overflow: hidden; color: #fff; isolation: isolate;
+  min-height: min(78vh, 720px); display: flex; align-items: flex-end;
+  padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 6vw, 72px);
+}
+.held-bild { object-fit: cover; z-index: -2; }
+/* Verlauf von unten: Die Schrift steht auf dem Bild und muss auf Himmel wie Rasen lesbar bleiben. */
+.held::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(20, 16, 12, 0.85), rgba(20, 16, 12, 0.45) 55%, rgba(20, 16, 12, 0.05) 85%); }
+.held h1, .held p { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35); }
+.held .breite { width: 100%; }
+.held .ueber { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: rgba(255, 255, 255, 0.85); }
+.held .einleitung { color: rgba(255, 255, 255, 0.92); }
 .einleitung { font-size: 1.15rem; color: var(--leise); max-width: 640px; }
 .abschnitt { padding: 56px 0; }
 .abschnitt.hell { background: var(--hell); }
@@ -159,3 +169,7 @@ label.haken input { width: auto; margin-top: 5px; }
 .raeume td, .raeume th { padding: 6px 0; border-bottom: 1px solid var(--linie); text-align: left; font-weight: 400; }
 .raeume td:last-child, .raeume th:last-child { text-align: right; }
 .raeume th { font-weight: 700; border-bottom: 0; }
+
+.haus-galerie { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: 24px; }
+.haus-galerie .bild { border-radius: var(--radius); }
+.bildhinweis { margin-top: 8px; }

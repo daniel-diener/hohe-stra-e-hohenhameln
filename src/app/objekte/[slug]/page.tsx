@@ -4,7 +4,7 @@ import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Bild } from "@/components/Bild";
 import { formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { objektNach, objekte } from "@/lib/objekte";
+import { bilderVon, objektNach, objekte } from "@/lib/objekte";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: o.titel,
     description: `${o.art}, ${o.zimmer} Zimmer, ${formatFlaeche(o.wohnflaeche)}, ${preisText(o)}. ${o.kurz}`,
-    openGraph: o.bilder[0] ? { images: [o.bilder[0].src] } : undefined,
+    openGraph: { images: [bilderVon(o)[0].src] },
   };
 }
 
@@ -28,6 +28,7 @@ export default async function ObjektSeite({ params }: Props) {
   const o = objektNach((await params).slug);
   if (!o) notFound();
 
+  const bilder = bilderVon(o);
   const eckdaten: [string, string][] = [
     ["Kaufpreis", preisText(o)],
     ["Wohnfläche", formatFlaeche(o.wohnflaeche)],
@@ -43,12 +44,13 @@ export default async function ObjektSeite({ params }: Props) {
   return (
     <main className="abschnitt">
       <div className="breite">
-        <Bild bild={o.bilder[0]} titel={o.titel} gross />
-        {o.bilder.length > 1 && (
+        <Bild bild={bilder[0]} titel={o.titel} gross />
+        {bilder.length > 1 && (
           <div className="galerie">
-            {o.bilder.slice(1).map((b) => <Bild key={b.src} bild={b} titel={o.titel} />)}
+            {bilder.slice(1).map((b) => <Bild key={b.src} bild={b} titel={o.titel} />)}
           </div>
         )}
+        {o.bilder.length === 0 && <p className="klein bildhinweis">Visualisierungen des Hauses, unverbindlich.</p>}
 
         <div className="zwei-spalten">
           <article>
