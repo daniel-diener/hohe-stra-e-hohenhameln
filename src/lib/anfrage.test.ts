@@ -18,13 +18,13 @@ function formular(felder: Record<string, string>) {
 describe("pruefeAnfrage", () => {
   it("nimmt eine vollständige Anfrage an", () => {
     const p = pruefeAnfrage(
-      formular({ objekt: "wohnung-1", telefon: "0511 123456", rueckruf: "on", zweck: "kapitalanlage", utm_source: "immoscout" }),
+      formular({ objekt: "wohnung-4", telefon: "0511 123456", rueckruf: "on", zweck: "kapitalanlage", utm_source: "immoscout" }),
       JETZT,
     );
     expect(p).toEqual({
       ok: true,
       anfrage: {
-        objekt_slug: "wohnung-1",
+        objekt_slug: "wohnung-4",
         name: "Erika Mustermann",
         email: "erika@example.de",
         telefon: "0511 123456",

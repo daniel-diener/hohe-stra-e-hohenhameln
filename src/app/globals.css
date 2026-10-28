@@ -154,3 +154,8 @@ label.haken input { width: auto; margin-top: 5px; }
 .gefahr summary { cursor: pointer; color: var(--rot); font-size: 0.9rem; }
 .gefahr form { display: grid; gap: 10px; margin-top: 10px; }
 .gefahr-knopf { background: var(--rot); justify-self: start; }
+
+.raeume { width: 100%; max-width: 420px; border-collapse: collapse; margin-bottom: 8px; }
+.raeume td, .raeume th { padding: 6px 0; border-bottom: 1px solid var(--linie); text-align: left; font-weight: 400; }
+.raeume td:last-child, .raeume th:last-child { text-align: right; }
+.raeume th { font-weight: 700; border-bottom: 0; }

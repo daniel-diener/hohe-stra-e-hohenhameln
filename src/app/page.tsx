@@ -28,7 +28,16 @@ export default function Start() {
         </div>
       </section>
 
-      <section id="lage" className="abschnitt hell">
+      <section className="abschnitt hell">
+        <div className="breite">
+          <h2>Das Haus</h2>
+          <ul className="liste">
+            {projekt.haus.map((punkt) => <li key={punkt}>{punkt}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section id="lage" className="abschnitt">
         <div className="breite">
           <h2>Die Lage</h2>
           <ul className="liste">
@@ -37,7 +46,7 @@ export default function Start() {
         </div>
       </section>
 
-      <section id="kontakt" className="abschnitt">
+      <section id="kontakt" className="abschnitt hell">
         <div className="breite zwei-spalten">
           <div>
             <h2>Exposé und Besichtigung</h2>

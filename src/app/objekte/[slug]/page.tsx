@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Bild } from "@/components/Bild";
-import { formatEuro, formatFlaeche, formatZahl } from "@/lib/format";
+import { formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { objektNach, objekte } from "@/lib/objekte";
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!o) return {};
   return {
     title: o.titel,
-    description: `${o.art}, ${o.zimmer} Zimmer, ${formatFlaeche(o.wohnflaeche)}, ${formatEuro(o.kaufpreis)}. ${o.kurz}`,
+    description: `${o.art}, ${o.zimmer} Zimmer, ${formatFlaeche(o.wohnflaeche)}, ${preisText(o)}. ${o.kurz}`,
     openGraph: o.bilder[0] ? { images: [o.bilder[0].src] } : undefined,
   };
 }
@@ -29,13 +29,15 @@ export default async function ObjektSeite({ params }: Props) {
   if (!o) notFound();
 
   const eckdaten: [string, string][] = [
-    ["Kaufpreis", o.status === "verkauft" ? "Verkauft" : formatEuro(o.kaufpreis)],
+    ["Kaufpreis", preisText(o)],
     ["Wohnfläche", formatFlaeche(o.wohnflaeche)],
     ["Zimmer", formatZahl(o.zimmer)],
-    ...(o.lage ? [["Lage", o.lage] as [string, string]] : []),
-    ...(o.grundstueck ? [["Grundstück", formatFlaeche(o.grundstueck)] as [string, string]] : []),
-    ...(o.baujahr ? [["Baujahr", String(o.baujahr)] as [string, string]] : []),
-    ["Käuferprovision", o.provision],
+    ["Bäder", formatZahl(o.baeder)],
+    ["Geschoss", o.lage],
+    ...(o.freisitz
+      ? [[o.freisitz.art, `${formatFlaeche(o.freisitz.flaeche)} · ${o.freisitz.seite}`] as [string, string]]
+      : []),
+    ...(o.provision ? [["Käuferprovision", o.provision] as [string, string]] : []),
   ];
 
   return (
@@ -61,6 +63,20 @@ export default async function ObjektSeite({ params }: Props) {
             </dl>
 
             {o.beschreibung.map((absatz, i) => <p key={i}>{absatz}</p>)}
+
+            <h2>Räume</h2>
+            <table className="raeume">
+              <tbody>
+                {o.raeume.map((r, i) => (
+                  <tr key={i}><td>{r.name}</td><td>{formatFlaeche(r.flaeche)}</td></tr>
+                ))}
+                <tr><th>Wohnfläche</th><th>{formatFlaeche(o.wohnflaeche)}</th></tr>
+              </tbody>
+            </table>
+            <p className="klein">
+              Flächen laut Genehmigungsplanung (Stand Januar 2026), ohne {o.freisitz?.art ?? "Freisitz"}.
+              Maßgeblich ist die Wohnflächenberechnung im Kaufvertrag.
+            </p>
 
             <h2>Ausstattung</h2>
             <ul className="liste">{o.ausstattung.map((a) => <li key={a}>{a}</li>)}</ul>

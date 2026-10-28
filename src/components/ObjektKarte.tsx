@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatEuro, formatFlaeche } from "@/lib/format";
+import { formatFlaeche, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import type { Objekt } from "@/lib/objekte";
 import { Bild } from "./Bild";
@@ -12,10 +12,10 @@ export function ObjektKarte({ objekt }: { objekt: Objekt }) {
         <span className={`marke ${objekt.status}`}>{objektStatusLabel[objekt.status]}</span>
         <h3>{objekt.titel}</h3>
         <p className="eckdaten">
-          {objekt.zimmer} Zi. · {formatFlaeche(objekt.wohnflaeche)}
-          {objekt.lage ? ` · ${objekt.lage}` : ""}
+          {objekt.zimmer} Zi. · {formatFlaeche(objekt.wohnflaeche)} · {objekt.lage}
+          {objekt.freisitz ? ` · ${objekt.freisitz.art}` : ""}
         </p>
-        <p className="preis">{objekt.status === "verkauft" ? "Verkauft" : formatEuro(objekt.kaufpreis)}</p>
+        <p className="preis">{preisText(objekt)}</p>
       </div>
     </Link>
   );
