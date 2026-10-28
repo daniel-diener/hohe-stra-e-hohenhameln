@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   metadataBase: process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined,
   title: { default: `${projekt.name}, ${projekt.ort} — ${projekt.claim}`, template: `%s · ${projekt.name} ${projekt.ort}` },
   description: `${projekt.claim}: Neubauwohnungen mit Terrasse, Balkon oder Dachterrasse, ${projekt.adresse}. Jetzt Exposé anfragen.`,
+  // Erst mit eigener Domain in die Suchmaschinen — eine Vorschau mit
+  // „Preis auf Anfrage" und TODO-Impressum soll niemand bei Google finden.
+  robots: process.env.SITE_URL ? undefined : { index: false, follow: false },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -10,6 +10,10 @@ import { createServerClient } from "@supabase/ssr";
  * und am Ende RLS: Ein Konto ohne Eintrag in `team` sieht hier nur „kein Zugang".
  */
 export async function middleware(req: NextRequest) {
+  // Ohne Supabase (Vorschau) gibt es keinen Vertrieb — zurück zur Startseite
+  // statt eines Absturzes beim Anlegen des Clients.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return NextResponse.redirect(new URL("/", req.url));
+
   const res = NextResponse.next({ request: req });
 
   const supabase = createServerClient(

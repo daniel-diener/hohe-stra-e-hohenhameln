@@ -7,6 +7,8 @@ import { supabaseDienst } from "@/lib/supabase-server";
 export type AnfrageStand =
   | { stand: "offen" }
   | { stand: "gesendet" }
+  /** Ohne Datenbank, etwa auf einer Vorschau für den Auftraggeber. */
+  | { stand: "vorschau" }
   | { stand: "fehler"; fehler: Extract<Pruefung, { spam: false }>["fehler"]; meldung?: string };
 
 export async function sendeAnfrage(_vorher: AnfrageStand, form: FormData): Promise<AnfrageStand> {
@@ -16,6 +18,8 @@ export async function sendeAnfrage(_vorher: AnfrageStand, form: FormData): Promi
     if (pruefung.spam) return { stand: "gesendet" };
     return { stand: "fehler", fehler: pruefung.fehler };
   }
+
+  if (!process.env.SUPABASE_SECRET_KEY) return { stand: "vorschau" };
 
   const a = pruefung.anfrage;
   const { data, error } = await supabaseDienst()

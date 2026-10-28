@@ -39,6 +39,18 @@ export function AnfrageFormular({ objektSlug }: { objektSlug?: string }) {
     );
   }
 
+  if (stand.stand === "vorschau") {
+    return (
+      <div className="karte" role="status">
+        <h3>Vorschau</h3>
+        <p>
+          Das Formular ist geprüft und funktioniert — in dieser Vorschau werden Anfragen aber noch nicht
+          gespeichert. Das ändert sich, sobald die Datenbank angebunden ist.
+        </p>
+      </div>
+    );
+  }
+
   const fehler = stand.stand === "fehler" ? stand.fehler : {};
 
   return (
