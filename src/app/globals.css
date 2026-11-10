@@ -234,13 +234,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 .objekt-karte:hover { text-decoration: none; border-color: hsl(var(--foreground) / 0.25); box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.18); transform: translateY(-2px); }
-.objekt-karte.status-verkauft { opacity: 0.55; }
 .karte-kopf { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px 0; }
 .karte-kopf .mono { color: hsl(var(--muted-foreground)); font-size: 0.75rem; }
 .status-punkt { display: inline-flex; align-items: center; gap: 6px; font: 500 0.75rem var(--font-sans); color: hsl(var(--muted-foreground)); text-transform: none; letter-spacing: 0; }
 .status-punkt::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .status-punkt.verfuegbar { color: hsl(var(--success)); }
 .status-punkt.reserviert { color: hsl(var(--warning)); }
+.status-punkt.verkauft { color: hsl(var(--destructive, 0 72% 45%)); }
 .objekt-text { padding: 4px 18px 18px; display: flex; flex-direction: column; flex: 1; }
 .objekt-text h3 { font-size: 1.0625rem; margin: 0 0 14px; }
 .kennwerte { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 20px; margin: 0 0 16px; }

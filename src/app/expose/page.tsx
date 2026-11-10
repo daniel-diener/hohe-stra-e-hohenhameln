@@ -259,7 +259,7 @@ function WohnungsBlatt({ o }: { o: Objekt }) {
       <div className="ex-grundriss">
         <Plan
           src={o.grundriss.src} alt={`Grundriss ${o.titel}`} breite={o.grundriss.breite} hoehe={o.grundriss.hoehe}
-          sizes="182mm" reserviert={o.status === "reserviert"}
+          sizes="182mm" status={o.status}
         />
       </div>
       <div className="wohnung-spalten">

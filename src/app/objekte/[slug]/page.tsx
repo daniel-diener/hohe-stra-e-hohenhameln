@@ -107,7 +107,7 @@ export default async function ObjektSeite({ params }: Props) {
                 breite={o.grundriss.breite}
                 hoehe={o.grundriss.hoehe}
                 sizes="(max-width: 860px) 100vw, 680px"
-                reserviert={o.status === "reserviert"}
+                status={o.status}
               />
               <figcaption className="klein leise">
                 Grundriss{o.grundriss.baugleichMit ? ` baugleich mit WE ${o.grundriss.baugleichMit}, daher deren Nummer im Plan` : ""}.

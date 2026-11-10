@@ -1,27 +1,29 @@
 import Image from "next/image";
 import { JudekLogo } from "./JudekLogo";
+import type { ObjektStatus } from "@/lib/objekte";
 
 /** Ein Grundriss: ganz zeigen, nie beschneiden — ein halber Plan lügt. */
 export function Plan({
-  src, alt, breite, hoehe, sizes, reserviert = false,
-}: { src: string; alt: string; breite: number; hoehe: number; sizes: string; reserviert?: boolean }) {
+  src, alt, breite, hoehe, sizes, status = "verfuegbar",
+}: { src: string; alt: string; breite: number; hoehe: number; sizes: string; status?: ObjektStatus }) {
+  const vergeben = status !== "verfuegbar";
   return (
-    <div className={`plan ${reserviert ? "plan-reserviert" : ""}`}>
+    <div className={`plan ${vergeben ? "plan-reserviert" : ""}`}>
       <Image src={src} alt={alt} width={breite} height={hoehe} sizes={sizes} />
-      {reserviert && <ReserviertSchild />}
+      {vergeben && <StatusSchild titel={status === "verkauft" ? "Verkauft" : "Reserviert"} />}
     </div>
   );
 }
 
 /**
- * Das Schild über dem Grundriss reservierter Wohnungen: „Reserviert" und
- * darunter der Bauherr. Der Plan bleibt dahinter sichtbar.
+ * Das Schild über dem Grundriss reservierter oder verkaufter Wohnungen:
+ * „Reserviert" bzw. „Verkauft" und darunter der Bauherr. Der Plan bleibt dahinter sichtbar.
  */
-function ReserviertSchild() {
+function StatusSchild({ titel }: { titel: string }) {
   return (
     <div className="schild" aria-hidden="true">
       <div className="schild-box">
-        <p className="schild-titel">Reserviert</p>
+        <p className="schild-titel">{titel}</p>
         <JudekLogo />
       </div>
     </div>
