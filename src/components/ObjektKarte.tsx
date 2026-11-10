@@ -23,6 +23,7 @@ export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {
         breite={o.grundriss.breite}
         hoehe={o.grundriss.hoehe}
         sizes="(max-width: 700px) 100vw, 360px"
+        reserviert={o.status === "reserviert"}
       />
       <div className="objekt-text">
         <h3>{untertitel(o)}</h3>

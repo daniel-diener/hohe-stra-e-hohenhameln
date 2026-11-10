@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Icon, type IconName } from "@/components/Icon";
-import { WohnungsFilter } from "@/components/WohnungsFilter";
-import { objekte, projekt } from "@/lib/objekte";
+import { Wohnungen } from "@/components/Wohnungen";
+import { adresseLd, objekte, projekt } from "@/lib/objekte";
+import { seitenUrl } from "@/lib/seite";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Start() {
   const frei = objekte.filter((o) => o.status === "verfuegbar").length;
@@ -10,15 +14,32 @@ export default function Start() {
   const p = projekt.ansprechpartner;
   const [eingang, luftbild, garten, zufahrt] = projekt.bilder;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ApartmentComplex",
+    name: `${projekt.name}, ${projekt.ort}`,
+    description: projekt.einleitung,
+    url: seitenUrl.href,
+    image: projekt.bilder.map((b) => new URL(b.src, seitenUrl).href),
+    address: adresseLd,
+    numberOfAccommodationUnits: objekte.length,
+    numberOfAvailableAccommodationUnits: frei,
+  };
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <section className="held">
         <Image src={eingang.src} alt={eingang.alt} fill priority sizes="100vw" className="held-bild" />
         <div className="breite held-inhalt">
           <p className="badge">
-            <span className="punkt" /> Neubau · Fertigstellung 2026/2027
+            <span className="punkt" /> Neubau · Fertigstellung {projekt.fertigstellung}
           </p>
+          <p className="held-beiname">{projekt.beiname}</p>
           <h1>Wohnen an der<br />Hohen Straße.</h1>
+          <ul className="held-vorteile">
+            {projekt.vorteile.map((v) => <li key={v}>{v}</li>)}
+          </ul>
           <p className="held-text">{projekt.einleitung}</p>
           <div className="aktionen">
             <a href="#objekte" className="knopf hell-knopf">
@@ -51,7 +72,7 @@ export default function Start() {
               barrierefrei über den Aufzug erreichbar.
             </p>
           </header>
-          <WohnungsFilter />
+          <Wohnungen />
         </div>
       </section>
 
@@ -125,7 +146,7 @@ export default function Start() {
               <a href={`mailto:${p.email}`}><Icon name="mail" size={16} /> {p.email}</a>
             </div>
           </div>
-          <AnfrageFormular />
+          <AnfrageFormular optionen={objekte.filter((o) => o.status !== "verkauft").map(({ slug, titel }) => ({ slug, titel }))} />
         </div>
       </section>
     </main>

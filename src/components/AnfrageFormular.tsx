@@ -4,11 +4,14 @@ import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import { sendeAnfrage, type AnfrageStand } from "@/app/aktionen";
 import { FINANZIERUNG, ZWECK, finanzierungLabel, zweckLabel } from "@/lib/labels";
-import { objekte } from "@/lib/objekte";
 
 const UTM = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
-export function AnfrageFormular({ objektSlug }: { objektSlug?: string }) {
+/**
+ * `optionen` kommt vom Server: so steht im JavaScript nur Slug und Titel der
+ * Wohnungen, nicht der ganze Datenbestand aus `lib/objekte.ts`.
+ */
+export function AnfrageFormular({ objektSlug, optionen = [] }: { objektSlug?: string; optionen?: { slug: string; titel: string }[] }) {
   const [stand, absenden, sendet] = useActionState<AnfrageStand, FormData>(sendeAnfrage, { stand: "offen" });
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -82,7 +85,7 @@ export function AnfrageFormular({ objektSlug }: { objektSlug?: string }) {
           Interesse an
           <select name="objekt" defaultValue="">
             <option value="">Allgemein / noch offen</option>
-            {objekte.filter((o) => o.status !== "verkauft").map((o) => (
+            {optionen.map((o) => (
               <option key={o.slug} value={o.slug}>{o.titel}</option>
             ))}
           </select>

@@ -8,7 +8,8 @@ import { Icon, type IconName } from "@/components/Icon";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { geschossName, objektNach, objekte, projekt } from "@/lib/objekte";
+import { adresseLd, geschossName, objektNach, objekte, projekt } from "@/lib/objekte";
+import { seitenUrl } from "@/lib/seite";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,10 +22,21 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const o = objektNach((await params).slug);
   if (!o) return {};
+  const description = `${o.zimmer}-Zimmer-Wohnung, ${formatFlaeche(o.wohnflaeche)}, ${geschossName[o.geschoss]}, ${preisText(o)}. ${o.kurz}`;
+  const bild = o.bilder[0] ?? projekt.bilder[0];
   return {
     title: o.titel,
-    description: `${o.zimmer}-Zimmer-Wohnung, ${formatFlaeche(o.wohnflaeche)}, ${geschossName[o.geschoss]}, ${preisText(o)}. ${o.kurz}`,
-    openGraph: { images: [o.bilder[0]?.src ?? projekt.bilder[0].src] },
+    description,
+    alternates: { canonical: `/objekte/${o.slug}` },
+    // Ersetzt die openGraph-Angaben des Layouts ganz, nicht nur das Bild — daher vollständig.
+    openGraph: {
+      type: "website",
+      locale: "de_DE",
+      siteName: `${projekt.name} ${projekt.ort}`,
+      title: `${o.titel} · ${projekt.name} ${projekt.ort}`,
+      description,
+      images: [{ url: bild.src, alt: bild.alt }],
+    },
   };
 }
 
@@ -52,8 +64,23 @@ export default async function ObjektSeite({ params }: Props) {
   const [vorher, nachher] = [objekte[i - 1], objekte[i + 1]];
   const bilder = o.bilder.length > 0 ? o.bilder : projekt.bilder.slice(0, 3);
 
+  // Strukturierte Daten für Suchmaschinen.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Apartment",
+    name: o.titel,
+    description: o.kurz,
+    url: new URL(`/objekte/${o.slug}`, seitenUrl).href,
+    numberOfRooms: o.zimmer,
+    numberOfBathroomsTotal: o.baeder,
+    floorSize: { "@type": "QuantitativeValue", value: o.wohnflaeche, unitCode: "MTK" },
+    image: new URL(o.grundriss.src, seitenUrl).href,
+    address: adresseLd,
+  };
+
   return (
     <main className="abschnitt objekt-seite">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <div className="breite">
         <nav className="kruemel mono" aria-label="Pfad">
           <Link href="/#objekte">Wohnungen</Link> <span>/</span> {geschossName[o.geschoss]} <span>/</span> WE {o.we}
@@ -80,6 +107,7 @@ export default async function ObjektSeite({ params }: Props) {
                 breite={o.grundriss.breite}
                 hoehe={o.grundriss.hoehe}
                 sizes="(max-width: 860px) 100vw, 680px"
+                reserviert={o.status === "reserviert"}
               />
               <figcaption className="klein leise">
                 Grundriss{o.grundriss.baugleichMit ? ` baugleich mit WE ${o.grundriss.baugleichMit}, daher deren Nummer im Plan` : ""}.

@@ -60,10 +60,18 @@ export const projekt = {
   name: "Hohe Straße",
   ort: "Hohenhameln",
   adresse: "Hohe Straße 11, 31249 Hohenhameln",
+  /**
+   * Beiname für die Vermarktung. Plakate und Schilder tragen „Hohe Straße" —
+   * das bleibt der Name; der Beiname steht auf der Seite dazu.
+   */
+  beiname: "Die Residenz am Marktplatz",
   claim: "16 Eigentumswohnungen in Hohenhameln",
+  fertigstellung: "Ende 2027",
   einleitung:
-    "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 barrierefreie Wohnungen " +
-    "von 55 bis 122 m², jede mit Terrasse, Balkon oder Dachterrasse. Fertigstellung 2026/2027.",
+    "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 Wohnungen von 55 bis 122 m² — " +
+    "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
+  /** Die drei Kernaussagen, groß im Titelbild. */
+  vorteile: ["Förderfähig", "Barrierefrei", "Mit Terrasse oder Balkon"],
   bauherr: "Judek Projekt GmbH",
   architekt: "FINK + TEAM architektur und planung, Hannover",
   /** Visualisierungen des Hauses. Das erste ist das Titelbild der Startseite. */
@@ -96,10 +104,10 @@ export const projekt = {
     { wert: "im Ort", ziel: "Grundschule, Schulzentrum und mehrere Kitas" },
   ],
   ansprechpartner: {
-    // TODO: echte Kontaktdaten.
+    // TODO: Name der Ansprechperson prüfen.
     name: "Daniel Diener",
-    telefon: "+49 000 0000000",
-    email: "anfrage@example.de",
+    telefon: "+49 155 10336973",
+    email: "immobilien@lena-mylin.de",
   },
 } as const;
 
@@ -177,7 +185,7 @@ export const objekte: Objekt[] = [
     raeume: [...R_4ZI(40.77), { name: "Abstellraum", flaeche: 3.68 }],
   }),
   wohnung({
-    we: 2, plan: "we-2-6", geschoss: "UG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
+    we: 2, status: "reserviert", plan: "we-2-6", geschoss: "UG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
     titel: "WE 2 — 2 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 7.13, seite: "Süd" }, garten: true, keller: 5.1,
     kurz: "Kompakte Zweizimmerwohnung mit Terrasse und eigenem Garten nach Süden.",
@@ -226,7 +234,7 @@ export const objekte: Objekt[] = [
     raeume: R_2ZI_SUED,
   }),
   wohnung({
-    we: 7, plan: "we-7-12", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
+    we: 7, status: "reserviert", plan: "we-7-12", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
     titel: "WE 7 — 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 4.83,
     kurz: "Eckwohnung mit Wohn- und Essbereich zum Südbalkon, Schlafzimmer und Kinderzimmer an der Giebelseite.",
@@ -291,7 +299,7 @@ export const objekte: Objekt[] = [
     raeume: R_3ZI_SUED,
   }),
   wohnung({
-    we: 13, plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
+    we: 13, status: "reserviert", plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
     titel: "WE 13 — 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 10.66, seite: "Nord" }, garten: false, keller: 4.42,
     kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad und Balkon.",
@@ -332,7 +340,7 @@ export const objekte: Objekt[] = [
     ],
   }),
   wohnung({
-    we: 16, plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
+    we: 16, status: "reserviert", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
     titel: "WE 16 — Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.33, seite: "Süd/West" }, garten: false, keller: 5.48,
     kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen — Abendsonne inklusive.",
@@ -349,6 +357,16 @@ export const objekte: Objekt[] = [
 ];
 
 /** Von oben nach unten — so liest man ein Haus. */
+/** Adresse des Hauses als schema.org-PostalAddress, für die strukturierten Daten. */
+export const adresseLd = {
+  "@type": "PostalAddress",
+  streetAddress: "Hohe Straße 11",
+  postalCode: "31249",
+  addressLocality: "Hohenhameln",
+  addressRegion: "Niedersachsen",
+  addressCountry: "DE",
+};
+
 export const geschosse: Geschoss[] = ["SG", "OG", "EG", "UG"];
 
 export function objektNach(slug: string | null | undefined): Objekt | undefined {

@@ -2,16 +2,30 @@ import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
+import { Icon } from "@/components/Icon";
 import { projekt } from "@/lib/objekte";
+import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
+const titel = `${projekt.name} ${projekt.ort} — ${projekt.beiname}`;
+const beschreibung = `${projekt.claim}: KfW-40-Neubau, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
+
 export const metadata: Metadata = {
-  metadataBase: process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined,
-  title: { default: `${projekt.name}, ${projekt.ort} — ${projekt.claim}`, template: `%s · ${projekt.name} ${projekt.ort}` },
-  description: `${projekt.claim}: Neubauwohnungen mit Terrasse, Balkon oder Dachterrasse, ${projekt.adresse}. Jetzt Exposé anfragen.`,
-  // Erst mit eigener Domain in die Suchmaschinen — eine Vorschau mit
-  // „Preis auf Anfrage" und TODO-Impressum soll niemand bei Google finden.
-  robots: process.env.SITE_URL ? undefined : { index: false, follow: false },
+  metadataBase: seitenUrl,
+  title: { default: titel, template: `%s · ${projekt.name} ${projekt.ort}` },
+  description: beschreibung,
+  // Vorschau beim Teilen in WhatsApp, Mail, Facebook & Co.
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    siteName: `${projekt.name} ${projekt.ort}`,
+    title: titel,
+    description: beschreibung,
+    images: [{ url: projekt.bilder[0].src, width: 2000, height: 1234, alt: projekt.bilder[0].alt }],
+  },
+  twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: false, email: false, address: false },
+  robots: indexierbar ? undefined : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
@@ -25,11 +39,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
+        <div className="kontaktleiste">
+          <div className="breite kontaktleiste-innen">
+            <span className="nur-breit leise">Beratung und Exposé:</span>
+            <a href={`tel:${projekt.ansprechpartner.telefon.replace(/\s/g, "")}`}>
+              <Icon name="telefon" size={14} /> {projekt.ansprechpartner.telefon}
+            </a>
+            <a href={`mailto:${projekt.ansprechpartner.email}`}>
+              <Icon name="mail" size={14} /> {projekt.ansprechpartner.email}
+            </a>
+          </div>
+        </div>
         <header className="kopf">
           <div className="breite kopf-innen">
             <Link href="/" className="marke-name">
               <span className="logo-zeichen" aria-hidden="true">HS</span>
-              <span>{projekt.name} <span className="leise">{projekt.ort}</span></span>
+              <span className="marke-text">
+                <span>{projekt.name} <span className="leise">{projekt.ort}</span></span>
+                <span className="marke-beiname">{projekt.beiname}</span>
+              </span>
             </Link>
             <nav>
               <Link href="/#objekte" className="nur-breit">Wohnungen</Link>
