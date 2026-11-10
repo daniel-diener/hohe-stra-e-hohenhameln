@@ -12,6 +12,7 @@ export default function Start() {
   const frei = objekte.filter((o) => o.status === "verfuegbar").length;
   const flaechen = objekte.map((o) => o.wohnflaeche);
   const p = projekt.ansprechpartner;
+  const t = projekt.team;
   const [eingang, luftbild, garten, zufahrt] = projekt.bilder;
 
   const jsonLd = {
@@ -141,10 +142,22 @@ export default function Start() {
               einen Termin.
             </p>
             <div className="person">
-              <p className="leise klein person-rolle">{p.rolle}</p>
-              <p className="person-name">{p.name}</p>
-              <a href={`tel:${p.telefon.replace(/\s/g, "")}`}><Icon name="telefon" size={16} /> {p.telefon}</a>
-              <a href={`mailto:${p.email}`}><Icon name="mail" size={16} /> {p.email}</a>
+              <figure className="person-bild">
+                <Image
+                  src={t.bild.src} alt={t.bild.alt} width={t.bild.breite} height={t.bild.hoehe}
+                  sizes="(max-width: 860px) 100vw, 420px"
+                />
+              </figure>
+              <div className="person-text">
+                <p className="eyebrow person-rolle">{t.titel}</p>
+                <p className="person-name">{t.namen.join(" & ")}</p>
+                <p className="leise">{t.text}</p>
+                <div className="person-kontakt">
+                  <p className="leise klein person-rolle">{p.rolle}: <strong className="vorn">{p.name}</strong></p>
+                  <a href={`tel:${p.telefon.replace(/\s/g, "")}`}><Icon name="telefon" size={16} /> {p.telefon}</a>
+                  <a href={`mailto:${p.email}`}><Icon name="mail" size={16} /> {p.email}</a>
+                </div>
+              </div>
             </div>
           </div>
           <AnfrageFormular optionen={objekte.filter((o) => o.status !== "verkauft").map(({ slug, titel }) => ({ slug, titel }))} />

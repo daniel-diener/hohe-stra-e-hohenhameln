@@ -320,9 +320,15 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 /* ── Kontakt ──────────────────────────────────────────────── */
-.person { display: grid; gap: 8px; margin-top: 32px; padding: 20px 24px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); max-width: 380px; }
+.person { margin-top: 32px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); max-width: 440px; overflow: hidden; background: hsl(var(--card)); }
+.person-bild { margin: 0; aspect-ratio: 5 / 4; overflow: hidden; }
+.person-bild img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
+.person-text { padding: 20px 24px 22px; }
+.person-text .eyebrow { margin-bottom: 8px; }
+.person-text > .leise { margin: 0 0 16px; }
+.person-kontakt { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid hsl(var(--border)); }
 .person-rolle { margin: 0; }
-.person-name { font-weight: 600; margin: 0 0 4px; }
+.person-name { font-weight: 600; font-size: 1.125rem; letter-spacing: -0.015em; margin: 0 0 6px; }
 .vorn { color: hsl(var(--foreground)); }
 .person a { display: inline-flex; align-items: center; gap: 10px; color: hsl(var(--foreground)); }
 .person .icon { color: hsl(var(--muted-foreground)); }

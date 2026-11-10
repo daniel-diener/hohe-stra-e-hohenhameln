@@ -103,6 +103,13 @@ export const projekt = {
     { wert: "zu Fuß", ziel: "Einkauf, Ärzte, Apotheken, Cafés, Bushaltestelle" },
     { wert: "im Ort", ziel: "Grundschule, Schulzentrum und mehrere Kitas" },
   ],
+  /** Projektmanagement — Foto und Namen im Kontaktbereich. Links im Bild Lena Mylin, rechts Daniel Diener. */
+  team: {
+    titel: "Projektmanagement",
+    namen: ["Lena Mylin", "Daniel Diener"],
+    text: "Wir stehen Ihnen bei allen Fragen zur Seite — von der ersten Besichtigung bis zur Übergabe.",
+    bild: { src: "/projekt/team.jpg", breite: 1194, hoehe: 1317, alt: "Lena Mylin und Daniel Diener, Projektmanagement Hohe Straße" },
+  },
   ansprechpartner: {
     // Immer Lena Mylin als Ansprechpartnerin — auf der Seite, in Mails und Antwortvorlagen.
     name: "Lena Mylin",
