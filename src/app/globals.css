@@ -266,6 +266,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .grundriss .schild-box { font-size: clamp(1rem, 3vw, 1.5rem); }
 .schild p { margin: 0; }
 .schild-titel { color: #c8102e; font-size: 2em; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.schild-titel.schild-verkauft { color: hsl(var(--success)); }
 .judek-logo { display: block; width: 7.5em; height: auto; margin: 0.5em auto 0; }
 .grundriss .plan { aspect-ratio: auto; margin: 0; padding: 24px; border: 1px solid hsl(var(--border)); }
 .grundriss .plan img { position: static; width: 100%; height: auto; }

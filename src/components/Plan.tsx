@@ -10,20 +10,22 @@ export function Plan({
   return (
     <div className={`plan ${vergeben ? "plan-reserviert" : ""}`}>
       <Image src={src} alt={alt} width={breite} height={hoehe} sizes={sizes} />
-      {vergeben && <StatusSchild titel={status === "verkauft" ? "Verkauft" : "Reserviert"} />}
+      {vergeben && <StatusSchild verkauft={status === "verkauft"} />}
     </div>
   );
 }
 
 /**
  * Das Schild über dem Grundriss reservierter oder verkaufter Wohnungen:
- * „Reserviert" bzw. „Verkauft" und darunter der Bauherr. Der Plan bleibt dahinter sichtbar.
+ * „Reserviert" bzw. „Erfolgreich verkauft" (grün) und darunter der Bauherr. Der Plan bleibt dahinter sichtbar.
  */
-function StatusSchild({ titel }: { titel: string }) {
+function StatusSchild({ verkauft }: { verkauft: boolean }) {
   return (
     <div className="schild" aria-hidden="true">
       <div className="schild-box">
-        <p className="schild-titel">{titel}</p>
+        <p className={`schild-titel ${verkauft ? "schild-verkauft" : ""}`}>
+          {verkauft ? "Erfolgreich verkauft" : "Reserviert"}
+        </p>
         <JudekLogo />
       </div>
     </div>
