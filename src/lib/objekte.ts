@@ -347,7 +347,7 @@ export const objekte: Objekt[] = [
     ],
   }),
   wohnung({
-    we: 16, status: "reserviert", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
+    we: 16, status: "verkauft", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
     titel: "WE 16 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.33, seite: "Süd/West" }, garten: false, keller: 5.48,
     kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen, Abendsonne inklusive.",
