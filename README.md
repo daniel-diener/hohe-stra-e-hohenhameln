@@ -35,6 +35,11 @@ deployt `main` automatisch. Ein Objekt auf `status: "reserviert"` oder
 `"verkauft"` setzen, statt es zu löschen: Leads verweisen über den `slug`
 darauf, und der Link in alten Anzeigen soll weiter funktionieren.
 
+Reservierte Wohnungen (`status: "reserviert"`) bekommen auf Karte und
+Objektseite automatisch das Schild „Reserviert" über dem Grundriss.
+Beiname, Fertigstellung und Ansprechpartnerin (Lena Mylin) stehen oben in
+`projekt` und erscheinen von dort überall auf der Seite und in den Mails.
+
 Alles mit **TODO** fehlt noch — Preise, Energieausweis, Provision,
 Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 
