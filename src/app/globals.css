@@ -575,3 +575,44 @@ label.haken input { margin-top: 3px; }
   .blatt:last-child { break-after: auto; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* ── Statistik (Vertrieb) ─────────────────────────────────── */
+.statistik-kopf { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.statistik-kopf h1 { margin-bottom: 4px; }
+.statistik-kopf .reiter { margin: 0; }
+.statistik-zahlen { grid-template-columns: repeat(4, 1fr); }
+.statistik-zahlen dd { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.03em; margin-top: 4px; }
+@media (max-width: 640px) { .statistik-zahlen { grid-template-columns: 1fr 1fr; } }
+.statistik-block { margin-top: 32px; }
+.statistik-block h2 { font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 12px; }
+.statistik-raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0 40px; }
+.statistik-fuss { margin-top: 8px; }
+
+.saeulen {
+  display: flex; align-items: flex-end; gap: 2px; height: 180px; padding-top: 12px;
+  border-bottom: 1px solid hsl(var(--border));
+  background: repeating-linear-gradient(to top, transparent 0 44px, hsl(var(--border) / 0.6) 44px 45px);
+}
+.saeule { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; outline: none; }
+.saeule-balken { width: 100%; max-width: 28px; min-height: 2px; background: hsl(var(--cta)); border-radius: 4px 4px 0 0; transition: opacity 0.1s; }
+.saeule:hover .saeule-balken, .saeule:focus-visible .saeule-balken { opacity: 0.75; }
+.saeule-anfrage { position: absolute; bottom: -12px; width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--foreground)); }
+.saeule-tipp {
+  display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); z-index: 5;
+  white-space: nowrap; padding: 8px 10px; border-radius: var(--radius); font-size: 0.8125rem; line-height: 1.4;
+  background: hsl(var(--foreground)); color: hsl(var(--background)); box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.4);
+}
+.saeule-tipp strong { display: block; font-weight: 600; }
+.saeule:first-child .saeule-tipp { left: 0; transform: none; }
+.saeule:last-child .saeule-tipp { left: auto; right: 0; transform: none; }
+.saeule:hover .saeule-tipp, .saeule:focus-visible .saeule-tipp { display: block; }
+.saeulen-achse { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
+
+.rangliste { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.rangliste th { text-align: left; font-weight: 500; color: hsl(var(--muted-foreground)); padding: 0 0 8px; border-bottom: 1px solid hsl(var(--border)); }
+.rangliste th:last-child, .rangliste td:last-child { text-align: right; width: 1%; white-space: nowrap; padding-left: 16px; }
+.rangliste td { padding: 0; border-bottom: 1px solid hsl(var(--border)); }
+.rangliste td:first-child { position: relative; padding: 9px 8px; }
+.rang-balken { position: absolute; inset: 4px auto 4px 0; background: hsl(var(--cta) / 0.12); border-radius: 4px; }
+.rang-name { position: relative; }
+.rang-neben { position: relative; margin-left: 8px; color: hsl(var(--muted-foreground)); font-size: 0.8125rem; }

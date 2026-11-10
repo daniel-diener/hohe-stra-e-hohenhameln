@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
+import { Besuchszaehler } from "@/components/Besuchszaehler";
 import { Logo } from "@/components/Logo";
 import { objekte, projekt } from "@/lib/objekte";
 
@@ -67,6 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         {children}
+        <Besuchszaehler />
         <footer className="fuss">
           <div className="breite fuss-innen">
             <div>

@@ -24,6 +24,7 @@ export default async function TeamLayout({ children }: { children: React.ReactNo
         <div className="breite">
           <nav>
             <Link href="/admin">Leads</Link>
+            <Link href="/admin/statistik">Statistik</Link>
             <a href="/admin/export">CSV-Export</a>
           </nav>
           <form action="/admin/abmelden" method="post">

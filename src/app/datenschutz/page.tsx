@@ -14,7 +14,8 @@ export const metadata: Metadata = { title: "Datenschutz", alternates: { canonica
  *   E-Mails           Resend (lib/mail.ts), nur wenn RESEND_API_KEY gesetzt
  *   Schriften         Geist, mit dem Build ausgeliefert — kein Google Fonts
  *   Cookies           öffentlich keine; im Vertriebsbereich nur Anmeldung
- *   Analyse/Tracking  keins
+ *   Statistik         eigene, ohne Cookies (api/besuch, Migration 0003)
+ *   Fremd-Tracking    keins
  */
 export default function Datenschutz() {
   return (
@@ -69,8 +70,9 @@ export default function Datenschutz() {
         <h2>3. Cookies und lokale Speicherung</h2>
         <p>
           Auf den öffentlichen Seiten setzen wir <strong>keine Cookies</strong> und speichern nichts in
-          Ihrem Browser. Wir verwenden keine Analyse-, Tracking- oder Werbedienste, keine Social-Media-Plugins
-          und keine eingebetteten Karten oder Videos Dritter.
+          Ihrem Browser. Wir verwenden keine Analyse-, Tracking- oder Werbedienste Dritter, keine Social-Media-Plugins
+          und keine eingebetteten Karten oder Videos Dritter. Unsere eigene, cookielose Besucherstatistik
+          beschreibt Abschnitt 4.
         </p>
         <p>
           Nur im geschützten Vertriebsbereich (<code>/admin</code>), der unserem Team vorbehalten ist,
@@ -78,7 +80,33 @@ export default function Datenschutz() {
           Art. 6 Abs. 1 lit. f DSGVO). Besucherinnen und Besucher der Website sind davon nicht betroffen.
         </p>
 
-        <h2>4. Anfrageformular</h2>
+        <h2>4. Besucherstatistik</h2>
+        <p>
+          Um zu verstehen, wie die Website genutzt wird (welche Wohnungen gefragt sind und ob Besucher etwa über
+          ein Bauschild, eine Anzeige oder eine Suchmaschine kommen), zählen wir Seitenaufrufe mit einer eigenen
+          Statistik. Sie läuft vollständig auf unseren Systemen; es werden <strong>keine Cookies</strong> gesetzt,
+          nichts in Ihrem Browser gespeichert und keine Daten an Dritte gegeben.
+        </p>
+        <p>
+          Gespeichert werden je Aufruf: die aufgerufene Seite, Datum und Uhrzeit, der Name der Website, von der
+          Sie gekommen sind (nur der Domainname, z. B. „google.com“), gegebenenfalls eine Kampagnenkennung aus dem
+          Link, der Gerätetyp (Smartphone, Tablet oder Computer) und das Land, das sich aus der IP-Adresse ergibt.
+          Ihre IP-Adresse selbst wird nicht gespeichert. Um Besucher zählen zu können, bildet der Server aus
+          IP-Adresse, Browserkennung und einem zufälligen Wert, der jeden Tag neu erzeugt und am Folgetag gelöscht
+          wird, eine verkürzte Prüfsumme. Danach lässt sich daraus niemand mehr ermitteln; dieselbe Person zählt
+          an jedem Tag neu. Die Statistik wird nur zusammengefasst ausgewertet, Rückschlüsse auf einzelne Personen
+          ziehen wir nicht.
+        </p>
+        <p>
+          Rechtsgrundlage ist unser berechtigtes Interesse an einer bedarfsgerechten Gestaltung der Website und
+          an der Erfolgsmessung unserer Werbung (Art. 6 Abs. 1 lit. f DSGVO). Da nichts auf Ihrem Gerät gespeichert
+          oder ausgelesen wird, ist keine Einwilligung nach § 25 TDDDG erforderlich. Die Daten liegen bei Supabase
+          in Frankfurt (siehe Abschnitt 5) und werden nach 13 Monaten gelöscht. Haben Sie in Ihrem Browser „Do Not
+          Track“ oder „Global Privacy Control“ eingeschaltet, zählen wir Ihre Aufrufe nicht. Im Übrigen können Sie
+          der Verarbeitung jederzeit widersprechen (Abschnitt 9).
+        </p>
+
+        <h2>5. Anfrageformular</h2>
         <p>Wenn Sie uns über das Formular schreiben, verarbeiten wir:</p>
         <ul>
           <li>Ihren Namen und Ihre E-Mail-Adresse (Pflichtangaben),</li>
@@ -127,14 +155,14 @@ export default function Datenschutz() {
           EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).
         </p>
 
-        <h2>5. Kontakt per E-Mail oder Telefon</h2>
+        <h2>6. Kontakt per E-Mail oder Telefon</h2>
         <p>
           Wenn Sie uns direkt per E-Mail oder telefonisch kontaktieren, verarbeiten wir Ihre Angaben zur
           Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. b DSGVO, bei allgemeinen Anfragen
-          Art. 6 Abs. 1 lit. f DSGVO). Für die Speicherdauer gilt Abschnitt 7.
+          Art. 6 Abs. 1 lit. f DSGVO). Für die Speicherdauer gilt Abschnitt 8.
         </p>
 
-        <h2>6. Weitergabe an Dritte</h2>
+        <h2>7. Weitergabe an Dritte</h2>
         <p>
           Wir verkaufen Ihre Daten nicht und geben sie nicht zu Werbezwecken weiter. Ihre Anfrage bearbeitet
           in unserem Auftrag das Projektmanagement ({projekt.team.namen.join(" und ")}). Kommt es zu einer
@@ -145,7 +173,7 @@ export default function Datenschutz() {
           Leistung erforderlich ist.
         </p>
 
-        <h2>7. Speicherdauer</h2>
+        <h2>8. Speicherdauer</h2>
         <p>
           Wir speichern Ihre Anfrage, solange wir Sie zu den Wohnungen beraten, längstens jedoch
           24 Monate nach unserem letzten Kontakt mit Ihnen. Kommt es zum Kauf, bewahren wir die
@@ -155,7 +183,7 @@ export default function Datenschutz() {
           Aufbewahrungspflicht entgegensteht.
         </p>
 
-        <h2>8. Ihre Rechte</h2>
+        <h2>9. Ihre Rechte</h2>
         <p>Sie haben gegenüber uns jederzeit das Recht auf</p>
         <ul>
           <li>Auskunft über die zu Ihnen gespeicherten Daten (Art. 15 DSGVO),</li>
@@ -176,19 +204,19 @@ export default function Datenschutz() {
           Landesbeauftragten für den Datenschutz Niedersachsen, Prinzenstraße 5, 30159 Hannover.
         </p>
 
-        <h2>9. Automatisierte Entscheidungen</h2>
+        <h2>10. Automatisierte Entscheidungen</h2>
         <p>
           Wir treffen keine ausschließlich automatisierten Entscheidungen einschließlich Profiling im
           Sinne von Art. 22 DSGVO.
         </p>
 
-        <h2>10. Verschlüsselung</h2>
+        <h2>11. Verschlüsselung</h2>
         <p>
           Die Verbindung zu dieser Website ist durchgehend per TLS verschlüsselt (erkennbar am Schloss
           in der Adresszeile). Ihre Angaben im Formular werden ausschließlich verschlüsselt übertragen.
         </p>
 
-        <h2>11. Änderungen</h2>
+        <h2>12. Änderungen</h2>
         <p>
           Wir passen diese Datenschutzerklärung an, wenn sich die Website oder die Rechtslage ändert.
           Es gilt die jeweils hier veröffentlichte Fassung. Siehe auch das <Link href="/impressum">Impressum</Link>.
