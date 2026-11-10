@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { projekt } from "@/lib/objekte";
+import { JudekLogo } from "./JudekLogo";
 
 /** Ein Grundriss: ganz zeigen, nie beschneiden — ein halber Plan lügt. */
 export function Plan({
@@ -22,10 +22,7 @@ function ReserviertSchild() {
     <div className="schild" aria-hidden="true">
       <div className="schild-box">
         <p className="schild-titel">Reserviert</p>
-        <p className="schild-logo">
-          <span className="schild-marke">JUDEK</span>
-          <span className="schild-zusatz">{projekt.bauherr.replace(/^Judek\s*/i, "")}</span>
-        </p>
+        <JudekLogo />
       </div>
     </div>
   );
