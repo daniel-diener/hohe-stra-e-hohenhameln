@@ -37,7 +37,7 @@ darauf, und der Link in alten Anzeigen soll weiter funktionieren.
 
 Reservierte Wohnungen (`status: "reserviert"`) bekommen auf Karte und
 Objektseite automatisch das Schild „Reserviert" über dem Grundriss.
-Beiname, Fertigstellung und Ansprechpartnerin (Lena Mylin) stehen oben in
+Fertigstellung, Ab-Preis und Ansprechpartnerin (Lena Mylin) stehen oben in
 `projekt` und erscheinen von dort überall auf der Seite und in den Mails.
 
 Alles mit **TODO** fehlt noch — Preise, Energieausweis, Provision,

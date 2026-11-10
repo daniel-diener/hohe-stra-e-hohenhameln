@@ -37,7 +37,6 @@ export default function Start() {
           <p className="badge">
             <span className="punkt" /> Neubau · Fertigstellung {projekt.fertigstellung}
           </p>
-          <p className="held-beiname">{projekt.beiname}</p>
           <h1>Wohnen an der<br />Hohen Straße.</h1>
           <ul className="held-vorteile">
             {projekt.vorteile.map((v) => <li key={v}>{v}</li>)}

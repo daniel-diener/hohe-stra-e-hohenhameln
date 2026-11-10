@@ -60,11 +60,6 @@ export const projekt = {
   name: "Hohe Straße",
   ort: "Hohenhameln",
   adresse: "Hohe Straße 11, 31249 Hohenhameln",
-  /**
-   * Beiname für die Vermarktung. Plakate und Schilder tragen „Hohe Straße" —
-   * das bleibt der Name; der Beiname steht auf der Seite dazu.
-   */
-  beiname: "Die Residenz am Marktplatz",
   claim: "16 Eigentumswohnungen in Hohenhameln",
   fertigstellung: "Ende 2027",
   /** Günstigster Kaufpreis im Haus; Einzelpreise auf Anfrage. */

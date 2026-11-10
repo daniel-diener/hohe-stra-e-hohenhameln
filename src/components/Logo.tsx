@@ -18,8 +18,8 @@ export function Hauszeichen({ size = 34 }: { size?: number }) {
   );
 }
 
-/** Zeichen und Name. `klein` ohne Beiname, für den Fuß. */
-export function Logo({ klein = false }: { klein?: boolean }) {
+/** Zeichen, Name und Ort. */
+export function Logo() {
   return (
     <span className="logo">
       <Hauszeichen />
@@ -27,7 +27,6 @@ export function Logo({ klein = false }: { klein?: boolean }) {
         <span className="logo-name">{projekt.name}</span>
         <span className="logo-zusatz">
           {projekt.ort}
-          {!klein && <span className="logo-beiname"> · {projekt.beiname}</span>}
         </span>
       </span>
     </span>

@@ -4,11 +4,13 @@ import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Logo } from "@/components/Logo";
-import { projekt } from "@/lib/objekte";
+import { objekte, projekt } from "@/lib/objekte";
+
+const objekteAnzahl = objekte.length;
 import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
-const titel = `${projekt.name} ${projekt.ort} · ${projekt.beiname}`;
+const titel = `${projekt.name} ${projekt.ort} · ${objekteAnzahl} Eigentumswohnungen`;
 const beschreibung = `${projekt.claim}: KfW-40-Neubau ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
 
 export const metadata: Metadata = {
@@ -68,7 +70,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <footer className="fuss">
           <div className="breite fuss-innen">
             <div>
-              <p className="marke-name"><Logo klein /></p>
+              <p className="marke-name"><Logo /></p>
               <p className="leise">{projekt.adresse}</p>
             </div>
             <div className="leise klein">

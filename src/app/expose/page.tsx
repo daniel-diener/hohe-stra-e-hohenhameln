@@ -45,7 +45,6 @@ export default function Expose() {
         <div className="titel-inhalt">
           <p className="titel-marke"><Hauszeichen size={40} /> Exposé</p>
           <div>
-            <p className="titel-beiname">{projekt.beiname}</p>
             <h1>{projekt.name}<br /><span>{projekt.ort}</span></h1>
             <p className="titel-zeile">
               {objekte.length} Eigentumswohnungen · KfW-40-Effizienzhaus · Fertigstellung {projekt.fertigstellung}
@@ -222,7 +221,7 @@ function Blatt({ nr, titel, children }: { nr: string; titel: string; children: R
 function BlattFuss() {
   return (
     <footer className="blatt-fuss">
-      <span>{projekt.name} {projekt.ort} · {projekt.beiname}</span>
+      <span>{projekt.name} {projekt.ort} · Exposé</span>
       <span>{projekt.ansprechpartner.name} · {projekt.ansprechpartner.telefon} · {projekt.ansprechpartner.email}</span>
     </footer>
   );
