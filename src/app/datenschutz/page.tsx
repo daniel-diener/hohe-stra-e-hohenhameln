@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { projekt } from "@/lib/objekte";
-import { datenschutzStand, verantwortlich as v } from "@/lib/rechtliches";
+import { anbieter as v, datenschutzStand } from "@/lib/rechtliches";
 
 export const metadata: Metadata = { title: "Datenschutz", alternates: { canonical: "/datenschutz" } };
 
@@ -30,14 +30,10 @@ export default function Datenschutz() {
 
         <h2>1. Verantwortliche Stelle</h2>
         <p>
-          <strong>{v.name}</strong><br />
-          {v.zusatz}<br />
-          {v.anschrift ? (
-            <>{v.anschrift.strasse}<br />{v.anschrift.plzOrt}<br /></>
-          ) : (
-            <span className="hinweis-fehlt">Anschrift wird ergänzt</span>
-          )}
-          {v.anschrift && <br />}
+          <strong>{v.firma}</strong><br />
+          {v.strasse}<br />
+          {v.plzOrt}<br />
+          {v.geschaeftsfuehrer && <>Geschäftsführung: {v.geschaeftsfuehrer}<br /></>}
           Telefon: <a href={`tel:${v.telefon.replace(/\s/g, "")}`}>{v.telefon}</a><br />
           E-Mail: <a href={`mailto:${v.email}`}>{v.email}</a>
         </p>
@@ -140,9 +136,10 @@ export default function Datenschutz() {
 
         <h2>6. Weitergabe an Dritte</h2>
         <p>
-          Wir verkaufen Ihre Daten nicht und geben sie nicht zu Werbezwecken weiter. Kommt es zu einer
-          Reservierung oder einem Kauf, übermitteln wir die dafür erforderlichen Angaben an den Bauherrn
-          ({projekt.bauherr}) und an das beurkundende Notariat (Art. 6 Abs. 1 lit. b DSGVO). Eine
+          Wir verkaufen Ihre Daten nicht und geben sie nicht zu Werbezwecken weiter. Ihre Anfrage bearbeitet
+          in unserem Auftrag das Projektmanagement ({projekt.team.namen.join(" und ")}). Kommt es zu einer
+          Reservierung oder einem Kauf, übermitteln wir die dafür erforderlichen Angaben an das
+          beurkundende Notariat (Art. 6 Abs. 1 lit. b DSGVO). Eine
           Weitergabe an finanzierende Banken erfolgt nur auf Ihren ausdrücklichen Wunsch. Darüber hinaus
           erhalten nur die oben genannten technischen Dienstleister Zugriff, und nur soweit es für ihre
           Leistung erforderlich ist.

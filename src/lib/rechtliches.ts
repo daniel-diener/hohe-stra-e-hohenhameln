@@ -1,20 +1,37 @@
 import { projekt } from "./objekte";
 
 /**
- * Verantwortliche Stelle für Datenschutz (und Impressum). Eine Stelle für
- * beide Seiten, damit nichts auseinanderläuft.
+ * Anbieterin der Website (Impressum) und Verantwortliche im Datenschutz.
+ * Eine Stelle für beide Seiten, damit nichts auseinanderläuft.
  *
- * TODO: Anschrift ergänzen — ohne ladungsfähige Anschrift ist die
- * Datenschutzerklärung nicht vollständig. Steht hier `null`, zeigt die Seite
- * einen sichtbaren Hinweis statt einer erfundenen Adresse.
+ * Felder mit `null` fehlen noch: Die Seiten zeigen dort sichtbar
+ * „wird ergänzt", statt etwas zu erfinden. Vor dem Livegang füllen.
  */
-export const verantwortlich = {
-  name: projekt.ansprechpartner.name,
-  zusatz: "Immobilien · Projektmanagement Hohe Straße",
-  anschrift: null as null | { strasse: string; plzOrt: string },
+export const anbieter = {
+  firma: "Judek Projekt GmbH",
+  strasse: "Hahnendamm 6",
+  plzOrt: "31249 Hohenhameln",
+  /** Vertretungsberechtigte Geschäftsführung (Pflicht nach § 5 DDG). */
+  geschaeftsfuehrer: null as string | null,
+  /** z. B. „Amtsgericht Hildesheim, HRB 12345" (Pflicht, wenn eingetragen). */
+  register: null as string | null,
+  /** USt-IdNr. nach § 27a UStG, falls vorhanden. */
+  ustId: null as string | null,
+  /**
+   * Erlaubnis nach § 34c GewO (Bauträger) und zuständige Behörde, z. B.
+   * „Landkreis Peine, Burgstraße 1, 31224 Peine". Pflicht, wenn erteilt.
+   */
+  erlaubnis34c: null as string | null,
+  /** Kontakt für Impressum und Datenschutz. Vorerst die Vermarktung (Lena Mylin). */
   telefon: projekt.ansprechpartner.telefon,
   email: projekt.ansprechpartner.email,
 };
 
-/** Stand der Datenschutzerklärung — bei jeder inhaltlichen Änderung anpassen. */
+/** Vermarktung und Projektmanagement, im Impressum genannt. */
+export const vermarktung = {
+  namen: projekt.team.namen,
+  kontakt: projekt.ansprechpartner,
+};
+
+/** Stand der Datenschutzerklärung, bei jeder inhaltlichen Änderung anpassen. */
 export const datenschutzStand = "November 2026";
