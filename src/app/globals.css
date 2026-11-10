@@ -239,8 +239,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .status-punkt { display: inline-flex; align-items: center; gap: 6px; font: 500 0.75rem var(--font-sans); color: hsl(var(--muted-foreground)); text-transform: none; letter-spacing: 0; }
 .status-punkt::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .status-punkt.verfuegbar { color: hsl(var(--success)); }
-.status-punkt.reserviert { color: hsl(var(--warning)); }
-.status-punkt.verkauft { color: hsl(var(--destructive, 0 72% 45%)); }
+.status-punkt.reserviert, .status-punkt.verkauft { color: hsl(var(--warning)); }
 .objekt-text { padding: 4px 18px 18px; display: flex; flex-direction: column; flex: 1; }
 .objekt-text h3 { font-size: 1.0625rem; margin: 0 0 14px; }
 .kennwerte { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 20px; margin: 0 0 16px; }
@@ -257,7 +256,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .plan { position: relative; aspect-ratio: 4 / 3; background: #fff; margin: 12px 12px 14px; border-radius: var(--radius); }
 .plan img { position: absolute; inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); object-fit: contain; }
 .grundriss { margin: 0 0 40px; }
-/* Reserviert: Schild über dem Plan, der Plan bleibt dahinter erkennbar. */
+/* Reserviert und verkauft: Schild über dem Plan, der Plan bleibt dahinter erkennbar. */
 .plan-reserviert img { opacity: 0.45; }
 .schild { position: absolute; inset: 0; display: grid; place-items: center; padding: 12%; pointer-events: none; }
 .schild-box {
