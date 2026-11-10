@@ -4,6 +4,7 @@ import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Icon, type IconName } from "@/components/Icon";
 import { Wohnungen } from "@/components/Wohnungen";
 import { adresseLd, objekte, projekt } from "@/lib/objekte";
+import { formatEuro } from "@/lib/format";
 import { seitenUrl } from "@/lib/seite";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -58,8 +59,8 @@ export default function Start() {
             <dt>Wohnfläche</dt>
             <dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd>
           </div>
+          <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
           <div><dt>Effizienzhaus</dt><dd>KfW 40</dd></div>
-          <div><dt>Stellplätze</dt><dd>18</dd></div>
         </dl>
       </section>
 

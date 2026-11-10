@@ -67,6 +67,9 @@ export const projekt = {
   beiname: "Die Residenz am Marktplatz",
   claim: "16 Eigentumswohnungen in Hohenhameln",
   fertigstellung: "Ende 2027",
+  /** Günstigster Kaufpreis im Haus; Einzelpreise auf Anfrage. */
+  abPreis: 228370,
+  provision: "provisionsfrei",
   einleitung:
     "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 Wohnungen von 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
@@ -134,6 +137,7 @@ function wohnung({ plan, baugleichMit, ...o }: Eingabe): Objekt {
   return {
     status: "verfuegbar",
     bilder: [],
+    provision: "Provisionsfrei",
     ...o,
     slug: `wohnung-${o.we}`,
     grundriss: { src: `/grundrisse/${plan}.png`, breite, hoehe, baugleichMit },

@@ -5,7 +5,7 @@ import { JudekLogo } from "@/components/JudekLogo";
 import { Hauszeichen } from "@/components/Logo";
 import { Plan } from "@/components/Plan";
 import { untertitel } from "@/components/ObjektKarte";
-import { formatFlaeche, formatZahl, preisText } from "@/lib/format";
+import { formatEuro, formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { geschossName, geschosse, objekte, projekt, type Objekt } from "@/lib/objekte";
 import { DruckKnopf } from "./DruckKnopf";
@@ -65,9 +65,9 @@ export default function Expose() {
         <dl className="ex-kennzahlen">
           <div><dt>Wohnungen</dt><dd>{objekte.length}</dd></div>
           <div><dt>Wohnfläche</dt><dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd></div>
-          <div><dt>Zimmer</dt><dd>2 bis 4</dd></div>
+          <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
           <div><dt>Effizienzhaus</dt><dd>KfW 40</dd></div>
-          <div><dt>Stellplätze</dt><dd>18</dd></div>
+          <div><dt>Provision</dt><dd>Provisionsfrei</dd></div>
           <div><dt>Fertigstellung</dt><dd>{projekt.fertigstellung}</dd></div>
         </dl>
         <figure className="ex-bild ex-bild-gross">
@@ -77,6 +77,7 @@ export default function Expose() {
           <div><dt>Adresse</dt><dd>{projekt.adresse}</dd></div>
           <div><dt>Bauherr</dt><dd>{projekt.bauherr}</dd></div>
           <div><dt>Architektur</dt><dd>{projekt.architekt}</dd></div>
+          <div><dt>Zimmer</dt><dd>2 bis 4, 18 Stellplätze am Haus</dd></div>
           <div><dt>Geschosse</dt><dd>Gartengeschoss, Erdgeschoss, Obergeschoss, Staffelgeschoss mit Dachterrassen</dd></div>
         </dl>
       </Blatt>
@@ -194,8 +195,8 @@ export default function Expose() {
             soweit sie technisch oder behördlich bedingt sind und den Wert nicht mindern.
           </p>
           <p>
-            Kaufpreise auf Anfrage. Der Energieausweis (Bedarfsausweis nach GEG) wird mit Fertigstellung der
-            Planung nachgereicht. Angaben zu einer Käuferprovision erhalten Sie mit dem Angebot.
+            Kaufpreise ab {formatEuro(projekt.abPreis)}, Einzelpreise auf Anfrage. Der Erwerb ist für Käufer
+            provisionsfrei. Der Energieausweis (Bedarfsausweis nach GEG) wird nachgereicht.
           </p>
           <p className="ex-klein">Stand: {STAND}</p>
         </div>
@@ -237,6 +238,7 @@ function WohnungsBlatt({ o }: { o: Objekt }) {
     ["Abstellraum UG", formatFlaeche(o.keller)],
     ["Aufzug", "Ja, barrierefrei"],
     ["Kaufpreis", preisText(o)],
+    ["Provision", o.provision ?? "auf Anfrage"],
   ];
   return (
     <section className="blatt">

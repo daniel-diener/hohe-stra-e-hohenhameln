@@ -9,7 +9,7 @@ import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
 const titel = `${projekt.name} ${projekt.ort} · ${projekt.beiname}`;
-const beschreibung = `${projekt.claim}: KfW-40-Neubau, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
+const beschreibung = `${projekt.claim}: KfW-40-Neubau ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
 
 export const metadata: Metadata = {
   metadataBase: seitenUrl,
