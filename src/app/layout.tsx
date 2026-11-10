@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
+import { Logo } from "@/components/Logo";
 import { projekt } from "@/lib/objekte";
 import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
@@ -52,12 +53,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <header className="kopf">
           <div className="breite kopf-innen">
-            <Link href="/" className="marke-name">
-              <span className="logo-zeichen" aria-hidden="true">HS</span>
-              <span className="marke-text">
-                <span>{projekt.name} <span className="leise">{projekt.ort}</span></span>
-                <span className="marke-beiname">{projekt.beiname}</span>
-              </span>
+            <Link href="/" className="marke-name" aria-label={`${projekt.name} ${projekt.ort} – Startseite`}>
+              <Logo />
             </Link>
             <nav>
               <Link href="/#objekte" className="nur-breit">Wohnungen</Link>
@@ -71,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <footer className="fuss">
           <div className="breite fuss-innen">
             <div>
-              <p className="marke-name"><span className="logo-zeichen" aria-hidden="true">HS</span> {projekt.name}</p>
+              <p className="marke-name"><Logo klein /></p>
               <p className="leise">{projekt.adresse}</p>
             </div>
             <div className="leise klein">
