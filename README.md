@@ -47,6 +47,12 @@ Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 
 ### 1. Supabase
 
+> **Eingerichtet (11/2026):** Projekt `hohe-strasse-hohenhameln`, Ref
+> `pkhsnivsksnjtzjkhica`, Region Frankfurt, Organisation „ld-projects".
+> Migrationen 0001 und 0002 sind eingespielt, Selbstregistrierung ist aus,
+> Lena Mylin und Daniel Diener stehen in `team`. Die drei Supabase-Variablen
+> sind in Vercel (Production) gesetzt. Die Schritte unten gelten für ein neues Projekt.
+
 1. Neues Projekt anlegen, Region **Frankfurt (eu-central-1)**.
 2. SQL-Editor → Inhalt von `supabase/migrations/0001_leads.sql` ausführen
    (oder `supabase db push` mit der CLI).
