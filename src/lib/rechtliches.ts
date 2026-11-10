@@ -16,7 +16,7 @@ export const anbieter = {
   /** z. B. „Amtsgericht Hildesheim, HRB 12345" (Pflicht, wenn eingetragen). */
   register: "Amtsgericht Hildesheim, HRB 206991" as string | null,
   /** USt-IdNr. nach § 27a UStG, falls vorhanden. */
-  ustId: null as string | null,
+  ustId: "DE 334932493" as string | null,
   /**
    * Erlaubnis nach § 34c GewO (Bauträger) und zuständige Behörde, z. B.
    * „Landkreis Peine, Burgstraße 1, 31224 Peine". Pflicht, wenn erteilt.
