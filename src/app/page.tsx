@@ -160,7 +160,9 @@ export default function Start() {
               </div>
             </div>
           </div>
-          <AnfrageFormular optionen={objekte.filter((o) => o.status !== "verkauft").map(({ slug, titel }) => ({ slug, titel }))} />
+          <AnfrageFormular optionen={objekte
+            .filter((o) => o.status !== "verkauft")
+            .map((o) => ({ slug: o.slug, titel: o.status === "reserviert" ? `${o.titel} (reserviert)` : o.titel }))} />
         </div>
       </section>
     </main>
