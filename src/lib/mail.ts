@@ -64,7 +64,7 @@ export async function meldeNeueAnfrage(id: string, a: Anfrage) {
           `Guten Tag ${a.name},`,
           "",
           `vielen Dank für Ihr Interesse an ${objekt ? objekt.titel : `unserem Projekt ${projekt.name}`}.`,
-          "Wir melden uns in Kürze bei Ihnen.",
+          `${p.name} meldet sich in Kürze persönlich bei Ihnen.`,
           "",
           "Viele Grüße",
           p.name,

@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <div className="kontaktleiste">
           <div className="breite kontaktleiste-innen">
-            <span className="nur-breit leise">Beratung und Exposé:</span>
+            <span><span className="nur-breit leise">{projekt.ansprechpartner.rolle}: </span><strong>{projekt.ansprechpartner.name}</strong></span>
             <a href={`tel:${projekt.ansprechpartner.telefon.replace(/\s/g, "")}`}>
               <Icon name="telefon" size={14} /> {projekt.ansprechpartner.telefon}
             </a>

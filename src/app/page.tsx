@@ -141,6 +141,7 @@ export default function Start() {
               einen Termin.
             </p>
             <div className="person">
+              <p className="leise klein person-rolle">{p.rolle}</p>
               <p className="person-name">{p.name}</p>
               <a href={`tel:${p.telefon.replace(/\s/g, "")}`}><Icon name="telefon" size={16} /> {p.telefon}</a>
               <a href={`mailto:${p.email}`}><Icon name="mail" size={16} /> {p.email}</a>

@@ -104,8 +104,9 @@ export const projekt = {
     { wert: "im Ort", ziel: "Grundschule, Schulzentrum und mehrere Kitas" },
   ],
   ansprechpartner: {
-    // TODO: Name der Ansprechperson prüfen.
-    name: "Daniel Diener",
+    // Immer Lena Mylin als Ansprechpartnerin — auf der Seite, in Mails und Antwortvorlagen.
+    name: "Lena Mylin",
+    rolle: "Ihre Ansprechpartnerin",
     telefon: "+49 155 10336973",
     email: "immobilien@lena-mylin.de",
   },

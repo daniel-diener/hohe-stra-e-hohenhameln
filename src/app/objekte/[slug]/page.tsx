@@ -181,7 +181,11 @@ export default async function ObjektSeite({ params }: Props) {
 
           <aside id="kontakt" className="seitenleiste">
             <h2>{o.status === "verfuegbar" ? "Exposé anfragen" : "Auf die Warteliste"}</h2>
-            <p className="leise klein">Unverbindlich und kostenfrei.</p>
+            <p className="leise klein">
+              Unverbindlich und kostenfrei. {projekt.ansprechpartner.rolle}:{" "}
+              <strong className="vorn">{projekt.ansprechpartner.name}</strong>,{" "}
+              <a href={`tel:${projekt.ansprechpartner.telefon.replace(/\s/g, "")}`} className="ohne-umbruch">{projekt.ansprechpartner.telefon}</a>
+            </p>
             <AnfrageFormular objektSlug={o.slug} />
           </aside>
         </div>

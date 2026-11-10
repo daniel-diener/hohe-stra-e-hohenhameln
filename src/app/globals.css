@@ -324,7 +324,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Kontakt ──────────────────────────────────────────────── */
 .person { display: grid; gap: 8px; margin-top: 32px; padding: 20px 24px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); max-width: 380px; }
+.person-rolle { margin: 0; }
 .person-name { font-weight: 600; margin: 0 0 4px; }
+.vorn { color: hsl(var(--foreground)); }
 .person a { display: inline-flex; align-items: center; gap: 10px; color: hsl(var(--foreground)); }
 .person .icon { color: hsl(var(--muted-foreground)); }
 
@@ -448,3 +450,4 @@ label.haken input { margin-top: 3px; }
   .merkmal p { font-size: 0.8125rem; }
   .marke-name .leise { display: none; }
 }
+.ohne-umbruch { white-space: nowrap; }
