@@ -56,7 +56,7 @@ export default function Start() {
           <div><dt>Eigentumswohnungen</dt><dd>{objekte.length}</dd></div>
           <div>
             <dt>Wohnfläche</dt>
-            <dd>{Math.floor(Math.min(...flaechen))}–{Math.round(Math.max(...flaechen))} m²</dd>
+            <dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd>
           </div>
           <div><dt>Effizienzhaus</dt><dd>KfW 40</dd></div>
           <div><dt>Stellplätze</dt><dd>18</dd></div>
@@ -66,7 +66,7 @@ export default function Start() {
       <section id="objekte" className="abschnitt">
         <div className="breite">
           <header className="abschnitt-kopf">
-            <p className="eyebrow">01 — Wohnungen</p>
+            <p className="eyebrow">01 · Wohnungen</p>
             <h2>Zwei bis vier Zimmer, auf vier Ebenen.</h2>
             <p className="leise gross-text">
               Gärten im Erdgeschoss, Balkone darüber, Dachterrassen bis 50 m² ganz oben. Alle Wohnungen
@@ -80,7 +80,7 @@ export default function Start() {
       <section id="haus" className="abschnitt gedaempft">
         <div className="breite">
           <header className="abschnitt-kopf">
-            <p className="eyebrow">02 — Das Haus</p>
+            <p className="eyebrow">02 · Das Haus</p>
             <h2>Effizient, barrierefrei, durchdacht.</h2>
           </header>
           <div className="merkmale">
@@ -112,10 +112,10 @@ export default function Start() {
       <section id="lage" className="abschnitt dunkel-abschnitt">
         <div className="breite">
           <header className="abschnitt-kopf">
-            <p className="eyebrow">03 — Lage</p>
+            <p className="eyebrow">03 · Lage</p>
             <h2>Ruhig im Ort. Schnell überall.</h2>
             <p className="leise gross-text">
-              Hohenhameln, rund 3.400 Einwohner, im Landkreis Peine — zwischen Hannover, Hildesheim und Braunschweig.
+              Hohenhameln, rund 3.400 Einwohner, im Landkreis Peine, zwischen Hannover, Hildesheim und Braunschweig.
             </p>
           </header>
           <div className="lage-raster">
@@ -135,7 +135,7 @@ export default function Start() {
       <section id="kontakt" className="abschnitt">
         <div className="breite zwei-spalten">
           <div>
-            <p className="eyebrow">04 — Kontakt</p>
+            <p className="eyebrow">04 · Kontakt</p>
             <h2>Exposé und Beratung.</h2>
             <p className="leise gross-text">
               Schreiben Sie uns, welche Wohnung Sie interessiert. Wir senden Ihnen das Exposé und vereinbaren

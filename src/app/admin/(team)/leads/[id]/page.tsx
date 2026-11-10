@@ -57,7 +57,7 @@ export default async function LeadSeite({ params }: Props) {
 
             <dl className="eckdaten-tabelle">
               <div><dt>E-Mail</dt><dd><a href={`mailto:${lead.email}`}>{lead.email}</a></dd></div>
-              <div><dt>Telefon</dt><dd>{lead.telefon ?? "—"}{lead.rueckruf ? " · Rückruf gewünscht" : ""}</dd></div>
+              <div><dt>Telefon</dt><dd>{lead.telefon ?? "keine Angabe"}{lead.rueckruf ? " · Rückruf gewünscht" : ""}</dd></div>
               <div><dt>Zweck</dt><dd>{zweckLabel[lead.zweck]}</dd></div>
               <div><dt>Finanzierung</dt><dd>{finanzierungLabel[lead.finanzierung]}</dd></div>
               <div><dt>Einwilligung</dt><dd>{formatDatum(lead.einwilligung_at)}</dd></div>

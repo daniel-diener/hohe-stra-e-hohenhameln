@@ -35,7 +35,7 @@ export default function Anmelden() {
   return (
     <main className="abschnitt">
       <div className="breite schmal">
-        <h1>Vertrieb — Anmeldung</h1>
+        <h1>Vertrieb · Anmeldung</h1>
         <form onSubmit={anmelden} className="formular">
           <label>E-Mail<input name="email" type="email" autoComplete="username" required /></label>
           <label>Passwort<input name="passwort" type="password" autoComplete="current-password" required /></label>

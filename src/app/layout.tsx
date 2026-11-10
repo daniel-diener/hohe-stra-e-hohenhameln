@@ -8,7 +8,7 @@ import { projekt } from "@/lib/objekte";
 import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
-const titel = `${projekt.name} ${projekt.ort} — ${projekt.beiname}`;
+const titel = `${projekt.name} ${projekt.ort} · ${projekt.beiname}`;
 const beschreibung = `${projekt.claim}: KfW-40-Neubau, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <header className="kopf">
           <div className="breite kopf-innen">
-            <Link href="/" className="marke-name" aria-label={`${projekt.name} ${projekt.ort} – Startseite`}>
+            <Link href="/" className="marke-name" aria-label={`${projekt.name} ${projekt.ort} · Startseite`}>
               <Logo />
             </Link>
             <nav>

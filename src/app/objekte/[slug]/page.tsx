@@ -54,7 +54,7 @@ export default async function ObjektSeite({ params }: Props) {
     ["Geschoss", geschossName[o.geschoss]],
     ["Bäder", formatZahl(o.baeder)],
     [`${o.freisitz.art} Ausrichtung`, o.freisitz.seite],
-    ["Garten", o.garten ? "Ja, Sondernutzung" : "—"],
+    ["Garten", o.garten ? "Ja, Sondernutzung" : "Nein"],
     ["Abstellraum UG", formatFlaeche(o.keller)],
     ["Aufzug", "Ja, barrierefrei"],
     ...(o.provision ? [["Käuferprovision", o.provision] as [string, string]] : []),

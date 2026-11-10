@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "expose": "node scripts/expose-pdf.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",

@@ -7,7 +7,7 @@ import { Icon } from "./Icon";
 
 /** „WE 14 — Dachterrasse über Eck" → „Dachterrasse über Eck"; die Nummer steht darüber. */
 export function untertitel(o: Objekt) {
-  return o.titel.split(" — ")[1] ?? o.titel;
+  return o.titel.split(" · ")[1] ?? o.titel;
 }
 
 export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {

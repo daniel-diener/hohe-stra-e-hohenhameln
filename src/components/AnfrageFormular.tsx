@@ -47,7 +47,7 @@ export function AnfrageFormular({ objektSlug, optionen = [] }: { objektSlug?: st
       <div className="karte" role="status">
         <h3>Vorschau</h3>
         <p>
-          Das Formular ist geprüft und funktioniert — in dieser Vorschau werden Anfragen aber noch nicht
+          Das Formular ist geprüft und funktioniert. In dieser Vorschau werden Anfragen aber noch nicht
           gespeichert. Das ändert sich, sobald die Datenbank angebunden ist.
         </p>
       </div>

@@ -68,7 +68,7 @@ export const projekt = {
   claim: "16 Eigentumswohnungen in Hohenhameln",
   fertigstellung: "Ende 2027",
   einleitung:
-    "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 Wohnungen von 55 bis 122 m² — " +
+    "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 Wohnungen von 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
   /** Die drei Kernaussagen, groß im Titelbild. */
   vorteile: ["Förderfähig", "Barrierefrei", "Mit Terrasse oder Balkon"],
@@ -84,7 +84,7 @@ export const projekt = {
   lageBild: { src: "/projekt/hohenhameln.jpg", alt: "Luftbild von Hohenhameln mit Feldern am Ortsrand" },
   haus: [
     { icon: "blatt", titel: "KfW-40-Effizienzhaus", text: "Förderfähig über zinsgünstige KfW-Programme." },
-    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen — dazu Photovoltaik auf dem Dach." },
+    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
     { icon: "tropfen", titel: "Tageslichtbäder", text: "Mit ebenerdiger Dusche und hochwertiger Sanitärausstattung." },
@@ -93,7 +93,7 @@ export const projekt = {
     { icon: "baum", titel: "Eigene Gärten", text: "Sondernutzung für die Wohnungen im Garten- und Erdgeschoss." },
   ],
   stellplaetze:
-    "18 Pkw-Stellplätze direkt am Haus, davon acht mit Carport — zusätzlich zur Wohnung erwerbbar. " +
+    "18 Pkw-Stellplätze direkt am Haus, davon acht mit Carport, zusätzlich zur Wohnung erwerbbar. " +
     "Auf Wunsch mit Ladestation für das Elektroauto (gegen Aufpreis). Fahrradplätze für rund 30 Räder.",
   lage: [
     { wert: "15 Min.", ziel: "A2, Anschlussstelle Hämelerwald" },
@@ -107,7 +107,7 @@ export const projekt = {
   team: {
     titel: "Projektmanagement",
     namen: ["Lena Mylin", "Daniel Diener"],
-    text: "Wir stehen Ihnen bei allen Fragen zur Seite — von der ersten Besichtigung bis zur Übergabe.",
+    text: "Wir stehen Ihnen bei allen Fragen zur Seite, von der ersten Besichtigung bis zur Übergabe.",
     bild: { src: "/projekt/team.jpg", breite: 1194, hoehe: 1317, alt: "Lena Mylin und Daniel Diener, Projektmanagement Hohe Straße" },
   },
   ansprechpartner: {
@@ -186,7 +186,7 @@ export const objekte: Objekt[] = [
   // ── Gartengeschoss ────────────────────────────────────────────────
   wohnung({
     we: 1, plan: "we-1", geschoss: "UG", zimmer: 4, baeder: 2, wohnflaeche: 122.03,
-    titel: "WE 1 — 4 Zimmer mit Garten",
+    titel: "WE 1 · 4 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.58, seite: "Süd" }, garten: true, keller: 8.52,
     kurz: "Die größte Wohnung des Hauses: über 40 m² Wohnen mit offener Küche, drei Schlafzimmer, zwei Bäder und ein eigener Garten nach Süden.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse nach Süden", "Zwei Duschbäder", "Abstellraum in der Wohnung"],
@@ -194,7 +194,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 2, status: "reserviert", plan: "we-2-6", geschoss: "UG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
-    titel: "WE 2 — 2 Zimmer mit Garten",
+    titel: "WE 2 · 2 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 7.13, seite: "Süd" }, garten: true, keller: 5.1,
     kurz: "Kompakte Zweizimmerwohnung mit Terrasse und eigenem Garten nach Süden.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse nach Süden"],
@@ -202,7 +202,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 3, plan: "we-3", geschoss: "UG", zimmer: 3, baeder: 1, wohnflaeche: 89.14,
-    titel: "WE 3 — 3 Zimmer mit Garten",
+    titel: "WE 3 · 3 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.58, seite: "Süd" }, garten: true, keller: 5.12,
     kurz: "Drei Zimmer mit 38 m² Wohn- und Essbereich, Terrasse und eigenem Garten nach Süden.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse nach Süden"],
@@ -219,7 +219,7 @@ export const objekte: Objekt[] = [
   // ── Erdgeschoss ───────────────────────────────────────────────────
   wohnung({
     we: 4, plan: "we-4-9", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 90.98,
-    titel: "WE 4 — 3 Zimmer mit Garten",
+    titel: "WE 4 · 3 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.53, seite: "Nord" }, garten: true, keller: 5.39,
     kurz: "Großzügiger Wohnbereich mit Terrasse und Garten, Schlaf- und Kinderzimmer an den beiden Enden der Wohnung.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse"],
@@ -227,7 +227,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 5, plan: "we-5", geschoss: "EG", zimmer: 4, baeder: 2, wohnflaeche: 112.53,
-    titel: "WE 5 — 4 Zimmer, zwei Bäder",
+    titel: "WE 5 · 4 Zimmer, zwei Bäder",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 7.49,
     kurz: "Die Familienwohnung im Erdgeschoss: drei Schlafzimmer, zwei Duschbäder und ein Balkon nach Süden.",
     merkmale: ["Balkon nach Süden", "Zwei Duschbäder"],
@@ -235,15 +235,15 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 6, plan: "we-2-6", baugleichMit: 2, geschoss: "EG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
-    titel: "WE 6 — 2 Zimmer mit Balkon",
+    titel: "WE 6 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 7.13, seite: "Süd" }, garten: false, keller: 4.91,
-    kurz: "Kompakte Zweizimmerwohnung mit Balkon nach Süden — für Singles, Paare oder als Kapitalanlage.",
+    kurz: "Kompakte Zweizimmerwohnung mit Balkon nach Süden. Ideal für Singles, Paare oder als Kapitalanlage.",
     merkmale: ["Balkon nach Süden"],
     raeume: R_2ZI_SUED,
   }),
   wohnung({
     we: 7, status: "reserviert", plan: "we-7-12", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
-    titel: "WE 7 — 3 Zimmer mit Balkon",
+    titel: "WE 7 · 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 4.83,
     kurz: "Eckwohnung mit Wohn- und Essbereich zum Südbalkon, Schlafzimmer und Kinderzimmer an der Giebelseite.",
     merkmale: ["Balkon nach Süden", "Eckwohnung"],
@@ -251,7 +251,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 8, plan: "we-8-13", geschoss: "EG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
-    titel: "WE 8 — 2 Zimmer mit Garten",
+    titel: "WE 8 · 2 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 10.66, seite: "Nord" }, garten: true, keller: 6.24,
     kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad, Terrasse und Garten.",
     // TODO: „rollstuhlgerecht" nur mit Bestätigung der Planung (DIN 18040-2 R) bewerben.
@@ -262,7 +262,7 @@ export const objekte: Objekt[] = [
   // ── Obergeschoss ──────────────────────────────────────────────────
   wohnung({
     we: 9, plan: "we-4-9", baugleichMit: 4, geschoss: "OG", zimmer: 3, baeder: 1, wohnflaeche: 90.98,
-    titel: "WE 9 — 3 Zimmer mit Balkon",
+    titel: "WE 9 · 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.53, seite: "Nord" }, garten: false, keller: 4.86,
     kurz: "Großzügiger Wohnbereich mit Balkon, Schlaf- und Kinderzimmer an den beiden Enden der Wohnung.",
     merkmale: ["Balkon"],
@@ -270,7 +270,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 10, plan: "we-10", geschoss: "OG", zimmer: 3, baeder: 2, wohnflaeche: 98.93,
-    titel: "WE 10 — 3 Zimmer, zwei Bäder",
+    titel: "WE 10 · 3 Zimmer, zwei Bäder",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 5.48,
     kurz: "Drei Zimmer mit zwei Duschbädern, großem Entree und Balkon nach Süden.",
     merkmale: ["Balkon nach Süden", "Zwei Duschbäder"],
@@ -286,9 +286,9 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 11, plan: "we-11", geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 55.08,
-    titel: "WE 11 — 2 Zimmer mit Balkon",
+    titel: "WE 11 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 7.13, seite: "Süd" }, garten: false, keller: 4.85,
-    kurz: "Die kompakteste Wohnung im Haus: zwei Zimmer mit Balkon nach Süden — ideal als Kapitalanlage.",
+    kurz: "Die kompakteste Wohnung im Haus: zwei Zimmer mit Balkon nach Süden, ideal als Kapitalanlage.",
     merkmale: ["Balkon nach Süden"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 26.03 },
@@ -300,7 +300,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 12, plan: "we-7-12", baugleichMit: 7, geschoss: "OG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
-    titel: "WE 12 — 3 Zimmer mit Balkon",
+    titel: "WE 12 · 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 4.91,
     kurz: "Eckwohnung mit Wohn- und Essbereich zum Südbalkon, Schlafzimmer und Kinderzimmer an der Giebelseite.",
     merkmale: ["Balkon nach Süden", "Eckwohnung"],
@@ -308,7 +308,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 13, status: "reserviert", plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
-    titel: "WE 13 — 2 Zimmer mit Balkon",
+    titel: "WE 13 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 10.66, seite: "Nord" }, garten: false, keller: 4.42,
     kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad und Balkon.",
     merkmale: ["Balkon", "Großes Duschbad (8 m²)"],
@@ -318,7 +318,7 @@ export const objekte: Objekt[] = [
   // ── Staffelgeschoss ───────────────────────────────────────────────
   wohnung({
     we: 14, plan: "we-14", geschoss: "SG", zimmer: 3, baeder: 2, wohnflaeche: 113.12,
-    titel: "WE 14 — Dachterrasse über Eck",
+    titel: "WE 14 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.56, seite: "Süd/Ost" }, garten: false, keller: 6.09,
     kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Osten und zwei Tageslichtbädern.",
     merkmale: ["Dachterrasse nach Süd/Ost (46,56 m²)", "Zwei Tageslichtbäder"],
@@ -334,7 +334,7 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 15, plan: "we-15", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 110.63,
-    titel: "WE 15 — Maisonette mit 50 m² Dachterrasse",
+    titel: "WE 15 · Maisonette mit 50 m² Dachterrasse",
     freisitz: { art: "Dachterrasse", flaeche: 50, seite: "Süd" }, garten: false, keller: 5.71,
     kurz: "Maisonette über zwei Ebenen: fast 39 m² Wohnen an der 50 m² großen Südterrasse, darunter ein Gäste- oder Arbeitszimmer.",
     merkmale: ["Dachterrasse nach Süden (50 m²)", "Maisonette über zwei Etagen"],
@@ -349,9 +349,9 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 16, status: "reserviert", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
-    titel: "WE 16 — Dachterrasse über Eck",
+    titel: "WE 16 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.33, seite: "Süd/West" }, garten: false, keller: 5.48,
-    kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen — Abendsonne inklusive.",
+    kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen, Abendsonne inklusive.",
     merkmale: ["Dachterrasse nach Süd/West (46,33 m²)", "Ankleide am Schlafzimmer"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 34.56 },

@@ -36,12 +36,12 @@ export async function meldeNeueAnfrage(id: string, a: Anfrage) {
     aufgaben.push(
       senden(
         team,
-        `Neue Anfrage: ${bezug} — ${a.name}`,
+        `Neue Anfrage: ${bezug} · ${a.name}`,
         [
           `Objekt: ${bezug}`,
           `Name: ${a.name}`,
           `E-Mail: ${a.email}`,
-          `Telefon: ${a.telefon ?? "—"}${a.rueckruf ? " (Rückruf gewünscht)" : ""}`,
+          `Telefon: ${a.telefon ?? "keine Angabe"}${a.rueckruf ? " (Rückruf gewünscht)" : ""}`,
           `Zweck: ${zweckLabel[a.zweck]}`,
           `Finanzierung: ${finanzierungLabel[a.finanzierung]}`,
           "",
