@@ -192,7 +192,7 @@ export const objekte: Objekt[] = [
     raeume: [...R_4ZI(40.77), { name: "Abstellraum", flaeche: 3.68 }],
   }),
   wohnung({
-    we: 2, status: "reserviert", plan: "we-2-6", geschoss: "UG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
+    we: 2, status: "verkauft", plan: "we-2-6", geschoss: "UG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
     titel: "WE 2 · 2 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 7.13, seite: "Süd" }, garten: true, keller: 5.1,
     kurz: "Kompakte Zweizimmerwohnung mit Terrasse und eigenem Garten nach Süden.",
@@ -347,7 +347,7 @@ export const objekte: Objekt[] = [
     ],
   }),
   wohnung({
-    we: 16, status: "reserviert", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
+    we: 16, status: "verkauft", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
     titel: "WE 16 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.33, seite: "Süd/West" }, garten: false, keller: 5.48,
     kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen, Abendsonne inklusive.",

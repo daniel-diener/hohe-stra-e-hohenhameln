@@ -44,7 +44,7 @@ export default function Start() {
           <p className="held-text">{projekt.einleitung}</p>
           <div className="aktionen">
             <a href="#objekte" className="knopf hell-knopf">
-              {frei} Wohnungen ansehen <Icon name="pfeil" size={18} />
+              Alle {objekte.length} Wohnungen ansehen <Icon name="pfeil" size={18} />
             </a>
             <a href="#kontakt" className="knopf rahmen-knopf">Exposé anfragen</a>
           </div>
