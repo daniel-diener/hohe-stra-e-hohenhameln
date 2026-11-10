@@ -12,9 +12,9 @@ export const anbieter = {
   strasse: "Hahnendamm 6",
   plzOrt: "31249 Hohenhameln",
   /** Vertretungsberechtigte Geschäftsführung (Pflicht nach § 5 DDG). */
-  geschaeftsfuehrer: null as string | null,
+  geschaeftsfuehrer: "René Judek" as string | null,
   /** z. B. „Amtsgericht Hildesheim, HRB 12345" (Pflicht, wenn eingetragen). */
-  register: null as string | null,
+  register: "Amtsgericht Hildesheim, HRB 206991" as string | null,
   /** USt-IdNr. nach § 27a UStG, falls vorhanden. */
   ustId: null as string | null,
   /**
