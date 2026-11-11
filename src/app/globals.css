@@ -233,6 +233,17 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); overflow: hidden;
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
+/* Schräges Band über der Ecke vergebener Wohnungen; der Plan tritt grau zurück. */
+.objekt-karte { position: relative; }
+.band {
+  position: absolute; top: 26px; right: -46px; z-index: 2; width: 180px; transform: rotate(45deg);
+  padding: 7px 0; text-align: center; color: #fff; font: 700 0.75rem var(--font-sans);
+  text-transform: uppercase; letter-spacing: 0.12em; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); pointer-events: none;
+}
+.band-verkauft { background: hsl(var(--success)); }
+.band-reserviert { background: #c8102e; }
+.objekt-karte.status-reserviert .plan > img, .objekt-karte.status-verkauft .plan > img { filter: grayscale(60%); }
+.objekt-karte.status-reserviert .status-punkt, .objekt-karte.status-verkauft .status-punkt { visibility: hidden; }
 .objekt-karte:hover { text-decoration: none; border-color: hsl(var(--foreground) / 0.25); box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.18); transform: translateY(-2px); }
 .karte-kopf { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px 0; }
 .karte-kopf .mono { color: hsl(var(--muted-foreground)); font-size: 0.75rem; }
