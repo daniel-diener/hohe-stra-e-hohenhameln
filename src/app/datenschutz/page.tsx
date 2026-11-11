@@ -15,6 +15,7 @@ export const metadata: Metadata = { title: "Datenschutz", alternates: { canonica
  *   Schriften         Geist, mit dem Build ausgeliefert — kein Google Fonts
  *   Cookies           öffentlich keine; im Vertriebsbereich nur Anmeldung
  *   Statistik         eigene, ohne Cookies (api/besuch, Migration 0003)
+ *   Web Analytics     Vercel, ohne Cookies (components/WebAnalytics.tsx)
  *   Fremd-Tracking    keins
  */
 export default function Datenschutz() {
@@ -104,6 +105,15 @@ export default function Datenschutz() {
           in Frankfurt (siehe Abschnitt 5) und werden nach 13 Monaten gelöscht. Haben Sie in Ihrem Browser „Do Not
           Track“ oder „Global Privacy Control“ eingeschaltet, zählen wir Ihre Aufrufe nicht. Im Übrigen können Sie
           der Verarbeitung jederzeit widersprechen (Abschnitt 9).
+        </p>
+        <p>
+          Zusätzlich nutzen wir Vercel Web Analytics unseres Hosters (Abschnitt 2). Dabei werden die aufgerufene
+          Seite, die Herkunftsseite, Gerätetyp, Browser, Betriebssystem und das aus der IP-Adresse abgeleitete Land
+          erfasst. Es werden keine Cookies gesetzt und keine Daten auf Ihrem Gerät gespeichert. Besucher werden über
+          eine Prüfsumme aus der Anfrage gezählt, die nach 24 Stunden verworfen wird. Die IP-Adresse wird nicht
+          gespeichert, ein seitenübergreifendes Profil entsteht nicht. Rechtsgrundlage, Widerspruch und die
+          Ausnahme bei „Do Not Track“ oder „Global Privacy Control“ gelten wie oben; für Vercel gilt der unter
+          Abschnitt 2 genannte Vertrag zur Auftragsverarbeitung.
         </p>
 
         <h2>5. Anfrageformular</h2>
