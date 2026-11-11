@@ -113,7 +113,7 @@ export const projekt = {
     name: "Lena Mylin",
     rolle: "Ihre Ansprechpartnerin",
     telefon: "+49 155 10336973",
-    email: "immobilien@lena-mylin.de",
+    email: "hohe-strasse@judek-projekt.de",
   },
 } as const;
 
