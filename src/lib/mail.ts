@@ -9,7 +9,7 @@ import { objektNach, projekt } from "./objekte";
  * Ein Fehler hier darf keine Anfrage kosten: Der Lead steht zu diesem
  * Zeitpunkt schon in der Datenbank. Darum wird protokolliert, nicht geworfen.
  */
-async function senden(an: string, betreff: string, text: string, antwortAn?: string) {
+async function senden(an: string | string[], betreff: string, text: string, antwortAn?: string) {
   const schluessel = process.env.RESEND_API_KEY;
   const absender = process.env.MAIL_ABSENDER;
   if (!schluessel || !absender) return;
@@ -17,7 +17,7 @@ async function senden(an: string, betreff: string, text: string, antwortAn?: str
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${schluessel}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: absender, to: [an], subject: betreff, text, reply_to: antwortAn }),
+      body: JSON.stringify({ from: absender, to: Array.isArray(an) ? an : [an], subject: betreff, text, reply_to: antwortAn }),
     });
     if (!res.ok) console.error("Mail an", an, "abgelehnt:", res.status, await res.text());
   } catch (e) {
@@ -25,13 +25,20 @@ async function senden(an: string, betreff: string, text: string, antwortAn?: str
   }
 }
 
+/** „flyer / print / postwurf-hohenhameln" oder die Seite, von der jemand kam. */
+function herkunft(q: Record<string, string>) {
+  const utm = [q.utm_source, q.utm_medium, q.utm_campaign].filter(Boolean).join(" / ");
+  return utm || q.referrer || "direkt";
+}
+
 export async function meldeNeueAnfrage(id: string, a: Anfrage) {
   const objekt = objektNach(a.objekt_slug);
   const bezug = objekt?.titel ?? "Allgemeine Anfrage";
   const aufgaben: Promise<void>[] = [];
 
-  const team = process.env.LEAD_BENACHRICHTIGUNG_AN;
-  if (team) {
+  // Mehrere Empfänger mit Komma trennen: "a@x.de, b@y.de".
+  const team = (process.env.LEAD_BENACHRICHTIGUNG_AN ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  if (team.length > 0) {
     const link = process.env.SITE_URL ? `${process.env.SITE_URL}/admin/leads/${id}` : "";
     aufgaben.push(
       senden(
@@ -44,6 +51,7 @@ export async function meldeNeueAnfrage(id: string, a: Anfrage) {
           `Telefon: ${a.telefon ?? "keine Angabe"}${a.rueckruf ? " (Rückruf gewünscht)" : ""}`,
           `Zweck: ${zweckLabel[a.zweck]}`,
           `Finanzierung: ${finanzierungLabel[a.finanzierung]}`,
+          `Herkunft: ${herkunft(a.quelle)}`,
           "",
           a.nachricht ?? "(keine Nachricht)",
           "",
