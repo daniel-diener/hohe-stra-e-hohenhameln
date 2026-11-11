@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Besuchszaehler } from "@/components/Besuchszaehler";
 import { Logo } from "@/components/Logo";
+import { WebAnalytics } from "@/components/WebAnalytics";
 import { objekte, projekt } from "@/lib/objekte";
 
 const objekteAnzahl = objekte.length;
@@ -69,6 +70,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </header>
         {children}
         <Besuchszaehler />
+        <WebAnalytics />
         <footer className="fuss">
           <div className="breite fuss-innen">
             <div>
