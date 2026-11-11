@@ -13,6 +13,11 @@ export function untertitel(o: Objekt) {
 export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {
   return (
     <Link href={`/objekte/${o.slug}`} className={`objekt-karte status-${o.status}`}>
+      {o.status !== "verfuegbar" && (
+        <span className={`band band-${o.status}`} aria-hidden="true">
+          {o.status === "verkauft" ? "Verkauft" : "Reserviert"}
+        </span>
+      )}
       <div className="karte-kopf">
         <span className="mono">WE {o.we} · {o.geschoss}</span>
         <span className={`status-punkt ${o.status}`}>{objektStatusLabel[o.status]}</span>
@@ -24,6 +29,7 @@ export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {
         hoehe={o.grundriss.hoehe}
         sizes="(max-width: 700px) 100vw, 360px"
         status={o.status}
+        schild={false}
       />
       <div className="objekt-text">
         <h3>{untertitel(o)}</h3>
