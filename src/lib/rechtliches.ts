@@ -21,7 +21,7 @@ export const anbieter = {
    * Erlaubnis nach § 34c GewO (Bauträger) und zuständige Behörde, z. B.
    * „Landkreis Peine, Burgstraße 1, 31224 Peine". Pflicht, wenn erteilt.
    */
-  erlaubnis34c: "Landkreis Peine, Burgstraße 1, 31224 Peine" as string | null,
+  erlaubnis34c: "Industrie- und Handelskammer Braunschweig, Brabandtstraße 11, 38100 Braunschweig, www.ihk.de/braunschweig" as string | null,
   /** Kontakt für Impressum und Datenschutz: Projektpostfach, betreut vom Projektmanagement. */
   telefon: projekt.ansprechpartner.telefon,
   email: projekt.ansprechpartner.email,

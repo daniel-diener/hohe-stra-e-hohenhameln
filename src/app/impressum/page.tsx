@@ -40,9 +40,9 @@ export default function Impressum() {
         <h2>Umsatzsteuer-Identifikationsnummer</h2>
         <p>Gemäß § 27a Umsatzsteuergesetz: <Wert wert={a.ustId} /></p>
 
-        <h2>Erlaubnis nach § 34c GewO</h2>
+        <h2>Gewerbeerlaubnis und zuständige Aufsichtsbehörde</h2>
         <p>
-          Tätigkeit als Bauträger. Erlaubnis erteilt durch: <Wert wert={a.erlaubnis34c} />
+          Tätigkeit als Bauträger. Erlaubnis nach § 34c GewO erteilt durch: <Wert wert={a.erlaubnis34c} />
         </p>
 
         <h2>Projektmanagement</h2>
