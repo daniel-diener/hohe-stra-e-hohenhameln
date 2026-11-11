@@ -66,10 +66,28 @@ export const projekt = {
   abPreis: 228370,
   provision: "provisionsfrei",
   einleitung:
-    "Neubau eines Mehrfamilienhauses als KfW-40-Effizienzhaus: 16 Wohnungen von 55 bis 122 m², " +
+    "Neubau eines Mehrfamilienhauses als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG): 16 Wohnungen von 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
   /** Die drei Kernaussagen, groß im Titelbild. */
-  vorteile: ["Förderfähig", "Barrierefrei", "Mit Terrasse oder Balkon"],
+  vorteile: ["Effizienzhaus 40 QNG", "Barrierefrei", "Mit Terrasse oder Balkon"],
+  /**
+   * Förderung durch Effizienzhaus 40 mit QNG. Programmbedingungen ändern sich —
+   * vor jeder Kampagne prüfen (KfW „Klimafreundlicher Neubau", § 7b EStG).
+   */
+  foerderung: [
+    {
+      icon: "blatt", fuer: "Eigennutzer und Vermieter", titel: "KfW-Kredit bis 150.000\u00a0€ je Wohnung",
+      text: "Zinsgünstiger Kredit aus dem KfW-Programm „Klimafreundlicher Neubau“. Mit QNG-Siegel gilt der höchste Kreditbetrag.",
+    },
+    {
+      icon: "schichten", fuer: "Kapitalanleger", titel: "Sonderabschreibung nach §\u00a07b EStG",
+      text: "Zusätzlich zur regulären Abschreibung vier Jahre lang je 5 % (Bemessungsgrundlage bis 4.000\u00a0€ je m² Wohnfläche), bei Vermietung für mindestens zehn Jahre.",
+    },
+    {
+      icon: "waerme", fuer: "Alle Käufer", titel: "Niedrige Energiekosten",
+      text: "Wärmepumpe, Fußbodenheizung und Photovoltaik auf dem Dach. Der Effizienzhaus-40-Standard braucht nur einen Bruchteil der Energie eines Bestandsbaus.",
+    },
+  ],
   bauherr: "Judek Projekt GmbH",
   architekt: "FINK + TEAM architektur und planung, Hannover",
   /** Visualisierungen des Hauses. Das erste ist das Titelbild der Startseite. */
@@ -81,7 +99,7 @@ export const projekt = {
   ],
   lageBild: { src: "/projekt/hohenhameln.jpg", alt: "Luftbild von Hohenhameln mit Feldern am Ortsrand" },
   haus: [
-    { icon: "blatt", titel: "KfW-40-Effizienzhaus", text: "Förderfähig über zinsgünstige KfW-Programme." },
+    { icon: "blatt", titel: "Effizienzhaus 40 QNG", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
     { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
