@@ -42,12 +42,13 @@ export default function Impressum() {
 
         <h2>Erlaubnis nach § 34c GewO</h2>
         <p>
-          Tätigkeit als Bauträger. Erlaubnis und zuständige Aufsichtsbehörde: <Wert wert={a.erlaubnis34c} />
+          Tätigkeit als Bauträger. Erlaubnis erteilt durch: <Wert wert={a.erlaubnis34c} />
         </p>
 
-        <h2>Vermarktung und Projektmanagement</h2>
+        <h2>Projektmanagement</h2>
         <p>
-          {m.namen.join(" und ")}<br />
+          {m.namen.join(" und ")}, im Auftrag der {a.firma}. Keine Maklertätigkeit, der Verkauf erfolgt
+          provisionsfrei direkt durch die Bauherrin.<br />
           Ansprechpartnerin: {m.kontakt.name}, {m.kontakt.telefon}, {m.kontakt.email}
         </p>
 

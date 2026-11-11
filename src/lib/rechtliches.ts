@@ -21,13 +21,13 @@ export const anbieter = {
    * Erlaubnis nach § 34c GewO (Bauträger) und zuständige Behörde, z. B.
    * „Landkreis Peine, Burgstraße 1, 31224 Peine". Pflicht, wenn erteilt.
    */
-  erlaubnis34c: null as string | null,
-  /** Kontakt für Impressum und Datenschutz. Vorerst die Vermarktung (Lena Mylin). */
+  erlaubnis34c: "Landkreis Peine, Burgstraße 1, 31224 Peine" as string | null,
+  /** Kontakt für Impressum und Datenschutz: Projektpostfach, betreut vom Projektmanagement. */
   telefon: projekt.ansprechpartner.telefon,
   email: projekt.ansprechpartner.email,
 };
 
-/** Vermarktung und Projektmanagement, im Impressum genannt. */
+/** Projektmanagement im Auftrag der Bauherrin (keine Makler), im Impressum genannt. */
 export const vermarktung = {
   namen: projekt.team.namen,
   kontakt: projekt.ansprechpartner,
