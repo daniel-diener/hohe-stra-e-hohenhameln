@@ -59,7 +59,7 @@ export default function Start() {
             <dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd>
           </div>
           <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
-          <div><dt>Effizienzhaus</dt><dd>40 QNG</dd></div>
+          <div><dt>Effizienzhaus</dt><dd>QNG 40</dd></div>
         </dl>
       </section>
 

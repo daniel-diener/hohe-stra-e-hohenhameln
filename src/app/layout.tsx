@@ -13,7 +13,7 @@ import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
 const titel = `${projekt.name} ${projekt.ort} · ${objekteAnzahl} Eigentumswohnungen`;
-const beschreibung = `${projekt.claim}: Neubau als Effizienzhaus 40 QNG ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
+const beschreibung = `${projekt.claim}: Neubau als Effizienzhaus QNG 40 ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
 
 export const metadata: Metadata = {
   metadataBase: seitenUrl,
