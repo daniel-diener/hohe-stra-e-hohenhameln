@@ -47,7 +47,7 @@ export default function Expose() {
           <div>
             <h1>{projekt.name}<br /><span>{projekt.ort}</span></h1>
             <p className="titel-zeile">
-              {objekte.length} Eigentumswohnungen · Effizienzhaus 40 QNG · Fertigstellung {projekt.fertigstellung}
+              {objekte.length} Eigentumswohnungen · Effizienzhaus QNG 40 · Fertigstellung {projekt.fertigstellung}
             </p>
             <ul className="titel-vorteile">{projekt.vorteile.map((v) => <li key={v}>{v}</li>)}</ul>
           </div>
@@ -65,7 +65,7 @@ export default function Expose() {
           <div><dt>Wohnungen</dt><dd>{objekte.length}</dd></div>
           <div><dt>Wohnfläche</dt><dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd></div>
           <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
-          <div><dt>Effizienzhaus</dt><dd>40 QNG</dd></div>
+          <div><dt>Effizienzhaus</dt><dd>QNG 40</dd></div>
           <div><dt>Provision</dt><dd>Provisionsfrei</dd></div>
           <div><dt>Fertigstellung</dt><dd>{projekt.fertigstellung}</dd></div>
         </dl>

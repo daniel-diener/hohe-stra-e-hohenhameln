@@ -69,7 +69,7 @@ export const projekt = {
     "Neubau eines Mehrfamilienhauses als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG): 16 Wohnungen von 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
   /** Die drei Kernaussagen, groß im Titelbild. */
-  vorteile: ["Effizienzhaus 40 QNG", "Barrierefrei", "Mit Terrasse oder Balkon"],
+  vorteile: ["Effizienzhaus QNG 40", "Barrierefrei", "Mit Terrasse oder Balkon"],
   /**
    * Förderung durch Effizienzhaus 40 mit QNG. Programmbedingungen ändern sich —
    * vor jeder Kampagne prüfen (KfW „Klimafreundlicher Neubau", § 7b EStG).
@@ -99,7 +99,7 @@ export const projekt = {
   ],
   lageBild: { src: "/projekt/hohenhameln.jpg", alt: "Luftbild von Hohenhameln mit Feldern am Ortsrand" },
   haus: [
-    { icon: "blatt", titel: "Effizienzhaus 40 QNG", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
+    { icon: "blatt", titel: "Effizienzhaus QNG 40", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
     { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
