@@ -200,7 +200,7 @@ export const objekte: Objekt[] = [
     raeume: R_2ZI_SUED,
   }),
   wohnung({
-    we: 3, plan: "we-3", geschoss: "UG", zimmer: 3, baeder: 1, wohnflaeche: 89.14,
+    we: 3, status: "reserviert", plan: "we-3", geschoss: "UG", zimmer: 3, baeder: 1, wohnflaeche: 89.14,
     titel: "WE 3 · 3 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.58, seite: "Süd" }, garten: true, keller: 5.12,
     kurz: "Drei Zimmer mit 38 m² Wohn- und Essbereich, Terrasse und eigenem Garten nach Süden.",
@@ -241,7 +241,7 @@ export const objekte: Objekt[] = [
     raeume: R_2ZI_SUED,
   }),
   wohnung({
-    we: 7, status: "reserviert", plan: "we-7-12", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
+    we: 7, status: "verkauft", plan: "we-7-12", geschoss: "EG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
     titel: "WE 7 · 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 4.83,
     kurz: "Eckwohnung mit Wohn- und Essbereich zum Südbalkon, Schlafzimmer und Kinderzimmer an der Giebelseite.",
@@ -306,7 +306,7 @@ export const objekte: Objekt[] = [
     raeume: R_3ZI_SUED,
   }),
   wohnung({
-    we: 13, status: "reserviert", plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
+    we: 13, status: "verkauft", plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
     titel: "WE 13 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 10.66, seite: "Nord" }, garten: false, keller: 4.42,
     kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad und Balkon.",
