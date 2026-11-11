@@ -59,7 +59,7 @@ export default function Start() {
             <dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd>
           </div>
           <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
-          <div><dt>Effizienzhaus</dt><dd>KfW 40</dd></div>
+          <div><dt>Effizienzhaus</dt><dd>40 QNG</dd></div>
         </dl>
       </section>
 
@@ -109,10 +109,38 @@ export default function Start() {
         </div>
       </section>
 
+      <section id="foerderung" className="abschnitt">
+        <div className="breite">
+          <header className="abschnitt-kopf">
+            <p className="eyebrow">03 · Förderung</p>
+            <h2>Gefördert finanzieren, Steuern sparen.</h2>
+            <p className="leise gross-text">
+              Das Haus entsteht als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG), der höchsten
+              Förderstufe für Neubauten. Davon profitieren Sie als Eigennutzer genauso wie als Kapitalanleger.
+            </p>
+          </header>
+          <div className="merkmale foerderung">
+            {projekt.foerderung.map((f) => (
+              <div key={f.titel} className="merkmal">
+                <span className="merkmal-icon"><Icon name={f.icon as IconName} /></span>
+                <p className="eyebrow foerderung-fuer">{f.fuer}</p>
+                <h3>{f.titel}</h3>
+                <p className="leise">{f.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="klein leise">
+            Förderung und Steuervorteile hängen von den jeweils gültigen Programmbedingungen und Ihrer persönlichen
+            Situation ab. Keine Steuer- oder Finanzierungsberatung; bitte sprechen Sie mit Ihrer Bank und Ihrem
+            Steuerberater.
+          </p>
+        </div>
+      </section>
+
       <section id="lage" className="abschnitt dunkel-abschnitt">
         <div className="breite">
           <header className="abschnitt-kopf">
-            <p className="eyebrow">03 · Lage</p>
+            <p className="eyebrow">04 · Lage</p>
             <h2>Ruhig im Ort. Schnell überall.</h2>
             <p className="leise gross-text">
               Hohenhameln, rund 3.400 Einwohner, im Landkreis Peine, zwischen Hannover, Hildesheim und Braunschweig.
@@ -135,7 +163,7 @@ export default function Start() {
       <section id="kontakt" className="abschnitt">
         <div className="breite zwei-spalten">
           <div>
-            <p className="eyebrow">04 · Kontakt</p>
+            <p className="eyebrow">05 · Kontakt</p>
             <h2>Exposé und Beratung.</h2>
             <p className="leise gross-text">
               Schreiben Sie uns, welche Wohnung Sie interessiert. Wir senden Ihnen das Exposé und vereinbaren

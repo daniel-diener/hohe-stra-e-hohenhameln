@@ -13,7 +13,7 @@ import { indexierbar, seitenUrl } from "@/lib/seite";
 import "./globals.css";
 
 const titel = `${projekt.name} ${projekt.ort} · ${objekteAnzahl} Eigentumswohnungen`;
-const beschreibung = `${projekt.claim}: KfW-40-Neubau ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
+const beschreibung = `${projekt.claim}: Neubau als Effizienzhaus 40 QNG ab 228.370 €, provisionsfrei, förderfähig, barrierefrei, mit Terrasse oder Balkon. ${projekt.adresse}, Fertigstellung ${projekt.fertigstellung}. Jetzt Exposé anfragen.`;
 
 export const metadata: Metadata = {
   metadataBase: seitenUrl,
@@ -63,6 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <nav>
               <Link href="/#objekte" className="nur-breit">Wohnungen</Link>
               <Link href="/#haus" className="nur-breit">Haus</Link>
+              <Link href="/#foerderung" className="nur-breit">Förderung</Link>
               <Link href="/#lage" className="nur-breit">Lage</Link>
               <Link href="/#kontakt" className="knopf klein">Exposé anfragen</Link>
             </nav>
