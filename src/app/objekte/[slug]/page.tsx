@@ -95,7 +95,9 @@ export default async function ObjektSeite({ params }: Props) {
         </header>
 
         <dl className="kennzahlen-raster karte-rahmen">
-          {kopfwerte.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+          {kopfwerte.map(([k, v]) => (
+            <div key={k}><dt>{k}</dt><dd className={k === "Kaufpreis" && o.status === "verkauft" ? "text-verkauft" : undefined}>{v}</dd></div>
+          ))}
         </dl>
 
         <div className="zwei-spalten">
