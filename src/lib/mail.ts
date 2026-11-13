@@ -33,7 +33,10 @@ function verbindung() {
 
 async function senden(an: string | string[], betreff: string, text: string, antwortAn?: string) {
   const t = verbindung();
-  if (!t) return;
+  if (!t) {
+    console.warn("Mail nicht versendet: SMTP_PASSWORT ist nicht gesetzt (Vercel → Environment Variables, danach Redeploy).");
+    return;
+  }
   try {
     await t.sendMail({
       from: { name: `${projekt.name} ${projekt.ort}`, address: SMTP_BENUTZER },
@@ -42,6 +45,7 @@ async function senden(an: string | string[], betreff: string, text: string, antw
       text,
       replyTo: antwortAn,
     });
+    console.info("Mail versendet an", an, "·", betreff);
   } catch (e) {
     console.error("Mail an", an, "gescheitert:", e);
   }
