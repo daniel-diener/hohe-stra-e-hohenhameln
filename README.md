@@ -9,7 +9,7 @@ unter `/admin` ab, führt Status und Verlauf und exportiert sie als CSV.
 | Seite | Next.js 15 (App Router), statisch, wo es geht |
 | Leads, Anmeldung | Supabase (eigenes Projekt, Region EU) |
 | Hosting | Vercel, Region `fra1` (siehe `vercel.json`) |
-| E-Mail (optional) | Resend — Benachrichtigung ans Team, Eingangsbestätigung an Interessent:innen |
+| E-Mail (optional) | IONOS-Postfach per SMTP — Benachrichtigung ans Team, Eingangsbestätigung an Interessent:innen |
 
 ## Was wo steht
 
@@ -75,9 +75,9 @@ Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 
 ### 3. E-Mail (optional)
 
-Bei Resend die Absenderdomain verifizieren, `RESEND_API_KEY`, `MAIL_ABSENDER`
-und `LEAD_BENACHRICHTIGUNG_AN` setzen. Ohne Schlüssel wird jede Anfrage
-trotzdem gespeichert, nur ohne Mail.
+Versand über das IONOS-Postfach `hohe-strasse@judek-projekt.de` (smtp.ionos.de, Port 587).
+`SMTP_PASSWORT` und `LEAD_BENACHRICHTIGUNG_AN` setzen. Ohne Passwort wird jede
+Anfrage trotzdem gespeichert, nur ohne Mail.
 
 ## Entwicklung
 

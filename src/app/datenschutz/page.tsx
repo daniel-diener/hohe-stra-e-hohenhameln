@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Datenschutz", alternates: { canonica
  *
  *   Hosting           Vercel, Region Frankfurt (vercel.json)
  *   Anfragen          Supabase, Region Frankfurt (README)
- *   E-Mails           Resend (lib/mail.ts), nur wenn RESEND_API_KEY gesetzt
+ *   E-Mails           IONOS-Postfach per SMTP (lib/mail.ts), nur wenn SMTP_PASSWORT gesetzt
  *   Schriften         Geist, mit dem Build ausgeliefert — kein Google Fonts
  *   Cookies           öffentlich keine; im Vertriebsbereich nur Anmeldung
  *   Statistik         eigene, ohne Cookies (api/besuch, Migration 0003)
@@ -159,10 +159,10 @@ export default function Datenschutz() {
         <h3>E-Mail-Benachrichtigungen</h3>
         <p>
           Über neue Anfragen informieren wir unser Team per E-Mail; auf Wunsch erhalten Sie eine
-          Eingangsbestätigung. Für den Versand nutzen wir Resend (Plus Five Five, Inc., USA). Dabei werden
-          Ihr Name, Ihre E-Mail-Adresse und der Inhalt der Anfrage übermittelt. Mit Resend besteht ein
-          Vertrag zur Auftragsverarbeitung; die Übermittlung in die USA stützt sich auf
-          EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).
+          Eingangsbestätigung. Die E-Mails werden über unser Postfach bei der IONOS SE, Elgendorfer Str. 57,
+          56410 Montabaur, versendet. Dabei werden Ihr Name, Ihre E-Mail-Adresse und der Inhalt der Anfrage
+          verarbeitet. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung (Art. 28 DSGVO); die Daten
+          werden in Rechenzentren in Deutschland bzw. der EU verarbeitet.
         </p>
 
         <h2>6. Kontakt per E-Mail oder Telefon</h2>
