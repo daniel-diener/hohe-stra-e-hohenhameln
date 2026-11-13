@@ -251,7 +251,7 @@ export const objekte: Objekt[] = [
     raeume: R_4ZI(34.95),
   }),
   wohnung({
-    we: 6, plan: "we-2-6", baugleichMit: 2, geschoss: "EG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
+    we: 6, status: "reserviert", plan: "we-2-6", baugleichMit: 2, geschoss: "EG", zimmer: 2, baeder: 1, wohnflaeche: 58.7,
     titel: "WE 6 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 7.13, seite: "Süd" }, garten: false, keller: 4.91,
     kurz: "Kompakte Zweizimmerwohnung mit Balkon nach Süden. Ideal für Singles, Paare oder als Kapitalanlage.",
