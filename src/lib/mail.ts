@@ -1,25 +1,44 @@
 import "server-only";
+import nodemailer, { type Transporter } from "nodemailer";
 import type { Anfrage } from "./anfrage";
 import { finanzierungLabel, zweckLabel } from "./labels";
 import { objektNach, projekt } from "./objekte";
 
 /**
- * E-Mails über die REST-Schnittstelle von Resend — ohne SDK, ein fetch genügt.
+ * E-Mails über das IONOS-Postfach des Projekts (SMTP, STARTTLS auf Port 587).
+ * Absender ist das Postfach selbst — IONOS lehnt fremde Absender ab.
  *
  * Ein Fehler hier darf keine Anfrage kosten: Der Lead steht zu diesem
  * Zeitpunkt schon in der Datenbank. Darum wird protokolliert, nicht geworfen.
  */
+const SMTP_HOST = process.env.SMTP_HOST ?? "smtp.ionos.de";
+const SMTP_BENUTZER = process.env.SMTP_BENUTZER ?? projekt.ansprechpartner.email;
+
+let transport: Transporter | null = null;
+function verbindung() {
+  const passwort = process.env.SMTP_PASSWORT;
+  if (!passwort) return null;
+  transport ??= nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: { user: SMTP_BENUTZER, pass: passwort },
+  });
+  return transport;
+}
+
 async function senden(an: string | string[], betreff: string, text: string, antwortAn?: string) {
-  const schluessel = process.env.RESEND_API_KEY;
-  const absender = process.env.MAIL_ABSENDER;
-  if (!schluessel || !absender) return;
+  const t = verbindung();
+  if (!t) return;
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${schluessel}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: absender, to: Array.isArray(an) ? an : [an], subject: betreff, text, reply_to: antwortAn }),
+    await t.sendMail({
+      from: { name: `${projekt.name} ${projekt.ort}`, address: SMTP_BENUTZER },
+      to: an,
+      subject: betreff,
+      text,
+      replyTo: antwortAn,
     });
-    if (!res.ok) console.error("Mail an", an, "abgelehnt:", res.status, await res.text());
   } catch (e) {
     console.error("Mail an", an, "gescheitert:", e);
   }
