@@ -14,6 +14,9 @@ import { objektNach, projekt } from "./objekte";
 const SMTP_HOST = process.env.SMTP_HOST ?? "smtp.ionos.de";
 const SMTP_BENUTZER = process.env.SMTP_BENUTZER ?? projekt.ansprechpartner.email;
 
+/** Wer bei jeder neuen Anfrage eine Mail bekommt, solange in Vercel nichts anderes steht. */
+const TEAM_STANDARD = "immobilien@daniel-diener.de, immobilien@lena-mylin.de";
+
 let transport: Transporter | null = null;
 function verbindung() {
   const passwort = process.env.SMTP_PASSWORT;
@@ -55,8 +58,8 @@ export async function meldeNeueAnfrage(id: string, a: Anfrage) {
   const bezug = objekt?.titel ?? "Allgemeine Anfrage";
   const aufgaben: Promise<void>[] = [];
 
-  // Mehrere Empfänger mit Komma trennen: "a@x.de, b@y.de".
-  const team = (process.env.LEAD_BENACHRICHTIGUNG_AN ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  // Mehrere Empfänger mit Komma trennen: "a@x.de, b@y.de". In Vercel überschreibbar.
+  const team = (process.env.LEAD_BENACHRICHTIGUNG_AN || TEAM_STANDARD).split(",").map((s) => s.trim()).filter(Boolean);
   if (team.length > 0) {
     const link = process.env.SITE_URL ? `${process.env.SITE_URL}/admin/leads/${id}` : "";
     aufgaben.push(
