@@ -6,6 +6,10 @@
  * damit Grundrisse und Visualisierungen die Farbe tragen. */
 
 :root {
+  /* Status der Wohnungen, überall gleich: verkauft rot, reserviert gelb. */
+  --rot-verkauft: #c8102e;
+  --gelb-reserviert: #f5c400;
+  --gelb-reserviert-text: #b58900;
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
   --card: 0 0% 100%;
@@ -240,8 +244,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   padding: 7px 0; text-align: center; color: #fff; font: 700 0.75rem var(--font-sans);
   text-transform: uppercase; letter-spacing: 0.12em; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); pointer-events: none;
 }
-.band-verkauft { background: hsl(var(--success)); }
-.band-reserviert { background: #c8102e; }
+.band-verkauft { background: var(--rot-verkauft); }
+.band-reserviert { background: var(--gelb-reserviert); color: #1c1917; }
 .objekt-karte.status-reserviert .plan > img, .objekt-karte.status-verkauft .plan > img { filter: grayscale(60%); }
 .objekt-karte.status-reserviert .status-punkt, .objekt-karte.status-verkauft .status-punkt { visibility: hidden; }
 .objekt-karte:hover { text-decoration: none; border-color: hsl(var(--foreground) / 0.25); box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.18); transform: translateY(-2px); }
@@ -250,7 +254,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .status-punkt { display: inline-flex; align-items: center; gap: 6px; font: 500 0.75rem var(--font-sans); color: hsl(var(--muted-foreground)); text-transform: none; letter-spacing: 0; }
 .status-punkt::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .status-punkt.verfuegbar { color: hsl(var(--success)); }
-.status-punkt.reserviert, .status-punkt.verkauft { color: hsl(var(--warning)); }
+.status-punkt.reserviert { color: var(--gelb-reserviert-text); }
+.status-punkt.verkauft, .text-verkauft { color: var(--rot-verkauft); }
 .objekt-text { padding: 4px 18px 18px; display: flex; flex-direction: column; flex: 1; }
 .objekt-text h3 { font-size: 1.0625rem; margin: 0 0 14px; }
 .kennwerte { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 20px; margin: 0 0 16px; }
@@ -276,8 +281,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .grundriss .schild-box { font-size: clamp(1rem, 3vw, 1.5rem); }
 .schild p { margin: 0; }
-.schild-titel { color: #c8102e; font-size: 2em; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
-.schild-titel.schild-verkauft { color: hsl(var(--success)); }
+.schild-titel { color: var(--gelb-reserviert-text); font-size: 2em; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.schild-titel.schild-verkauft { color: var(--rot-verkauft); }
 .judek-logo { display: block; width: 7.5em; height: auto; margin: 0.5em auto 0; }
 .grundriss .plan { aspect-ratio: auto; margin: 0; padding: 24px; border: 1px solid hsl(var(--border)); }
 .grundriss .plan > img { position: static; width: 100%; height: auto; }
@@ -419,9 +424,11 @@ label.haken input { margin-top: 3px; }
   font: 500 0.75rem var(--font-sans); background: hsl(var(--muted)); color: hsl(var(--foreground));
   border: 1px solid hsl(var(--border));
 }
-.marke.verfuegbar, .marke.lead-verkauft { background: hsl(var(--success-muted)); color: hsl(var(--success)); border-color: transparent; }
-.marke.reserviert, .marke.lead-reserviert, .marke.lead-notartermin { background: hsl(var(--warning-muted)); color: hsl(var(--warning)); border-color: transparent; }
-.marke.verkauft, .marke.lead-abgesagt { color: hsl(var(--muted-foreground)); }
+.marke.verkauft, .marke.lead-verkauft { background: rgba(200, 16, 46, 0.1); color: var(--rot-verkauft); border-color: transparent; }
+.marke.reserviert, .marke.lead-reserviert { background: rgba(245, 196, 0, 0.18); color: var(--gelb-reserviert-text); border-color: transparent; }
+.marke.verfuegbar { background: hsl(var(--success-muted)); color: hsl(var(--success)); border-color: transparent; }
+.marke.lead-notartermin { background: hsl(var(--warning-muted)); color: hsl(var(--warning)); border-color: transparent; }
+.marke.lead-abgesagt { color: hsl(var(--muted-foreground)); }
 .marke.lead-neu { background: hsl(var(--destructive-muted)); color: hsl(var(--destructive)); border-color: transparent; }
 .marke.lead-kontaktiert, .marke.lead-besichtigung, .marke.lead-finanzierung { background: hsl(var(--cta-muted)); color: hsl(var(--cta)); border-color: transparent; }
 

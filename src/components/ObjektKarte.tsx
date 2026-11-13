@@ -39,7 +39,7 @@ export function ObjektKarte({ objekt: o }: { objekt: Objekt }) {
           <div><dt>{o.freisitz.art}</dt><dd>{o.freisitz.seite}</dd></div>
         </dl>
         <p className="preis">
-          <span>{preisText(o)}</span>
+          <span className={o.status === "verkauft" ? "text-verkauft" : undefined}>{preisText(o)}</span>
           <Icon name="pfeil" size={18} />
         </p>
       </div>
