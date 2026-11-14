@@ -50,33 +50,39 @@ export default async function TerminSeite({ params }: { params: Promise<{ token:
     <main className="abschnitt">
       <div className="breite termin-seite">
         <p className="eyebrow">Persönlicher Termin</p>
-        <h1>{eigener ? "Ihr Termin" : "Termin buchen"}</h1>
-        <p className="leise gross-text">
-          Guten Tag {lead.name}, {TERMIN.gastgeber} stellt Ihnen {objekt ? `die Wohnung ${objekt.titel}` : "das Projekt"} gern
-          persönlich vor und beantwortet Ihre Fragen zu Grundriss, Ausstattung, Kaufpreis und Finanzierung.
-        </p>
-
-        <dl className="termin-daten">
-          <div><dt>Wo</dt><dd>{TERMIN.ort.name}<br />{TERMIN.ort.strasse}, {TERMIN.ort.plzOrt}</dd></div>
-          <div><dt>Wann</dt><dd>{terminZeiten}</dd></div>
-        </dl>
-
-        {eigener && (
-          <div className="karte erfolg">
-            <h3>Gebucht: {terminText(eigener)}</h3>
-            <p>
-              Sie möchten verschieben? Wählen Sie unten einen anderen Termin, der bisherige wird dann frei.
-              Zum Absagen rufen Sie uns bitte kurz an oder antworten Sie auf die Bestätigung.
+        {eigener ? (
+          <>
+            <h1>Ihr Termin</h1>
+            <div className="karte erfolg termin-gebucht">
+              <p className="termin-gebucht-wann">{terminText(eigener)}</p>
+              <p>{TERMIN.ort.name}, {TERMIN.ort.strasse}, {TERMIN.ort.plzOrt}</p>
+              <p className="klein">
+                Die Bestätigung mit Kalenderdatei haben Sie per E-Mail bekommen. Zum Absagen antworten Sie bitte
+                auf diese E-Mail oder rufen uns an.
+              </p>
+            </div>
+            {/* key: Nach dem Verschieben beginnt die Auswahl wieder eingeklappt und leer. */}
+            <TerminWahl key={eigener} token={token} tage={tage} aktuell={eigener} />
+          </>
+        ) : (
+          <>
+            <h1>Termin buchen</h1>
+            <p className="leise gross-text">
+              Guten Tag {lead.name}, {TERMIN.gastgeber} stellt Ihnen {objekt ? `die Wohnung ${objekt.titel}` : "das Projekt"} gern
+              persönlich vor und beantwortet Ihre Fragen zu Grundriss, Ausstattung, Kaufpreis und Finanzierung.
             </p>
-          </div>
+            <dl className="termin-daten">
+              <div><dt>Wo</dt><dd>{TERMIN.ort.name}<br />{TERMIN.ort.strasse}, {TERMIN.ort.plzOrt}</dd></div>
+              <div><dt>Wann</dt><dd>{terminZeiten}</dd></div>
+            </dl>
+            <h2>Freie Tage</h2>
+            <p className="leise klein">Wählen Sie einen Tag und die Uhrzeit, zu der Sie kommen möchten.</p>
+            <TerminWahl token={token} tage={tage} aktuell={null} />
+          </>
         )}
 
-        <h2>{eigener ? "Anderen Termin wählen" : "Freie Tage"}</h2>
-        <p className="leise klein">Wählen Sie einen Tag und die Uhrzeit, zu der Sie kommen möchten.</p>
-        <TerminWahl token={token} tage={tage} aktuell={eigener} />
-
         <p className="leise klein termin-hinweis">
-          Passt kein Termin? Wir finden einen anderen:{" "}
+          {eigener ? "Fragen zum Termin?" : "Passt kein Termin? Wir finden einen anderen:"}{" "}
           <a href={`tel:${p.telefon.replace(/\s/g, "")}`} className="ohne-umbruch"><Icon name="telefon" size={14} /> {p.telefon}</a>{" "}
           oder <a href={`mailto:${p.email}`}>{p.email}</a>
         </p>
