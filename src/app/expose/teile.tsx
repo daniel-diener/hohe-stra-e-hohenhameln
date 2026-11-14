@@ -7,6 +7,8 @@ import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { geschossName, projekt, type Objekt } from "@/lib/objekte";
+import { anbieter } from "@/lib/rechtliches";
+import { seitenUrl } from "@/lib/seite";
 
 /** Bausteine des Exposés, gemeinsam für das Gesamt-Exposé und die Wohnungs-Exposés. */
 
@@ -57,22 +59,29 @@ export function LageBlatt({ nr }: { nr: string }) {
 }
 
 export function KontaktBlatt({ nr }: { nr: string }) {
+  // Bewusst allgemein, ohne Personen: Das Exposé bleibt gültig, wenn die Betreuung wechselt.
   const p = projekt.ansprechpartner;
-  const t = projekt.team;
+  const bild = projekt.bilder[2];
+  const web = seitenUrl.host;
   return (
       <Blatt nr={nr} titel="Ihr Kontakt">
         <div className="ex-kontakt">
-          <figure className="ex-team">
-            <Image src={t.bild.src} alt={t.bild.alt} width={t.bild.breite} height={t.bild.hoehe} sizes="80mm" loading="eager" />
+          <figure className="ex-team ex-kontakt-bild">
+            <Image src={bild.src} alt={bild.alt} fill sizes="80mm" loading="eager" />
           </figure>
           <div>
-            <p className="eyebrow">{t.titel}</p>
-            <p className="ex-namen">{t.namen.join(" & ")}</p>
-            <p>{t.text} Sprechen Sie uns an, wir vereinbaren gern einen persönlichen Termin.</p>
-            <p className="ex-ansprechpartnerin">{p.rolle}</p>
-            <p className="ex-namen klein-namen">{p.name}</p>
+            <p className="eyebrow">Bauherr und Verkauf</p>
+            <p className="ex-namen">{anbieter.firma}</p>
+            <p>
+              Wir verkaufen die Wohnungen direkt und provisionsfrei und begleiten Sie persönlich, von der
+              ersten Besichtigung bis zur Schlüsselübergabe. Sprechen Sie uns an, wir vereinbaren gern
+              einen Termin.
+            </p>
+            <p className="ex-ansprechpartnerin">Projekt {projekt.name} {projekt.ort}</p>
             <p className="ex-kontaktzeile"><Icon name="telefon" size={16} /> {p.telefon}</p>
             <p className="ex-kontaktzeile"><Icon name="mail" size={16} /> {p.email}</p>
+            <p className="ex-kontaktzeile"><Icon name="ort" size={16} /> {web}</p>
+            <p className="ex-anschrift">{anbieter.firma} · {anbieter.strasse} · {anbieter.plzOrt}</p>
           </div>
         </div>
 
@@ -129,7 +138,7 @@ export function BlattFuss() {
   return (
     <footer className="blatt-fuss">
       <span>{projekt.name} {projekt.ort} · Exposé</span>
-      <span>{projekt.ansprechpartner.name} · {projekt.ansprechpartner.telefon} · {projekt.ansprechpartner.email}</span>
+      <span>{anbieter.firma} · {projekt.ansprechpartner.telefon} · {projekt.ansprechpartner.email}</span>
     </footer>
   );
 }

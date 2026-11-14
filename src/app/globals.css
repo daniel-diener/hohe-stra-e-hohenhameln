@@ -667,3 +667,6 @@ label.haken input { margin-top: 3px; }
 .ex-ebene-we span { padding: 0.5mm 1.5mm; border-radius: 1mm; }
 .ex-ebene-hier { border-color: hsl(var(--foreground)); background: #fff; box-shadow: inset 4px 0 0 hsl(var(--foreground)); }
 .ex-we-hier { background: hsl(var(--foreground)); color: #fff; font-weight: 600; }
+.ex-kontakt-bild { position: relative; height: 92mm; }
+.ex-kontakt-bild img { object-fit: cover; }
+.ex-anschrift { margin: 4mm 0 0; font-size: 8.5pt; color: hsl(var(--muted-foreground)); }
