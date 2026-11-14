@@ -692,3 +692,10 @@ label.haken input { margin-top: 3px; }
 .termin-admin { padding: 16px 20px; margin-bottom: 12px; }
 .termin-admin p { margin: 0 0 8px; }
 .termin-einladen { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.termin-gebucht { margin: 24px 0 20px; }
+.termin-gebucht p { margin: 0 0 6px; }
+.termin-gebucht p:last-child { margin: 10px 0 0; }
+.termin-gebucht-wann { font-size: clamp(1.25rem, 2.6vw, 1.625rem); font-weight: 600; letter-spacing: -0.02em; }
+.termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta)); padding: 6px 0; width: fit-content; }
+.termin-verschieben[open] > summary { margin-bottom: 8px; }
+.termin-verschieben .termin-wahl { margin-top: 16px; }
