@@ -6,22 +6,17 @@ import { Hauszeichen } from "@/components/Logo";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, preisText } from "@/lib/format";
 import { geschossName, geschosse, objektNach, objekte, projekt, type Objekt } from "@/lib/objekte";
-import { DruckKnopf } from "../DruckKnopf";
-import { Blatt, HausBlatt, KontaktBlatt, LageBlatt, WohnungsBlatt } from "../teile";
+import { DruckKnopf } from "@/app/expose/DruckKnopf";
+import { Blatt, HausBlatt, KontaktBlatt, LageBlatt, WohnungsBlatt } from "@/app/expose/teile";
 
 /**
  * Exposé zu einer einzelnen Wohnung: die Objektunterlage für Käufer und Bank.
+ * Vorerst nur intern: liegt im Vertriebsbereich und ist nur angemeldet erreichbar.
  * Alles aus `lib/objekte.ts`. Was dort noch fehlt (Preis, Zahlungsplan, Miete),
  * erscheint als markiertes „folgt“ und füllt sich, sobald die Werte eingetragen sind.
  */
 
 type Props = { params: Promise<{ slug: string }> };
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return objekte.map((o) => ({ slug: o.slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const o = objektNach((await params).slug);

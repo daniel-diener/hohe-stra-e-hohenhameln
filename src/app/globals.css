@@ -597,7 +597,7 @@ label.haken input { margin-top: 3px; }
 @page { size: A4; margin: 0; }
 @media print {
   html, body { background: #fff !important; }
-  body:has(.expose) .kontaktleiste, body:has(.expose) .kopf, body:has(.expose) .fuss, .expose-leiste { display: none !important; }
+  body:has(.expose) .kontaktleiste, body:has(.expose) .kopf, body:has(.expose) .fuss, body:has(.expose) .admin-leiste, .expose-leiste { display: none !important; }
   .expose { padding: 0; background: #fff; }
   .blatt { margin: 0; box-shadow: none; break-after: page; page-break-after: always; }
   .blatt:last-child { break-after: auto; }

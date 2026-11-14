@@ -61,6 +61,7 @@ export default async function LeadSeite({ params }: Props) {
               {lead.telefon && (
                 <a className="knopf zweit" href={`tel:${lead.telefon.replace(/[^+0-9]/g, "")}`}>Anrufen</a>
               )}
+              {objekt && <Link className="knopf zweit" href={`/admin/expose/${objekt.slug}`}>Exposé (intern)</Link>}
             </div>
 
             <dl className="eckdaten-tabelle">
