@@ -315,3 +315,24 @@ export function terminInfo(l: Empfaenger & { id: string }, objekt: Objekt | unde
     hAbsatz(`<span style="color:${FARBE.leise};font-size:14px;">Die Kalenderdatei hängt an. Der Interessent hat eine Bestätigung mit demselben Termin bekommen.</span>`);
   return { betreff, text, html: rahmen({ betreff, vorschau: `${wann} · ${l.name}`, inhalt, basis, gruss: false }) };
 }
+
+/** Wann der nächste Anruf angekündigt wird. Schlüssel kommt aus dem Formular im Vertriebsbereich. */
+export const RUECKRUF_WANN = {
+  morgen: "morgen",
+  montag: "am Montag",
+  bald: "in den nächsten Tagen",
+} as const;
+export type RueckrufWann = keyof typeof RUECKRUF_WANN;
+
+/** Kurze Nachricht nach einem vergeblichen Anruf: nicht erreicht, wir rufen wieder an. */
+export function nichtErreicht(l: Empfaenger, objekt: Objekt | undefined, basis: URL, wann: RueckrufWann): Mail {
+  const p = projekt.ansprechpartner;
+  const bezug = objekt ? `zur Wohnung ${objekt.titel}` : `zu unseren Eigentumswohnungen an der ${projekt.name}`;
+  const betreff = `Wir haben Sie telefonisch nicht erreicht · ${projekt.name} ${projekt.ort}`;
+  const s1 = `vielen Dank für Ihre Anfrage ${bezug}. Wir haben heute versucht, Sie telefonisch zu erreichen, leider ohne Erfolg.`;
+  const s2 = `Wir rufen Sie ${RUECKRUF_WANN[wann]} noch einmal an.`;
+  const s3 = `Passt Ihnen eine bestimmte Uhrzeit besser? Dann antworten Sie einfach auf diese E-Mail oder rufen Sie uns zurück: ${p.telefon}.`;
+  const text = [`Guten Tag ${l.name},`, "", s1, "", s2, s3, "", ...grussText(), "", ...pflichtText(basis)].join("\n");
+  const inhalt = hAbsatz(`Guten Tag ${esc(l.name)},`) + hAbsatz(esc(s1)) + hAbsatz(`<strong>${esc(s2)}</strong>`) + hAbsatz(esc(s3));
+  return { betreff, text, html: rahmen({ betreff, vorschau: s2, inhalt, basis }) };
+}

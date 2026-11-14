@@ -699,3 +699,5 @@ label.haken input { margin-top: 3px; }
 .termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta)); padding: 6px 0; width: fit-content; }
 .termin-verschieben[open] > summary { margin-bottom: 8px; }
 .termin-verschieben .termin-wahl { margin-top: 16px; }
+.nicht-erreicht { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; padding: 12px 14px; border: 1px solid hsl(var(--border)); border-radius: var(--radius); }
+.nicht-erreicht select { width: auto; min-height: 34px; padding-block: 5px; }

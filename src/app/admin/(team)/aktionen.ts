@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { AKTIVITAET, LEAD_STATUS, istEines, leadStatusLabel } from "@/lib/labels";
 import type { Lead } from "@/lib/leads";
-import { sendeEinladung, sendeTerminAbsage } from "@/lib/mail";
+import { sendeEinladung, sendeNichtErreicht, sendeTerminAbsage } from "@/lib/mail";
+import { RUECKRUF_WANN, type RueckrufWann } from "@/lib/mail-vorlagen";
 import { teamMitglied } from "@/lib/supabase-server";
 import { bucheTermin } from "@/lib/termin-buchen";
 import { terminText } from "@/lib/termine";
@@ -132,4 +133,27 @@ export async function sageTerminAb(form: FormData) {
   });
   if (lead) await sendeTerminAbsage(lead, termin.beginn);
   revalidatePath(`/admin/leads/${id}`);
+}
+
+/** Nach einem vergeblichen Anruf: kurze Mail „nicht erreicht, wir rufen wieder an" und Eintrag im Verlauf. */
+export async function meldeNichtErreicht(form: FormData) {
+  const { supabase, user } = await team();
+  const id = String(form.get("id"));
+  const wann = String(form.get("wann")) as RueckrufWann;
+  if (!(wann in RUECKRUF_WANN)) return;
+  const { data: lead } = await supabase.from("leads").select("*").eq("id", id).maybeSingle<Lead>();
+  if (!lead) return;
+
+  const versendet = await sendeNichtErreicht(lead, wann);
+  await supabase.from("lead_aktivitaeten").insert({
+    lead_id: id,
+    art: "anruf",
+    text: versendet
+      ? `Telefonisch nicht erreicht. E-Mail versendet: Wir rufen ${RUECKRUF_WANN[wann]} noch einmal an.`
+      : "Telefonisch nicht erreicht. Die E-Mail dazu konnte nicht versendet werden (Mailversand prüfen).",
+    created_by: user.id,
+  });
+  if (versendet) await supabase.from("leads").update({ status: "kontaktiert" }).eq("id", id).eq("status", "neu");
+  revalidatePath(`/admin/leads/${id}`);
+  revalidatePath("/admin");
 }

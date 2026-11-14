@@ -8,7 +8,8 @@ import type { Lead, LeadAktivitaet } from "@/lib/leads";
 import { objektNach, projekt } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
 import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
-import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, trageTerminEin } from "../../aktionen";
+import { RUECKRUF_WANN } from "@/lib/mail-vorlagen";
+import { ladeEin, loesche, meldeNichtErreicht, notiere, sageTerminAb, setzeStatus, trageTerminEin } from "../../aktionen";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -65,6 +66,16 @@ export default async function LeadSeite({ params }: Props) {
               )}
               {objekt && <Link className="knopf zweit" href={`/admin/expose/${objekt.slug}`}>Exposé (intern)</Link>}
             </div>
+
+            <form action={meldeNichtErreicht} className="nicht-erreicht">
+              <input type="hidden" name="id" value={lead.id} />
+              <span className="klein">Nicht erreicht? Kurze E-Mail senden: „Wir rufen</span>
+              <select name="wann" defaultValue="morgen" aria-label="Wann wir wieder anrufen">
+                {Object.entries(RUECKRUF_WANN).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+              </select>
+              <span className="klein">noch einmal an.“</span>
+              <button className="knopf zweit klein">Senden</button>
+            </form>
 
             <dl className="eckdaten-tabelle">
               <div><dt>E-Mail</dt><dd><a href={`mailto:${lead.email}`}>{lead.email}</a></dd></div>

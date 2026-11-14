@@ -3,7 +3,7 @@ import nodemailer, { type Transporter } from "nodemailer";
 import type { Anfrage } from "./anfrage";
 import { finanzierungLabel, zweckLabel } from "./labels";
 import type { Lead } from "./leads";
-import { bestaetigung, einladung, terminBestaetigung, terminInfo } from "./mail-vorlagen";
+import { bestaetigung, einladung, nichtErreicht, terminBestaetigung, terminInfo, type RueckrufWann } from "./mail-vorlagen";
 import { objektNach, projekt } from "./objekte";
 import { seitenUrl } from "./seite";
 import { TERMIN, kalenderDatei, terminOrt, terminText } from "./termine";
@@ -179,4 +179,10 @@ export async function sendeTerminAbsage(lead: Pick<Lead, "name" | "telefon" | "e
       `Wann: ${terminText(beginn)}`, `Interessent: ${lead.name}`, `Telefon: ${lead.telefon ?? "keine Angabe"}`, `E-Mail: ${lead.email}`,
     ].join("\n"),
   );
+}
+
+/** „Nicht erreicht, wir rufen wieder an" — vom Team per Knopf im Vertriebsbereich ausgelöst. */
+export async function sendeNichtErreicht(lead: LeadFuerMail, wann: RueckrufWann): Promise<boolean> {
+  const m = nichtErreicht(lead, objektNach(lead.objekt_slug), seitenUrl, wann);
+  return senden(lead.email, m.betreff, m.text, projekt.ansprechpartner.email, m.html);
 }
