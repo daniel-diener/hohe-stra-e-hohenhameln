@@ -19,7 +19,8 @@ const TEAM_STANDARD = "immobilien@daniel-diener.de, immobilien@lena-mylin.de";
 
 let transport: Transporter | null = null;
 function verbindung() {
-  const passwort = process.env.SMTP_PASSWORT;
+  // Leerzeichen am Rand rutschen beim Einfügen in Vercel leicht mit.
+  const passwort = process.env.SMTP_PASSWORT?.trim();
   if (!passwort) return null;
   transport ??= nodemailer.createTransport({
     host: SMTP_HOST,
@@ -48,6 +49,14 @@ async function senden(an: string | string[], betreff: string, text: string, antw
     console.info("Mail versendet an", an, "·", betreff);
   } catch (e) {
     console.error("Mail an", an, "gescheitert:", e);
+    if ((e as { responseCode?: number }).responseCode === 535) {
+      // Nur Prüfdaten, nie das Passwort selbst.
+      const roh = process.env.SMTP_PASSWORT ?? "";
+      console.error(
+        `IONOS-Anmeldung abgelehnt. Benutzer: ${SMTP_BENUTZER} · Server: ${SMTP_HOST} · ` +
+          `Passwortlänge: ${roh.trim().length} · Leerzeichen am Rand entfernt: ${roh !== roh.trim() ? "ja" : "nein"}`,
+      );
+    }
   }
 }
 
