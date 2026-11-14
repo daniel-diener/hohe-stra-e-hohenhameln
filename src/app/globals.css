@@ -670,3 +670,25 @@ label.haken input { margin-top: 3px; }
 .ex-kontakt-bild { position: relative; height: 92mm; }
 .ex-kontakt-bild img { object-fit: cover; }
 .ex-anschrift { margin: 4mm 0 0; font-size: 8.5pt; color: hsl(var(--muted-foreground)); }
+
+/* ── Terminbuchung ────────────────────────────────────────── */
+.termin-seite { max-width: 760px; }
+.termin-daten { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 32px; margin: 28px 0; padding: 20px 24px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); }
+.termin-daten dt { font: 0.6875rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: hsl(var(--muted-foreground)); }
+.termin-daten dd { margin: 4px 0 0; font-weight: 500; }
+.termin-wahl { display: grid; gap: 14px; }
+.termin-tag { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid hsl(var(--border)); }
+.termin-tag legend { float: left; padding: 0; font-weight: 500; }
+.termin-zeiten { display: flex; gap: 8px; }
+.termin-zeit { position: relative; cursor: pointer; }
+.termin-zeit input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.termin-zeit span { display: inline-block; padding: 8px 14px; border: 1px solid hsl(var(--input)); border-radius: var(--radius); font-weight: 500; font-variant-numeric: tabular-nums; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.termin-zeit:hover span { border-color: hsl(var(--foreground) / 0.4); }
+.termin-zeit input:checked + span { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+.termin-zeit input:focus-visible + span { box-shadow: 0 0 0 3px hsl(var(--ring) / 0.3); }
+.termin-absenden { position: sticky; bottom: 0; padding: 14px 0; background: linear-gradient(to top, hsl(var(--background)) 70%, transparent); }
+.termin-hinweis { margin-top: 24px; }
+@media (max-width: 520px) { .termin-tag { grid-template-columns: 1fr; } }
+.termin-admin { padding: 16px 20px; margin-bottom: 12px; }
+.termin-admin p { margin: 0 0 8px; }
+.termin-einladen { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }

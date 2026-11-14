@@ -12,6 +12,7 @@ export const metadata: Metadata = { title: "Datenschutz", alternates: { canonica
  *   Hosting           Vercel, Region Frankfurt (vercel.json)
  *   Anfragen          Supabase, Region Frankfurt (README)
  *   E-Mails           IONOS-Postfach per SMTP (lib/mail.ts), nur wenn SMTP_PASSWORT gesetzt
+ *   Termine           eigene Buchungsseite /termin/<token>, Daten in Supabase (Migration 0004)
  *   Schriften         Geist, mit dem Build ausgeliefert — kein Google Fonts
  *   Cookies           öffentlich keine; im Vertriebsbereich nur Anmeldung
  *   Statistik         eigene, ohne Cookies (api/besuch, Migration 0003)
@@ -163,6 +164,16 @@ export default function Datenschutz() {
           56410 Montabaur, versendet. Dabei werden Ihr Name, Ihre E-Mail-Adresse und der Inhalt der Anfrage
           verarbeitet. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung (Art. 28 DSGVO); die Daten
           werden in Rechenzentren in Deutschland bzw. der EU verarbeitet.
+        </p>
+
+        <h3>Terminvereinbarung</h3>
+        <p>
+          Nach Ihrer Anfrage laden wir Sie per E-Mail zu einem persönlichen Termin ein. Über den Link in der
+          Einladung können Sie einen Termin online buchen oder verschieben. Dabei speichern wir den gewählten
+          Zeitpunkt zu Ihrer Anfrage. Sie und die Person, die das Gespräch mit Ihnen führt, erhalten eine
+          Terminbestätigung per E-Mail mit Ihrem Namen und Ihren Kontaktdaten sowie einer Kalenderdatei.
+          Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen auf Ihre Anfrage hin
+          (Art. 6 Abs. 1 lit. b DSGVO). Der Buchungslink ist persönlich; bitte geben Sie ihn nicht weiter.
         </p>
 
         <h2>6. Kontakt per E-Mail oder Telefon</h2>
