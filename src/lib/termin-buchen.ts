@@ -18,12 +18,20 @@ type LeadMitToken = Lead & { termin_token: string };
  *
  * `supabase` entscheidet über die Rechte: Die Buchungsseite kommt mit dem
  * Dienstschlüssel, der Vertriebsbereich mit der Sitzung der angemeldeten Person.
- * Dass ein Fenster nur einmal vergeben wird, sichert der Index `termine_slot`.
+ * Dass es pro Tag nur einen Termin gibt, sichert der Index `termine_tag`.
  */
 export async function bucheTermin(
   supabase: SupabaseClient, lead: LeadMitToken, beginn: Date, quelle: "online" | "team", userId?: string,
 ): Promise<Buchung> {
   if (!istTermin(beginn, new Date())) return { ok: false, grund: "ungueltig" };
+
+  // Verschieben: erst den bisherigen Termin freigeben. Sonst scheitert ein
+  // Wechsel der Uhrzeit am selben Tag an der Regel „ein Termin pro Tag".
+  const { data: alte } = await supabase
+    .from("termine").update({ status: "abgesagt" })
+    .eq("lead_id", lead.id).eq("status", "gebucht")
+    .select("id");
+  const verschoben = (alte?.length ?? 0) > 0;
 
   const { data: termin, error } = await supabase
     .from("termine")
@@ -31,17 +39,13 @@ export async function bucheTermin(
     .select("id, lead_id, beginn, status, quelle")
     .single<Termin>();
   if (error || !termin) {
-    // 23505 = unique_violation: Jemand anderes war schneller.
+    // Der neue Tag war doch vergeben: den bisherigen Termin wiederherstellen.
+    if (verschoben) await supabase.from("termine").update({ status: "gebucht" }).in("id", alte!.map((t) => t.id));
+    // 23505 = unique_violation: An dem Tag steht schon ein Termin.
     if (error?.code === "23505") return { ok: false, grund: "belegt" };
     console.error("Termin nicht gespeichert:", error);
     return { ok: false, grund: "fehler" };
   }
-
-  const { data: alte } = await supabase
-    .from("termine").update({ status: "abgesagt" })
-    .eq("lead_id", lead.id).eq("status", "gebucht").neq("id", termin.id)
-    .select("id");
-  const verschoben = (alte?.length ?? 0) > 0;
 
   // Ein Termin macht aus „neu" oder „kontaktiert" die nächste Stufe; spätere Stufen bleiben.
   await supabase.from("leads").update({ status: "besichtigung" }).eq("id", lead.id).in("status", ["neu", "kontaktiert"]);

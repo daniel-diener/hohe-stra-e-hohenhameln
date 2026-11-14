@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { berlinZeit, freieTermine, istTermin, kalenderDatei, terminText } from "./termine";
+import { berlinZeit, freieTermine, istTermin, kalenderDatei, terminText, terminZeiten } from "./termine";
 
 // Samstag, 14.11.2026, 10 Uhr in Berlin.
 const jetzt = new Date("2026-11-14T09:00:00Z");
@@ -10,17 +10,19 @@ describe("Zeitfenster", () => {
     expect(berlinZeit(2026, 7, 6, 17).toISOString()).toBe("2026-07-06T15:00:00.000Z");
   });
 
-  it("bietet nur Montag bis Freitag, 17 und 18 Uhr, ab morgen", () => {
+  it("bietet nur Montag bis Freitag, 17:00, 17:30 und 18:00 Uhr, ab morgen", () => {
     const frei = freieTermine(jetzt);
-    expect(frei[0].toISOString()).toBe("2026-11-16T16:00:00.000Z"); // Montag 17 Uhr
-    expect(frei[1].toISOString()).toBe("2026-11-16T17:00:00.000Z");
-    expect(frei).toHaveLength(15 * 2); // 21 Tage = 15 Werktage
+    expect(frei[0].toISOString()).toBe("2026-11-16T16:00:00.000Z"); // Montag 17:00
+    expect(frei[1].toISOString()).toBe("2026-11-16T16:30:00.000Z");
+    expect(frei[2].toISOString()).toBe("2026-11-16T17:00:00.000Z");
+    expect(frei).toHaveLength(15 * 3); // 21 Tage = 15 Werktage
     expect(frei.every((t) => ![0, 6].includes(t.getUTCDay()))).toBe(true);
   });
 
-  it("lässt belegte Fenster weg", () => {
-    const frei = freieTermine(jetzt, ["2026-11-16T16:00:00Z"]);
-    expect(frei[0].toISOString()).toBe("2026-11-16T17:00:00.000Z");
+  it("sperrt den ganzen Tag, sobald ein Termin steht", () => {
+    const frei = freieTermine(jetzt, ["2026-11-16T17:00:00Z"]);
+    expect(frei[0].toISOString()).toBe("2026-11-17T16:00:00.000Z"); // erst Dienstag
+    expect(frei).toHaveLength(14 * 3);
   });
 
   it("nimmt keine erfundenen Zeiten an", () => {
@@ -31,7 +33,8 @@ describe("Zeitfenster", () => {
   });
 
   it("schreibt den Termin aus", () => {
-    expect(terminText("2026-11-16T16:00:00Z")).toBe("Montag, 16. November 2026, 17:00 bis 18:00 Uhr");
+    expect(terminText("2026-11-16T16:00:00Z")).toBe("Montag, 16. November 2026, 17:00 Uhr");
+    expect(terminZeiten).toBe("Montag bis Freitag, Beginn zwischen 17:00 und 18:00 Uhr");
   });
 });
 
@@ -41,7 +44,7 @@ describe("Kalenderdatei", () => {
     expect(ics).toContain("DTSTART:20261116T160000Z");
     expect(ics).toContain("DTEND:20261116T170000Z");
     expect(ics).toContain("SUMMARY:Beratung\; Hohe Straße");
-    expect(ics).toContain("LOCATION:Judek Gebäudetechnik\\, Hahnendamm 6\\, 31249 Hohenhameln");
+    expect(ics).toContain("LOCATION:Judek Projekt GmbH\\, Hahnendamm 6\\, 31249 Hohenhameln");
     expect(ics).toContain("DESCRIPTION:Zeile 1\\nZeile 2");
     expect(ics.split("\r\n")[0]).toBe("BEGIN:VCALENDAR");
   });
