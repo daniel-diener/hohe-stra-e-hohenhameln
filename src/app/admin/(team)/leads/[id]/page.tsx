@@ -34,7 +34,9 @@ export default async function LeadSeite({ params }: Props) {
     .from("termine").select("id, lead_id, beginn").eq("status", "gebucht").gte("beginn", jetzt.toISOString()).order("beginn")
     .returns<{ id: string; lead_id: string; beginn: string }[]>();
   const termin = gebucht?.find((t) => t.lead_id === lead.id) ?? null;
-  const frei = freieTermine(jetzt, (gebucht ?? []).map((t) => t.beginn));
+  // Pro Tag nur ein Termin; am Tag des eigenen Termins bleibt die Uhrzeit änderbar.
+  const frei = freieTermine(jetzt, (gebucht ?? []).filter((t) => t.lead_id !== lead.id).map((t) => t.beginn))
+    .filter((t) => !termin || new Date(termin.beginn).getTime() !== t.getTime());
 
   const objekt = objektNach(lead.objekt_slug);
   const bezug = objekt?.titel ?? `${projekt.name}, ${projekt.ort}`;

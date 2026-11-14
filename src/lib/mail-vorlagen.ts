@@ -3,7 +3,7 @@ import { formatFlaeche } from "./format";
 import { finanzierungLabel, zweckLabel } from "./labels";
 import type { Lead } from "./leads";
 import { geschossName, type Objekt, projekt } from "./objekte";
-import { TERMIN, terminTag, terminText, terminUhr } from "./termine";
+import { TERMIN, terminTag, terminText, terminUhr, terminZeiten } from "./termine";
 import { anbieter } from "./rechtliches";
 
 /**
@@ -245,19 +245,18 @@ export function einladung(l: Empfaenger, objekt: Objekt | undefined, basis: URL,
   const bezug = objekt ? `der Wohnung ${objekt.titel}` : `unseren Eigentumswohnungen an der ${projekt.name}`;
   const betreff = `Einladung zum persönlichen Termin · ${projekt.name} ${projekt.ort}`;
   const s1 = `vielen Dank für Ihr Interesse an ${bezug}. Gern stellen wir Ihnen das Projekt persönlich vor und beantworten Ihre Fragen zu Grundrissen, Ausstattung, Kaufpreis, Finanzierung und Förderung.`;
-  const s2 = `Dazu laden wir Sie herzlich in das Büro von ${TERMIN.ort.name} ein. ${TERMIN.gastgeber} nimmt sich etwa eine Stunde Zeit für Sie.`;
+  const s2 = `Dazu laden wir Sie herzlich in das Büro der ${TERMIN.ort.name} ein. ${TERMIN.gastgeber} nimmt sich Zeit für Sie. Die Uhrzeit suchen Sie sich aus.`;
   const s3 = "Passt keiner der Termine? Antworten Sie einfach auf diese E-Mail oder rufen Sie uns an, wir finden einen anderen.";
   const text = [
     `Guten Tag ${l.name},`, "", s1, "", s2, "",
-    "Wann: Montag bis Freitag, 17:00 oder 18:00 Uhr",
-    `Wo: ${TERMIN.ort.name}, ${TERMIN.ort.strasse}, ${TERMIN.ort.plzOrt}`,
-    "Dauer: etwa eine Stunde", "",
+    `Wann: ${terminZeiten}`,
+    `Wo: ${TERMIN.ort.name}, ${TERMIN.ort.strasse}, ${TERMIN.ort.plzOrt}`, "",
     `Termin online buchen: ${link}`, "", s3, "",
     ...grussText(), "", ...pflichtText(basis),
   ].join("\n");
   const inhalt =
     hAbsatz(`Guten Tag ${esc(l.name)},`) + hAbsatz(esc(s1)) + hAbsatz(esc(s2)) +
-    hKasten([["Wann", "Montag bis Freitag, 17:00 oder 18:00 Uhr"], ["Wo", ortHtml], ["Dauer", "etwa eine Stunde"]]) +
+    hKasten([["Wann", esc(terminZeiten)], ["Wo", ortHtml]]) +
     hKnopf(link, "Termin online buchen") + hAbsatz(esc(s3));
   return { betreff, text, html: rahmen({ betreff, vorschau: s2, inhalt, basis }) };
 }

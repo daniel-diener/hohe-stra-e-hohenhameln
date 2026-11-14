@@ -108,7 +108,7 @@ export async function trageTerminEin(form: FormData) {
     await supabase.from("lead_aktivitaeten").insert({
       lead_id: id,
       art: "notiz",
-      text: `Termin ${terminText(beginn)} konnte nicht eingetragen werden: ${ergebnis.grund === "belegt" ? "Das Zeitfenster ist schon vergeben." : "Bitte erneut versuchen."}`,
+      text: `Termin ${terminText(beginn)} konnte nicht eingetragen werden: ${ergebnis.grund === "belegt" ? "An diesem Tag steht schon ein Termin." : "Bitte erneut versuchen."}`,
       created_by: user.id,
     });
   }

@@ -31,7 +31,7 @@ export async function bucheOnline(_vorher: BuchungsStand, form: FormData): Promi
     stand: "fehler",
     meldung:
       ergebnis.grund === "belegt"
-        ? "Dieser Termin wurde gerade von jemand anderem gebucht. Bitte wählen Sie einen anderen."
+        ? "An diesem Tag wurde gerade ein anderer Termin gebucht. Bitte wählen Sie einen anderen Tag."
         : ergebnis.grund === "ungueltig"
           ? "Dieser Termin ist nicht mehr verfügbar. Bitte wählen Sie einen anderen."
           : "Der Termin konnte gerade nicht gespeichert werden. Bitte versuchen Sie es gleich noch einmal oder rufen Sie uns an.",

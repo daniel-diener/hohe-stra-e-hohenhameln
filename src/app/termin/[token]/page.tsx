@@ -4,7 +4,7 @@ import { Icon } from "@/components/Icon";
 import type { Lead } from "@/lib/leads";
 import { objektNach, projekt } from "@/lib/objekte";
 import { supabaseDienst } from "@/lib/supabase-server";
-import { TERMIN, freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
+import { TERMIN, freieTermine, terminTag, terminText, terminUhr, terminZeiten } from "@/lib/termine";
 import { TerminWahl } from "./TerminWahl";
 
 /**
@@ -33,7 +33,11 @@ export default async function TerminSeite({ params }: { params: Promise<{ token:
   const eigener = gebucht?.find((t) => t.lead_id === lead.id)?.beginn ?? null;
 
   const tage: { tag: string; zeiten: { iso: string; uhr: string }[] }[] = [];
-  for (const t of freieTermine(jetzt, (gebucht ?? []).map((g) => g.beginn))) {
+  // Pro Tag nur ein Termin: Tage anderer Buchungen fallen ganz weg. Am eigenen
+  // Tag bleiben die übrigen Startzeiten wählbar, damit sich die Uhrzeit ändern lässt.
+  const fremde = (gebucht ?? []).filter((g) => g.lead_id !== lead.id).map((g) => g.beginn);
+  for (const t of freieTermine(jetzt, fremde)) {
+    if (eigener && new Date(eigener).getTime() === t.getTime()) continue;
     const tag = terminTag(t);
     const eintrag = tage.at(-1)?.tag === tag ? tage.at(-1)! : (tage.push({ tag, zeiten: [] }), tage.at(-1)!);
     eintrag.zeiten.push({ iso: t.toISOString(), uhr: terminUhr(t) });
@@ -54,8 +58,7 @@ export default async function TerminSeite({ params }: { params: Promise<{ token:
 
         <dl className="termin-daten">
           <div><dt>Wo</dt><dd>{TERMIN.ort.name}<br />{TERMIN.ort.strasse}, {TERMIN.ort.plzOrt}</dd></div>
-          <div><dt>Dauer</dt><dd>etwa eine Stunde</dd></div>
-          <div><dt>Wann</dt><dd>Montag bis Freitag, 17:00 oder 18:00 Uhr</dd></div>
+          <div><dt>Wann</dt><dd>{terminZeiten}</dd></div>
         </dl>
 
         {eigener && (
@@ -68,7 +71,8 @@ export default async function TerminSeite({ params }: { params: Promise<{ token:
           </div>
         )}
 
-        <h2>{eigener ? "Anderen Termin wählen" : "Freie Termine"}</h2>
+        <h2>{eigener ? "Anderen Termin wählen" : "Freie Tage"}</h2>
+        <p className="leise klein">Wählen Sie einen Tag und die Uhrzeit, zu der Sie kommen möchten.</p>
         <TerminWahl token={token} tage={tage} aktuell={eigener} />
 
         <p className="leise klein termin-hinweis">
