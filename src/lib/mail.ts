@@ -2,7 +2,9 @@ import "server-only";
 import nodemailer, { type Transporter } from "nodemailer";
 import type { Anfrage } from "./anfrage";
 import { finanzierungLabel, zweckLabel } from "./labels";
+import { bestaetigung } from "./mail-vorlagen";
 import { objektNach, projekt } from "./objekte";
+import { seitenUrl } from "./seite";
 
 /**
  * E-Mails über das IONOS-Postfach des Projekts (SMTP, STARTTLS auf Port 587).
@@ -32,7 +34,7 @@ function verbindung() {
   return transport;
 }
 
-async function senden(an: string | string[], betreff: string, text: string, antwortAn?: string) {
+async function senden(an: string | string[], betreff: string, text: string, antwortAn?: string, html?: string) {
   const t = verbindung();
   if (!t) {
     console.warn("Mail nicht versendet: SMTP_PASSWORT ist nicht gesetzt (Vercel → Environment Variables, danach Redeploy).");
@@ -44,6 +46,7 @@ async function senden(an: string | string[], betreff: string, text: string, antw
       to: an,
       subject: betreff,
       text,
+      html,
       replyTo: antwortAn,
     });
     console.info("Mail versendet an", an, "·", betreff);
@@ -98,24 +101,8 @@ export async function meldeNeueAnfrage(id: string, a: Anfrage) {
   }
 
   if (process.env.ANFRAGE_BESTAETIGUNG === "1") {
-    const p = projekt.ansprechpartner;
-    aufgaben.push(
-      senden(
-        a.email,
-        `Ihre Anfrage: ${projekt.name}, ${projekt.ort}`,
-        [
-          `Guten Tag ${a.name},`,
-          "",
-          `vielen Dank für Ihr Interesse an ${objekt ? objekt.titel : `unserem Projekt ${projekt.name}`}.`,
-          `${p.name} meldet sich in Kürze persönlich bei Ihnen.`,
-          "",
-          "Viele Grüße",
-          p.name,
-          p.telefon,
-        ].join("\n"),
-        p.email,
-      ),
-    );
+    const m = bestaetigung(a, objekt, seitenUrl);
+    aufgaben.push(senden(a.email, m.betreff, m.text, projekt.ansprechpartner.email, m.html));
   }
 
   await Promise.all(aufgaben);
