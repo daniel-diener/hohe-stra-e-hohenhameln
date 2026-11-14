@@ -15,6 +15,10 @@ export type Lead = {
   einwilligung_at: string;
   status: LeadStatus;
   quelle: Record<string, string>;
+  /** Persönlicher Schlüssel für die Buchungsseite /termin/<token>. */
+  termin_token: string;
+  /** Wann die Einladung zum Termin rausging. */
+  einladung_at: string | null;
 };
 
 export type LeadAktivitaet = {

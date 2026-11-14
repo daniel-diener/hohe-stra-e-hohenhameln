@@ -597,7 +597,7 @@ label.haken input { margin-top: 3px; }
 @page { size: A4; margin: 0; }
 @media print {
   html, body { background: #fff !important; }
-  body:has(.expose) .kontaktleiste, body:has(.expose) .kopf, body:has(.expose) .fuss, .expose-leiste { display: none !important; }
+  body:has(.expose) .kontaktleiste, body:has(.expose) .kopf, body:has(.expose) .fuss, body:has(.expose) .admin-leiste, .expose-leiste { display: none !important; }
   .expose { padding: 0; background: #fff; }
   .blatt { margin: 0; box-shadow: none; break-after: page; page-break-after: always; }
   .blatt:last-child { break-after: auto; }
@@ -644,3 +644,51 @@ label.haken input { margin-top: 3px; }
 .rang-balken { position: absolute; inset: 4px auto 4px 0; background: hsl(var(--cta) / 0.12); border-radius: 4px; }
 .rang-name { position: relative; }
 .rang-neben { position: relative; margin-left: 8px; color: hsl(var(--muted-foreground)); font-size: 0.8125rem; }
+
+/* ── Wohnungs-Exposé ──────────────────────────────────────── */
+.titel-daten { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 0 9mm; margin: 0 0 6mm; }
+.titel-daten dt { font: 7pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.7); }
+.titel-daten dd { margin: 1mm 0 0; font-size: 14pt; font-weight: 600; letter-spacing: -0.02em; }
+.ex-spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+.ex-absatz { margin: 0 0 3mm; }
+.ex-mabv td:nth-child(2) { text-align: right; width: 16mm; color: hsl(var(--muted-foreground)); }
+.ex-mabv td:last-child { width: 30mm; }
+.ex-offen { display: inline-block; padding: 0 1.5mm; border-radius: 1mm; background: #fef08a; color: #713f12; font-family: var(--font-sans); font-size: 8.5pt; }
+.ex-foerder { border: 1px solid hsl(var(--border)); border-radius: 2mm; padding: 5mm; display: flex; flex-direction: column; gap: 2mm; }
+.ex-foerder p { margin: 0; font-size: 9pt; }
+.ex-foerder .eyebrow { margin: 0; }
+.ex-wichtig { background: hsl(var(--muted)); border-radius: 1.5mm; padding: 2.5mm 3mm; font-weight: 500; }
+.ex-haus-schnitt { display: grid; gap: 2mm; margin: 2mm 0; }
+.ex-ebene { display: flex; justify-content: space-between; align-items: center; gap: 6mm; padding: 4mm 5mm; border: 1px solid hsl(var(--border)); border-radius: 1.5mm; background: #fafafa; }
+.ex-ebene-sg { margin-right: 28%; }
+.ex-ebene-ug { background: #f4f4f5; }
+.ex-ebene-name { font-weight: 600; font-size: 10pt; }
+.ex-ebene-we { display: flex; flex-wrap: wrap; gap: 2mm; font: 8pt var(--font-mono); color: hsl(var(--muted-foreground)); }
+.ex-ebene-we span { padding: 0.5mm 1.5mm; border-radius: 1mm; }
+.ex-ebene-hier { border-color: hsl(var(--foreground)); background: #fff; box-shadow: inset 4px 0 0 hsl(var(--foreground)); }
+.ex-we-hier { background: hsl(var(--foreground)); color: #fff; font-weight: 600; }
+.ex-kontakt-bild { position: relative; height: 92mm; }
+.ex-kontakt-bild img { object-fit: cover; }
+.ex-anschrift { margin: 4mm 0 0; font-size: 8.5pt; color: hsl(var(--muted-foreground)); }
+
+/* ── Terminbuchung ────────────────────────────────────────── */
+.termin-seite { max-width: 760px; }
+.termin-daten { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 32px; margin: 28px 0; padding: 20px 24px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); }
+.termin-daten dt { font: 0.6875rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: hsl(var(--muted-foreground)); }
+.termin-daten dd { margin: 4px 0 0; font-weight: 500; }
+.termin-wahl { display: grid; gap: 14px; }
+.termin-tag { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid hsl(var(--border)); }
+.termin-tag legend { float: left; padding: 0; font-weight: 500; }
+.termin-zeiten { display: flex; gap: 8px; }
+.termin-zeit { position: relative; cursor: pointer; }
+.termin-zeit input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.termin-zeit span { display: inline-block; padding: 8px 14px; border: 1px solid hsl(var(--input)); border-radius: var(--radius); font-weight: 500; font-variant-numeric: tabular-nums; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.termin-zeit:hover span { border-color: hsl(var(--foreground) / 0.4); }
+.termin-zeit input:checked + span { background: hsl(var(--foreground)); color: hsl(var(--background)); border-color: hsl(var(--foreground)); }
+.termin-zeit input:focus-visible + span { box-shadow: 0 0 0 3px hsl(var(--ring) / 0.3); }
+.termin-absenden { position: sticky; bottom: 0; padding: 14px 0; background: linear-gradient(to top, hsl(var(--background)) 70%, transparent); }
+.termin-hinweis { margin-top: 24px; }
+@media (max-width: 520px) { .termin-tag { grid-template-columns: 1fr; } }
+.termin-admin { padding: 16px 20px; margin-bottom: 12px; }
+.termin-admin p { margin: 0 0 8px; }
+.termin-einladen { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }

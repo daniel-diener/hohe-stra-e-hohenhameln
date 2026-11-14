@@ -7,7 +7,8 @@ import {
 import type { Lead, LeadAktivitaet } from "@/lib/leads";
 import { objektNach, projekt } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
-import { loesche, notiere, setzeStatus } from "../../aktionen";
+import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
+import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, trageTerminEin } from "../../aktionen";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -27,6 +28,13 @@ export default async function LeadSeite({ params }: Props) {
       .returns<LeadAktivitaet[]>(),
   ]);
   if (!lead) notFound();
+
+  const jetzt = new Date();
+  const { data: gebucht } = await supabase
+    .from("termine").select("id, lead_id, beginn").eq("status", "gebucht").gte("beginn", jetzt.toISOString()).order("beginn")
+    .returns<{ id: string; lead_id: string; beginn: string }[]>();
+  const termin = gebucht?.find((t) => t.lead_id === lead.id) ?? null;
+  const frei = freieTermine(jetzt, (gebucht ?? []).map((t) => t.beginn));
 
   const objekt = objektNach(lead.objekt_slug);
   const bezug = objekt?.titel ?? `${projekt.name}, ${projekt.ort}`;
@@ -53,6 +61,7 @@ export default async function LeadSeite({ params }: Props) {
               {lead.telefon && (
                 <a className="knopf zweit" href={`tel:${lead.telefon.replace(/[^+0-9]/g, "")}`}>Anrufen</a>
               )}
+              {objekt && <Link className="knopf zweit" href={`/admin/expose/${objekt.slug}`}>Exposé (intern)</Link>}
             </div>
 
             <dl className="eckdaten-tabelle">
@@ -71,6 +80,43 @@ export default async function LeadSeite({ params }: Props) {
                 <h2>Nachricht</h2>
                 <blockquote className="nachricht">{lead.nachricht}</blockquote>
               </>
+            )}
+
+            <h2>Termin im Büro</h2>
+            {termin ? (
+              <div className="karte erfolg termin-admin">
+                <p><strong>{terminText(termin.beginn)}</strong></p>
+                <p className="klein">Bestätigung mit Kalenderdatei ging an den Interessenten, René Judek und das Team.</p>
+                <form action={sageTerminAb}>
+                  <input type="hidden" name="id" value={lead.id} />
+                  <input type="hidden" name="termin" value={termin.id} />
+                  <button className="knopf zweit klein">Termin absagen</button>
+                </form>
+              </div>
+            ) : (
+              <p className="klein leise">
+                Noch kein Termin.
+                {lead.einladung_at ? ` Einladung mit Buchungslink versendet am ${formatDatum(lead.einladung_at)}.` : ""}
+              </p>
+            )}
+            <form action={trageTerminEin} className="filter">
+              <input type="hidden" name="id" value={lead.id} />
+              <select name="beginn" defaultValue="" required>
+                <option value="" disabled>{termin ? "Auf anderen Termin verschieben …" : "Am Telefon vereinbarten Termin wählen …"}</option>
+                {frei.map((t) => (
+                  <option key={t.toISOString()} value={t.toISOString()}>{terminTag(t)}, {terminUhr(t)} Uhr</option>
+                ))}
+              </select>
+              <button className="knopf klein">{termin ? "Verschieben" : "Termin eintragen"}</button>
+            </form>
+            {!termin && (
+              <form action={ladeEin} className="termin-einladen">
+                <input type="hidden" name="id" value={lead.id} />
+                <button className="knopf zweit klein">
+                  {lead.einladung_at ? "Einladung erneut senden" : "Einladung mit Buchungslink senden"}
+                </button>
+                <span className="klein leise">Der Interessent wählt den Termin dann selbst online.</span>
+              </form>
             )}
 
             <h2>Status</h2>
