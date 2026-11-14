@@ -17,7 +17,7 @@ export type Lead = {
   quelle: Record<string, string>;
   /** Persönlicher Schlüssel für die Buchungsseite /termin/<token>. */
   termin_token: string;
-  /** Wann die Einladung zum Termin rausging. */
+  /** Wann das Team die Einladung zum Termin verschickt hat. Automatisch geht keine raus. */
   einladung_at: string | null;
 };
 
