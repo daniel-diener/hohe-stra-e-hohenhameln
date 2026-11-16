@@ -302,7 +302,7 @@ export const objekte: Objekt[] = [
     ],
   }),
   wohnung({
-    we: 11, plan: "we-11", geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 55.08,
+    we: 11, status: "reserviert", plan: "we-11", geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 55.08,
     titel: "WE 11 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 7.13, seite: "Süd" }, garten: false, keller: 4.85,
     kurz: "Die kompakteste Wohnung im Haus: zwei Zimmer mit Balkon nach Süden, ideal als Kapitalanlage.",
