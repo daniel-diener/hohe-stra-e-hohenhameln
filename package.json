@@ -9,8 +9,7 @@
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "expose": "node scripts/expose-pdf.mjs",
-    "ausstattung": "node scripts/expose-pdf.mjs http://localhost:3000/ausstattung ausstattung-hohe-strasse.pdf"
+    "expose": "node scripts/expose-pdf.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",

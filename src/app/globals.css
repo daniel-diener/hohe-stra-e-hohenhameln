@@ -436,7 +436,7 @@ label.haken input { margin-top: 3px; }
 
 .admin-leiste { border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--muted) / 0.5); padding: 10px 0; font-size: 0.875rem; }
 .admin-leiste .breite { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.admin-leiste nav { display: flex; gap: 20px; }
+.admin-leiste nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
 .admin-leiste a { color: hsl(var(--foreground)); font-weight: 500; }
 .reiter { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0; }
 .reiter a {

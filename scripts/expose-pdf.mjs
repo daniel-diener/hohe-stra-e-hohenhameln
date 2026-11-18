@@ -4,7 +4,6 @@
  *   npm run build && npm start         # in einem Terminal
  *   npm run expose                     # im zweiten → expose-hohe-strasse.pdf
  *   npm run expose -- https://…/expose ausgabe.pdf   # andere Quelle/Datei
- *   npm run ausstattung                # /ausstattung → ausstattung-hohe-strasse.pdf
  *
  * Braucht Playwright mit Chromium (`npx playwright install chromium`, falls nicht vorhanden).
  */

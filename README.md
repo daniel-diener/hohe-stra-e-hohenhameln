@@ -19,7 +19,7 @@ public/objekte/<slug>/    Fotos je Objekt
 src/app/page.tsx          Startseite: Objekte, Lage, Anfrage
 src/app/objekte/[slug]    Objektseite mit Anfrageformular
 src/app/expose/           Exposé als A4-Seiten (PDF: npm run expose)
-src/app/ausstattung/      Materialien & Ausstattung als A4-Seiten (PDF: npm run ausstattung)
+src/app/admin/(team)/ausstattung/  Materialien & Ausstattung als A4-Seiten, nur intern (PDF über den Knopf auf der Seite)
 src/app/aktionen.ts       Speichert eine Anfrage (Server Action)
 src/lib/anfrage.ts        Prüft das Formular, Spamschutz (Honigtopf + Mindestzeit)
 src/app/admin/            Vertrieb: Anmeldung, Leads, Lead-Detail, CSV-Export

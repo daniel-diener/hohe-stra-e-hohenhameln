@@ -6,16 +6,15 @@ import { Hauszeichen } from "@/components/Logo";
 import { objekte, projekt } from "@/lib/objekte";
 import { anbieter } from "@/lib/rechtliches";
 import { seitenUrl } from "@/lib/seite";
-import { DruckKnopf } from "../expose/DruckKnopf";
-import { STAND } from "../expose/teile";
+import { DruckKnopf } from "@/app/expose/DruckKnopf";
+import { STAND } from "@/app/expose/teile";
 
 /**
  * „Materialien & Ausstattung" als druckfertige A4-Seiten im Layout des Exposés:
  * Böden, Fliesen, Bad, Beschläge, Elektro und Haustechnik laut Baubeschreibung.
- * Geht als Ergänzung zum Exposé an Interessenten, die angefragt haben.
- * PDF: im Browser „Als PDF speichern" oder `npm run ausstattung`.
- *
- * Wie das Exposé bewusst nicht verlinkt und nicht in Suchmaschinen.
+ * Nur intern: liegt im Vertriebsbereich und ist nur angemeldet erreichbar.
+ * Der Vertrieb speichert die Seite über „Als PDF speichern" und schickt das
+ * PDF von Hand an Interessenten; die automatischen Mails verlinken sie nicht.
  */
 export const metadata: Metadata = {
   title: "Materialien & Ausstattung",
