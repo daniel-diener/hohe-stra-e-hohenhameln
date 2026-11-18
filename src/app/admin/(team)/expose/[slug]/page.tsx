@@ -58,6 +58,10 @@ async function preiseLaden(we: number): Promise<Preise> {
   return { wohnung: w.data?.kaufpreis, stellplatz: ab(false), carport: ab(true) };
 }
 
+const euroCent = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", minimumFractionDigits: 2 });
+const formatEuroCent = (n: number) => euroCent.format(n);
+const prozent = (n: number) => `${(n * 100).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} %`;
+
 function Folgt({ text = "folgt" }: { text?: string }) {
   return <span className="ex-offen">{text}</span>;
 }
@@ -224,6 +228,9 @@ function KostenBlatt({ nr, o, preise }: { nr: string; o: Objekt; preise: Preise 
 
 function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
   const deckel = AFA_7B_DECKEL * o.wohnflaeche;
+  const preis = o.status === "verkauft" ? undefined : o.kaufpreis;
+  const monatsmiete = projekt.kaltmieteJeQm * o.wohnflaeche;
+  const jahresmiete = monatsmiete * 12;
   return (
     <Blatt nr={nr} titel="Förderung und Steuervorteil">
       <p className="ex-einleitung">
@@ -265,11 +272,11 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
         <h3>Rechenbeispiel für Vermieter</h3>
         <table className="ex-raeume ex-mabv">
           <tbody>
-            <tr><td>Kaufpreis Wohnung</td><td className="mono">{o.kaufpreis ? formatEuro(o.kaufpreis) : <Folgt />}</td></tr>
-            <tr><td>Erwartete Kaltmiete je m²</td><td className="mono"><Folgt /></td></tr>
-            <tr><td>Jahreskaltmiete ({formatFlaeche(o.wohnflaeche)})</td><td className="mono"><Folgt /></td></tr>
-            <tr><td>Bruttomietrendite</td><td className="mono"><Folgt /></td></tr>
-            <tr><td>Abschreibung im 1. Jahr (degressiv 5 % plus § 7b 5 %)</td><td className="mono"><Folgt /></td></tr>
+            <tr><td>Kaufpreis Wohnung</td><td className="mono">{preis ? formatEuro(preis) : <Folgt />}</td></tr>
+            <tr><td>Erwartete Kaltmiete je m²</td><td className="mono">{formatEuroCent(projekt.kaltmieteJeQm)}</td></tr>
+            <tr><td>Monatliche Kaltmiete ({formatFlaeche(o.wohnflaeche)})</td><td className="mono">{formatEuro(monatsmiete)}</td></tr>
+            <tr><td>Jahreskaltmiete</td><td className="mono">{formatEuro(jahresmiete)}</td></tr>
+            <tr><td>Bruttomietrendite</td><td className="mono">{preis ? prozent(jahresmiete / preis) : <Folgt />}</td></tr>
           </tbody>
         </table>
       </div>
