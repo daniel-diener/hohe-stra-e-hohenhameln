@@ -48,9 +48,6 @@ export function LageBlatt({ nr }: { nr: string }) {
           zwischen Hannover, Hildesheim und Braunschweig. Einkauf, Ärzte und Cafés sind zu Fuß erreichbar,
           die A2 in einer Viertelstunde.
         </p>
-        <figure className="ex-bild ex-bild-lage">
-          <Image src={projekt.lageBild.src} alt={projekt.lageBild.alt} fill sizes="182mm" loading="eager" />
-        </figure>
         <ul className="ex-lage">
           {projekt.lage.map((l) => <li key={l.ziel}><span>{l.wert}</span>{l.ziel}</li>)}
         </ul>

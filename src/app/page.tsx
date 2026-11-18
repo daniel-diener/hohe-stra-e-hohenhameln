@@ -146,17 +146,12 @@ export default function Start() {
               Hohenhameln, rund 3.400 Einwohner, im Landkreis Peine, zwischen Hannover, Hildesheim und Braunschweig.
             </p>
           </header>
-          <div className="lage-raster">
-            <ul className="lage-liste">
-              {projekt.lage.map((l) => (
-                <li key={l.ziel}><span className="mono">{l.wert}</span><span>{l.ziel}</span></li>
-              ))}
-            </ul>
-            <figure className="lage-bild">
-              <Image src={projekt.lageBild.src} alt={projekt.lageBild.alt} fill sizes="(max-width: 860px) 100vw, 640px" />
-              <figcaption className="mono"><Icon name="ort" size={14} /> {projekt.adresse}</figcaption>
-            </figure>
-          </div>
+          <ul className="lage-liste">
+            {projekt.lage.map((l) => (
+              <li key={l.ziel}><span className="mono">{l.wert}</span><span>{l.ziel}</span></li>
+            ))}
+          </ul>
+          <p className="lage-adresse mono"><Icon name="ort" size={14} /> {projekt.adresse}</p>
         </div>
       </section>
 
