@@ -4,6 +4,7 @@
  *   npm run build && npm start         # in einem Terminal
  *   npm run expose                     # im zweiten → expose-hohe-strasse.pdf
  *   npm run expose -- https://…/expose ausgabe.pdf   # andere Quelle/Datei
+ *   npm run ausstattung                # /ausstattung → ausstattung-hohe-strasse.pdf
  *
  * Braucht Playwright mit Chromium (`npx playwright install chromium`, falls nicht vorhanden).
  */
@@ -28,4 +29,4 @@ await seite.evaluate(async () => {
 await seite.emulateMedia({ media: "print" });
 await seite.pdf({ path: datei, format: "A4", printBackground: true, preferCSSPageSize: true });
 await browser.close();
-console.log(`Exposé gespeichert: ${datei}`);
+console.log(`PDF gespeichert: ${datei}`);

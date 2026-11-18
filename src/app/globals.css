@@ -692,3 +692,102 @@ label.haken input { margin-top: 3px; }
 .termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta)); padding: 6px 0; width: fit-content; }
 .termin-verschieben[open] > summary { margin-bottom: 8px; }
 .termin-verschieben .termin-wahl { margin-top: 16px; }
+
+/* ── Materialien & Ausstattung (/ausstattung), im Layout des Exposés ── */
+.ausstattung .eyebrow { font-size: 7.5pt; margin: 0 0 2mm; }
+.ausstattung .blatt-titel { margin-bottom: 7mm; }
+.au-zwischentitel { font-size: 17pt; letter-spacing: -0.03em; margin: 0 0 5mm; }
+.au-abstand { margin-top: 3mm; }
+.au-hinweis { position: absolute; left: 14mm; right: 14mm; bottom: 17mm; }
+.au-abschnitt { padding-top: 6mm; border-top: 1px solid hsl(var(--border)); }
+.au-abschnitt > .ex-klein { margin-top: 3mm; }
+
+.au-bild { position: relative; display: block; overflow: hidden; border-radius: 2mm; background: hsl(var(--muted)); }
+.au-bild img { object-fit: cover; }
+.au-einpassen { background: #fff; border: 1px solid hsl(var(--border)); }
+.au-einpassen img { object-fit: contain; padding: 5mm; }
+
+.titelblatt h1 + .au-titel-zeile { max-width: 150mm; margin-bottom: 8mm; }
+.ausstattung .titelblatt h1 { font-size: 40pt; }
+.au-palette { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; font: 7.5pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
+.au-muster { position: relative; display: block; height: 24mm; margin-bottom: 2mm; border-radius: 1.5mm; overflow: hidden; background: #f4f4f5; border: 1px solid rgba(255, 255, 255, 0.35); }
+.au-muster img { object-fit: cover; }
+
+.au-ueberblick { grid-template-columns: repeat(3, 1fr); padding-bottom: 7mm; border-bottom: 1px solid hsl(var(--border)); }
+.au-boeden { display: grid; grid-template-columns: 84mm 1fr; gap: 9mm; flex: 1; min-height: 0; padding-top: 1mm; }
+.au-boeden > div { align-self: center; }
+.au-boeden .au-bild { height: 100%; }
+
+.au-liste { margin: 0; display: grid; }
+.au-liste > div { padding: 3.5mm 0; border-top: 1px solid hsl(var(--border)); }
+.au-liste > div:last-child { border-bottom: 1px solid hsl(var(--border)); }
+.au-liste dt { font-weight: 600; font-size: 11pt; letter-spacing: -0.01em; }
+.au-liste dt span, .au-marke { display: block; font: 7pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: hsl(var(--muted-foreground)); margin-bottom: 0.5mm; }
+.au-liste dd { margin: 0.5mm 0 0; color: #52525b; }
+.au-liste + .ex-klein { margin-top: 3mm; }
+
+.au-fliesen { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+.au-fliesen h3 { font-size: 15pt; letter-spacing: -0.02em; margin-bottom: 4mm; }
+.au-fliesenpaar { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.au-fliesenpaar figure { margin: 0; }
+.au-fliesenpaar .au-bild { height: 128mm; }
+.au-fliesenpaar figcaption { margin-top: 2mm; font: 7.5pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: hsl(var(--muted-foreground)); }
+.au-kennzahlen { grid-template-columns: repeat(4, 1fr); margin-top: 4mm; }
+.au-kennzahlen > div:nth-child(n) { border-top: 0; border-left: 1px solid hsl(var(--border)); }
+.au-kennzahlen > div:first-child { border-left: 0; }
+.au-kennzahlen dd { font-size: 11.5pt; letter-spacing: -0.02em; }
+
+.au-produkte { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.au-produkte-3 { grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+.au-produkt { margin: 0; }
+.au-produkt .au-bild { height: 72mm; }
+.au-produkte-3 .au-bild { height: 56mm; }
+.au-produkt figcaption { padding-top: 3mm; }
+.au-produkt h3 { font-size: 11pt; margin: 0 0 1mm; }
+.au-produkt p { margin: 0; color: #52525b; font-size: 9pt; }
+.au-dunkel .au-bild { background: #000; border-color: #000; }
+
+.au-dusche { display: grid; grid-template-columns: 1fr 70mm; gap: 7mm; }
+.au-dusche > .au-bild { height: 84mm; }
+.au-dusche-text { display: grid; grid-template-columns: 16mm 1fr; gap: 4mm; align-items: center; }
+.au-dusche-text .au-bild { height: 84mm; border: 0; }
+.au-dusche-text .au-bild img { padding: 0; }
+.au-dusche-text .au-liste dt { font-size: 10pt; }
+.au-dusche-text .au-liste dd { font-size: 9pt; }
+.au-option { margin-top: 6mm; padding: 6mm; border-radius: 2mm; background: hsl(var(--muted)); }
+.au-option .au-einpassen { border-color: transparent; }
+
+.au-tueren { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; align-items: center; padding-bottom: 8mm; }
+.au-tueren .au-bild { height: 72mm; }
+.au-schalter { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; align-items: center; }
+.au-schalterpaar { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.au-schalterpaar .au-bild { aspect-ratio: 1; }
+.au-schalterpaar .au-bild img { padding: 2mm; }
+
+.au-elektro { font-size: 9pt; }
+.au-elektro td { padding: 2.2mm 3mm 2.2mm 0; }
+.au-elektro td:first-child { font-weight: 600; }
+.au-elektro td:nth-child(2), .au-elektro td:nth-child(4) { white-space: normal; }
+.au-komfort { display: grid; grid-template-columns: 62mm 1fr; gap: 9mm; flex: 1; min-height: 0; padding-top: 6mm; border-top: 1px solid hsl(var(--border)); }
+.au-komfort .au-bild { height: 100%; }
+.au-komfort > div { align-self: center; }
+.au-nummern { list-style: none; padding: 0; margin: 0; }
+.au-nummern li { display: grid; grid-template-columns: 9mm 1fr; padding: 3mm 0; border-top: 1px solid hsl(var(--border)); }
+.au-nummern .mono { font-size: 8pt; color: hsl(var(--muted-foreground)); padding-top: 0.6mm; }
+.au-nummern h3 { margin: 0 0 0.5mm; }
+.au-nummern p { margin: 0; color: #52525b; font-size: 9pt; }
+
+.au-haus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm 7mm; margin: 0; }
+.au-haus dt { font-weight: 600; font-size: 10.5pt; padding-top: 2.5mm; border-top: 1px solid hsl(var(--foreground) / 0.4); }
+.au-haus dd { margin: 1mm 0 0; color: #52525b; font-size: 9pt; }
+.au-qng { margin: 0; font-size: 9pt; }
+.au-box { border: 1px solid hsl(var(--border)); border-radius: 2mm; padding: 5mm; }
+.au-box ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.5mm; }
+.au-box li { display: flex; gap: 2.5mm; align-items: baseline; }
+.au-box li::before { content: "–"; color: hsl(var(--muted-foreground)); }
+.au-box-plus li::before { content: "+"; color: hsl(var(--success)); font-weight: 700; }
+.au-kontakt { display: grid; grid-template-columns: 1fr auto; gap: 10mm; align-items: center; margin-top: auto; padding: 6mm; border-radius: 2mm; background: #18181b; color: #fff; }
+.au-kontakt .eyebrow, .au-kontakt .ex-anschrift { color: rgba(255, 255, 255, 0.65); }
+.au-kontakt .ex-namen { margin: 0; line-height: 1.25; }
+.au-kontakt .ex-namen.klein-namen { margin-bottom: 2mm; }
+.au-kontakt .ex-kontaktzeile:last-child { margin-bottom: 0; }
