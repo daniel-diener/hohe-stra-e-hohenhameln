@@ -231,9 +231,6 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
   const preis = o.status === "verkauft" ? undefined : o.kaufpreis;
   const monatsmiete = projekt.kaltmieteJeQm * o.wohnflaeche;
   const jahresmiete = monatsmiete * 12;
-  // Degressiv 5 % auf den Gebäudeanteil, dazu § 7b 5 % auf höchstens 4.000 € je m².
-  const gebaeude = preis && projekt.gebaeudeanteil ? preis * projekt.gebaeudeanteil : undefined;
-  const afa = gebaeude ? gebaeude * 0.05 + Math.min(gebaeude, deckel) * 0.05 : undefined;
   return (
     <Blatt nr={nr} titel="Förderung und Steuervorteil">
       <p className="ex-einleitung">
@@ -280,7 +277,6 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
             <tr><td>Monatliche Kaltmiete ({formatFlaeche(o.wohnflaeche)})</td><td className="mono">{formatEuro(monatsmiete)}</td></tr>
             <tr><td>Jahreskaltmiete</td><td className="mono">{formatEuro(jahresmiete)}</td></tr>
             <tr><td>Bruttomietrendite</td><td className="mono">{preis ? prozent(jahresmiete / preis) : <Folgt />}</td></tr>
-            <tr><td>Abschreibung im 1. Jahr (degressiv 5 % plus § 7b 5 %)</td><td className="mono">{afa ? formatEuro(afa) : <Folgt />}</td></tr>
           </tbody>
         </table>
       </div>
