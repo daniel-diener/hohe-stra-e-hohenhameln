@@ -85,7 +85,7 @@ export default function Ausstattung() {
       <section className="blatt titelblatt">
         <Image
           src={`${BILD}/wohnraum-parkett.jpg`} alt="Wohnraum mit Echtholz-Eichenparkett"
-          fill sizes="210mm" loading="eager" className="titel-bild"
+          fill sizes="210mm" loading="eager" unoptimized className="titel-bild"
         />
         <div className="titel-inhalt">
           <p className="titel-marke"><Hauszeichen size={40} /> Ausstattung</p>
@@ -99,7 +99,7 @@ export default function Ausstattung() {
               {palette.map((f) => (
                 <li key={f.name}>
                   <span className="au-muster">
-                    {f.bild && <Image src={`${BILD}/${f.bild}`} alt="" fill sizes="40mm" loading="eager" />}
+                    {f.bild && <Image src={`${BILD}/${f.bild}`} alt="" fill sizes="40mm" loading="eager" unoptimized />}
                   </span>
                   {f.name}
                 </li>
@@ -107,7 +107,7 @@ export default function Ausstattung() {
             </ul>
           </div>
           <div className="titel-fuss">
-            <span>{objekte.length} Eigentumswohnungen · Effizienzhaus 40 QNG<br />{projekt.adresse}</span>
+            <span>{objekte.length} Eigentumswohnungen · Effizienzhaus QNG 40<br />{projekt.adresse}</span>
             <span className="titel-judek"><JudekLogo /></span>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function Ausstattung() {
           {haus.map(([name, text]) => <div key={name}><dt>{name}</dt><dd>{text}</dd></div>)}
         </dl>
         <p className="ex-kasten au-qng">
-          Ein Wohnhaus im Standard KfW-Effizienzhaus 40 QNG kombiniert extrem niedrigen Energiebedarf mit
+          Ein Wohnhaus im Standard KfW-Effizienzhaus QNG 40 kombiniert extrem niedrigen Energiebedarf mit
           strengen Nachhaltigkeitskriterien, um die höchste Stufe der staatlichen Neubauförderung zu erreichen.
         </p>
 
@@ -391,7 +391,7 @@ function Seite({ nr, kapitel, titel, hinweis, children }: {
 function Bild({ datei, alt, sizes, einpassen }: { datei: string; alt: string; sizes: string; einpassen?: boolean }) {
   return (
     <span className={`au-bild${einpassen ? " au-einpassen" : ""}`}>
-      <Image src={`${BILD}/${datei}`} alt={alt} fill sizes={sizes} loading="eager" />
+      <Image src={`${BILD}/${datei}`} alt={alt} fill sizes={sizes} loading="eager" unoptimized />
     </span>
   );
 }
