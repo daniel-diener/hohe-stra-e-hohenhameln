@@ -174,6 +174,10 @@ export function WohnungsBlatt({ o }: { o: Objekt }) {
           src={o.grundriss.src} alt={`Grundriss ${o.titel}`} breite={o.grundriss.breite} hoehe={o.grundriss.hoehe}
           sizes="182mm" status={o.status}
         />
+        <p className="ex-klein">
+          {o.grundriss.baugleichMit ? `Grundriss baugleich mit WE ${o.grundriss.baugleichMit}, daher deren Nummer im Plan. ` : ""}
+          Möblierung beispielhaft, nicht maßstäblich.
+        </p>
       </div>
       <div className="wohnung-spalten">
         <div>
@@ -192,10 +196,6 @@ export function WohnungsBlatt({ o }: { o: Objekt }) {
           <ul className="haken-liste ex-haken">{o.merkmale.map((m) => <li key={m}>{m}</li>)}</ul>
         </div>
       </div>
-      <p className="ex-klein">
-        {o.grundriss.baugleichMit ? `Grundriss baugleich mit WE ${o.grundriss.baugleichMit}, daher deren Nummer im Plan. ` : ""}
-        Möblierung beispielhaft, nicht maßstäblich.
-      </p>
       <BlattFuss />
     </section>
   );

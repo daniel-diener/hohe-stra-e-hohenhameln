@@ -7,12 +7,14 @@ import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, preisText } from "@/lib/format";
 import { geschossName, geschosse, objektNach, objekte, projekt, type Objekt } from "@/lib/objekte";
 import { DruckKnopf } from "@/app/expose/DruckKnopf";
+import { supabaseSitzung } from "@/lib/supabase-server";
 import { Blatt, HausBlatt, KontaktBlatt, LageBlatt, WohnungsBlatt } from "@/app/expose/teile";
 
 /**
  * Exposé zu einer einzelnen Wohnung: die Objektunterlage für Käufer und Bank.
  * Vorerst nur intern: liegt im Vertriebsbereich und ist nur angemeldet erreichbar.
- * Alles aus `lib/objekte.ts`. Was dort noch fehlt (Preis, Zahlungsplan, Miete),
+ * Alles aus `lib/objekte.ts`, die Kaufpreise aus Supabase (`preise_wohnungen`,
+ * `stellplaetze`, nur fürs Team lesbar). Was noch fehlt (Hausgeld, Miete),
  * erscheint als markiertes „folgt“ und füllt sich, sobald die Werte eingetragen sind.
  */
 
@@ -29,30 +31,42 @@ const NOTAR = 0.02;
 /** § 7b EStG: Bemessungsgrundlage höchstens 4.000 € je m² Wohnfläche, 4 Jahre je 5 %. */
 const AFA_7B_DECKEL = 4000;
 
-/** Raten nach § 3 Abs. 2 MaBV (Höchstsätze). Der Kaufvertrag fasst sie zu höchstens sieben Raten zusammen. */
-const MABV: [string, number][] = [
-  ["Nach Beginn der Erdarbeiten", 30],
-  ["Nach Rohbaufertigstellung einschließlich Zimmererarbeiten", 28],
-  ["Herstellung der Dachflächen und Dachrinnen", 5.6],
-  ["Rohinstallation der Heizungsanlagen", 2.1],
-  ["Rohinstallation der Sanitäranlagen", 2.1],
-  ["Rohinstallation der Elektroanlagen", 2.1],
-  ["Fenstereinbau einschließlich Verglasung", 7],
-  ["Innenputz, ausgenommen Beiputzarbeiten", 4.2],
-  ["Estrich", 2.1],
-  ["Fliesenarbeiten im Sanitärbereich", 2.8],
-  ["Bezugsfertigkeit, Zug um Zug gegen Besitzübergabe", 8.4],
-  ["Fassadenarbeiten", 2.1],
-  ["Vollständige Fertigstellung", 3.5],
+/**
+ * Zahlung in zwei Teilbeträgen. Nach MaBV werden nach Rohbaufertigstellung 58 % fällig
+ * (30 % Erdarbeiten plus 28 % Rohbau); davon behält der Käufer 5 % als Sicherheit ein
+ * und zahlt sie mit der Schlussrate.
+ */
+const RATEN: [string, string, number][] = [
+  ["1. Teilbetrag nach Fertigstellung des Rohbaus", "58 % nach MaBV, abzüglich 5 % Sicherheit, die Sie einbehalten", 53],
+  ["2. Teilbetrag bei Fertigstellung (Schlussrate)", "die restlichen 42 % plus die einbehaltenen 5 %", 47],
 ];
+
+type Preise = { wohnung?: number; stellplatz?: number; carport?: number };
+
+/** Kaufpreis der Wohnung und Stellplatzpreise aus der Datenbank. */
+async function preiseLaden(we: number): Promise<Preise> {
+  const supabase = await supabaseSitzung();
+  const [w, s] = await Promise.all([
+    supabase.from("preise_wohnungen").select("kaufpreis").eq("we", we).maybeSingle<{ kaufpreis: number }>(),
+    supabase.from("stellplaetze").select("carport, kaufpreis").returns<{ carport: boolean; kaufpreis: number }[]>(),
+  ]);
+  const plaetze = s.data ?? [];
+  const ab = (carport: boolean) => {
+    const liste = plaetze.filter((x) => x.carport === carport).map((x) => x.kaufpreis);
+    return liste.length ? Math.min(...liste) : undefined;
+  };
+  return { wohnung: w.data?.kaufpreis, stellplatz: ab(false), carport: ab(true) };
+}
 
 function Folgt({ text = "folgt" }: { text?: string }) {
   return <span className="ex-offen">{text}</span>;
 }
 
 export default async function WohnungsExpose({ params }: Props) {
-  const o = objektNach((await params).slug);
-  if (!o) notFound();
+  const gefunden = objektNach((await params).slug);
+  if (!gefunden) notFound();
+  const preise = await preiseLaden(gefunden.we);
+  const o: Objekt = { ...gefunden, kaufpreis: preise.wohnung ?? gefunden.kaufpreis };
   const [eingang] = projekt.bilder;
 
   return (
@@ -80,6 +94,9 @@ export default async function WohnungsExpose({ params }: Props) {
               <li>KfW-Kredit bis 150.000 €</li>
               <li>Provisionsfrei</li>
               <li>Fertigstellung {projekt.fertigstellung}</li>
+              <li>Eigene PV-Anlage</li>
+              <li>Barrierefrei</li>
+              <li>Aufzug</li>
             </ul>
           </div>
           <div className="titel-fuss">
@@ -91,7 +108,7 @@ export default async function WohnungsExpose({ params }: Props) {
 
       <WohnungsBlatt o={o} />
       <LageImHaus nr="02" o={o} />
-      <KostenBlatt nr="03" o={o} />
+      <KostenBlatt nr="03" o={o} preise={preise} />
       <FoerderBlatt nr="04" o={o} />
       <HausBlatt nr="05" />
       <LageBlatt nr="06" />
@@ -143,20 +160,20 @@ function LageImHaus({ nr, o }: { nr: string; o: Objekt }) {
   );
 }
 
-function KostenBlatt({ nr, o }: { nr: string; o: Objekt }) {
+function KostenBlatt({ nr, o, preise }: { nr: string; o: Objekt; preise: Preise }) {
   const preis = o.status === "verkauft" ? undefined : o.kaufpreis;
   const zeile = (anteil: number) => (preis ? formatEuro(preis * anteil) : <Folgt />);
   return (
-    <Blatt nr={nr} titel="Kaufpreis und Zahlung">
+    <Blatt nr={nr} titel="Kaufpreis">
       <div className="ex-spalten">
         <div>
-          <h3>Kaufpreis</h3>
+          <h3>Wohnung und Stellplatz</h3>
           <table className="ex-raeume">
             <tbody>
               <tr><td>Wohnung {o.we}</td><td className="mono">{preis ? formatEuro(preis) : o.status === "verkauft" ? preisText(o) : <Folgt />}</td></tr>
-              <tr><td>Stellplatz bzw. Carport (optional)</td><td className="mono"><Folgt /></td></tr>
+              <tr><td>Stellplatz (optional)</td><td className="mono">{preise.stellplatz ? formatEuro(preise.stellplatz) : <Folgt />}</td></tr>
+              <tr><td>Stellplatz mit Carport (optional)</td><td className="mono">{preise.carport ? formatEuro(preise.carport) : <Folgt />}</td></tr>
               <tr><td>Ladestation (optional)</td><td className="mono"><Folgt text="gegen Aufpreis" /></td></tr>
-              <tr><td>Käuferprovision</td><td className="mono">0 €</td></tr>
             </tbody>
           </table>
         </div>
@@ -167,25 +184,23 @@ function KostenBlatt({ nr, o }: { nr: string; o: Objekt }) {
               <tr><td>Grunderwerbsteuer Niedersachsen (5 %)</td><td className="mono">{zeile(GREST)}</td></tr>
               <tr><td>Notar und Grundbuch (rund 2 %)</td><td className="mono">{zeile(NOTAR)}</td></tr>
               <tr><td>Maklerprovision</td><td className="mono">entfällt</td></tr>
-              <tr className="summe"><td>Nebenkosten gesamt (rund 7 %)</td><td className="mono">{zeile(GREST + NOTAR)}</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
       <div>
-        <h3>Zahlung nach Baufortschritt</h3>
+        <h3>Zahlung in zwei Teilbeträgen</h3>
         <p className="ex-klein ex-absatz">
-          Sie zahlen nicht vorab, sondern in Raten nach dem tatsächlichen Baufortschritt, wie es die
-          Makler- und Bauträgerverordnung (MaBV) vorschreibt. Die Tabelle zeigt die gesetzlichen Höchstsätze;
-          der Kaufvertrag fasst sie zu höchstens sieben Raten zusammen.
+          Sie zahlen nicht vorab, sondern erst nach Baufortschritt, wie es die Makler- und Bauträgerverordnung
+          (MaBV) vorsieht.
         </p>
-        <table className="ex-raeume ex-mabv">
+        <table className="ex-raeume ex-raten">
           <tbody>
-            {MABV.map(([schritt, prozent]) => (
-              <tr key={schritt}>
-                <td>{schritt}</td>
-                <td className="mono">{prozent.toLocaleString("de-DE")} %</td>
+            {RATEN.map(([rate, erklaerung, prozent]) => (
+              <tr key={rate}>
+                <td><strong>{rate}</strong><br /><span className="ex-klein">{erklaerung}</span></td>
+                <td className="mono">{prozent} %</td>
                 <td className="mono">{zeile(prozent / 100)}</td>
               </tr>
             ))}
@@ -195,7 +210,7 @@ function KostenBlatt({ nr, o }: { nr: string; o: Objekt }) {
 
       <div className="ex-spalten">
         <div className="ex-kasten"><p><strong>Hausgeld.</strong> Voraussichtliches monatliches Hausgeld: <Folgt /></p></div>
-        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Zusätzlich 5 % Sicherheit für die rechtzeitige Fertigstellung ohne wesentliche Mängel.</p></div>
+        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Die einbehaltenen 5 % sichern die rechtzeitige Fertigstellung ohne wesentliche Mängel.</p></div>
       </div>
       <p className="ex-klein">
         Richtwerte ohne Gewähr. Maßgeblich sind der notarielle Kaufvertrag und der darin vereinbarte Zahlungsplan.
@@ -210,7 +225,7 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
     <Blatt nr={nr} titel="Förderung und Steuervorteil">
       <p className="ex-einleitung">
         Das Haus entsteht als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG), der höchsten
-        Förderstufe für Neubauten. Davon profitieren Eigennutzer und Kapitalanleger.
+        Förderstufe für Neubauten. Davon profitieren Eigennutzer und Vermieter.
       </p>
 
       <div className="ex-spalten">
@@ -227,7 +242,7 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
           </p>
         </div>
         <div className="ex-foerder">
-          <p className="eyebrow">Kapitalanleger</p>
+          <p className="eyebrow">Vermieter</p>
           <h3>Sonderabschreibung nach §&nbsp;7b EStG</h3>
           <p>
             Zusätzlich zur regulären Abschreibung vier Jahre lang je 5 % der Herstellungs- bzw.
@@ -244,7 +259,7 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
       </div>
 
       <div>
-        <h3>Rechenbeispiel für Kapitalanleger</h3>
+        <h3>Rechenbeispiel für Vermieter</h3>
         <table className="ex-raeume ex-mabv">
           <tbody>
             <tr><td>Kaufpreis Wohnung</td><td className="mono">{o.kaufpreis ? formatEuro(o.kaufpreis) : <Folgt />}</td></tr>

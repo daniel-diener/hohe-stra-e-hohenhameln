@@ -103,7 +103,7 @@ export const projekt = {
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
     { icon: "tropfen", titel: "Tageslichtbäder", text: "Mit ebenerdiger Dusche und hochwertiger Sanitärausstattung." },
-    { icon: "schichten", titel: "Parkett und Feinsteinzeug", text: "Parkett in den Wohnräumen, Feinsteinzeug in Bad und Küche." },
+    { icon: "schichten", titel: "Parkett und Fliesen", text: "Parkett in den Wohnräumen, Fliesen in Bad und Küche." },
     { icon: "kiste", titel: "Abstellraum im UG", text: "Für jede Wohnung, rund 4 bis 9 m²." },
     { icon: "baum", titel: "Eigene Gärten", text: "Sondernutzung für die Wohnungen im Garten- und Erdgeschoss." },
   ],
