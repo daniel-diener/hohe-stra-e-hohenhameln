@@ -40,7 +40,7 @@ Objektseite automatisch das Schild „Reserviert" über dem Grundriss.
 Fertigstellung, Ab-Preis und Ansprechpartnerin (Lena Mylin) stehen oben in
 `projekt` und erscheinen von dort überall auf der Seite und in den Mails.
 
-Kaufpreise (Wohnungen und Stellplätze) liegen in Supabase in `preise_wohnungen`
+Kaufpreise (Wohnungen und Stellplätze, ohne Verkaufsstand) liegen in Supabase in `preise_wohnungen`
 und `stellplaetze` (nur fürs Team lesbar, Quelle: Kaufpreisliste vom 15.09.2026);
 das Wohnungs-Exposé unter `/admin/expose/<slug>` liest sie von dort.
 
