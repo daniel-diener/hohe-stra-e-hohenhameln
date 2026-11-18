@@ -545,12 +545,14 @@ label.haken input { margin-top: 3px; }
 .wohnung-flaeche { margin: 0 0 4mm; text-align: right; font-size: 8pt; color: hsl(var(--muted-foreground)); white-space: nowrap; }
 .wohnung-flaeche span { display: block; font-size: 18pt; font-weight: 600; letter-spacing: -0.03em; color: hsl(var(--foreground)); }
 .ex-grundriss { margin: 5mm 0; }
-.ex-grundriss .plan { margin: 0; aspect-ratio: auto; height: 112mm; border: 1px solid hsl(var(--border)); }
+.ex-grundriss .plan { margin: 0; aspect-ratio: auto; height: 106mm; border: 1px solid hsl(var(--border)); }
+.ex-grundriss .ex-klein { margin-top: 1.5mm; }
 .ex-grundriss .schild-box { font-size: 15pt; }
 .wohnung-spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-bottom: 4mm; }
 .ex-raeume { width: 100%; border-collapse: collapse; font-size: 9pt; }
 .ex-raeume td { padding: 1.3mm 0; border-bottom: 1px solid hsl(var(--border)); }
 .ex-raeume td:last-child { text-align: right; }
+.ex-raten td:nth-child(2) { white-space: nowrap; padding-left: 4mm; }
 .ex-raeume .summe td { font-weight: 600; border-bottom: 0; border-top: 1px solid hsl(var(--foreground) / 0.4); }
 .ex-details { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; margin: 0 0 3mm; font-size: 9pt; }
 .ex-haken { margin: 0; gap: 1.5mm; font-size: 9pt; }
@@ -568,6 +570,14 @@ label.haken input { margin-top: 3px; }
 .titel-fuss { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; font-size: 9pt; color: rgba(255, 255, 255, 0.85); }
 .titel-judek { background: rgba(255, 255, 255, 0.92); padding: 3mm 4mm; border-radius: 2mm; }
 .titel-judek .judek-logo { width: 34mm; margin: 0; }
+/* Variante Wohnungs-Exposé: Titel im Himmel, Daten auf dem Rasen, Fassade frei. */
+.titelblatt-himmel::after { background: linear-gradient(to bottom, rgba(9, 9, 11, 0.55) 0%, rgba(9, 9, 11, 0.15) 30%, rgba(9, 9, 11, 0) 45%, rgba(9, 9, 11, 0) 58%, rgba(9, 9, 11, 0.55) 75%, rgba(9, 9, 11, 0.92) 100%); }
+.titelblatt-himmel .titel-oben { display: flex; flex-direction: column; gap: 12mm; }
+.titelblatt-himmel .titel-unten { display: flex; flex-direction: column; gap: 6mm; }
+.titelblatt-himmel h1 { font-size: 44pt; margin: 0; }
+.titelblatt-himmel h1 span { color: rgba(255, 255, 255, 0.8); }
+.titelblatt-himmel .titel-daten { margin: 0; }
+.titelblatt-himmel .titel-vorteile { font-size: 11.5pt; }
 
 .ex-kontakt { display: grid; grid-template-columns: 78mm 1fr; gap: 8mm; align-items: start; }
 .ex-team { margin: 0; border-radius: 2mm; overflow: hidden; }
