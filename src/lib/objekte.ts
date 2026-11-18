@@ -97,7 +97,6 @@ export const projekt = {
     { src: "/projekt/garten.jpg", alt: "Visualisierung: Gartenseite mit Balkonen und Terrassen" },
     { src: "/projekt/zufahrt-abend.jpg", alt: "Visualisierung: Zufahrt am Abend mit Stellplätzen" },
   ],
-  lageBild: { src: "/projekt/hohenhameln.jpg", alt: "Luftbild von Hohenhameln mit Feldern am Ortsrand" },
   haus: [
     { icon: "blatt", titel: "Effizienzhaus QNG 40", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
     { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
