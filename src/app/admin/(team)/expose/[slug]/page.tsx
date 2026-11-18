@@ -77,12 +77,15 @@ export default async function WohnungsExpose({ params }: Props) {
       </div>
 
       {/* ── Titel ─────────────────────────────────────────────── */}
-      <section className="blatt titelblatt">
+      {/* Titel oben im Himmel, Daten unten: die Fassade in der Mitte bleibt frei. */}
+      <section className="blatt titelblatt titelblatt-himmel">
         <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" className="titel-bild" />
         <div className="titel-inhalt">
-          <p className="titel-marke"><Hauszeichen size={40} /> Exposé · Wohnung {o.we}</p>
-          <div>
+          <div className="titel-oben">
+            <p className="titel-marke"><Hauszeichen size={40} /> Exposé · Wohnung {o.we}</p>
             <h1>{untertitel(o)}<br /><span>{projekt.name}, {projekt.ort}</span></h1>
+          </div>
+          <div className="titel-unten">
             <dl className="titel-daten">
               <div><dt>Wohnfläche</dt><dd>{formatFlaeche(o.wohnflaeche)}</dd></div>
               <div><dt>Zimmer</dt><dd>{o.zimmer}</dd></div>
@@ -98,10 +101,10 @@ export default async function WohnungsExpose({ params }: Props) {
               <li>Barrierefrei</li>
               <li>Aufzug</li>
             </ul>
-          </div>
-          <div className="titel-fuss">
-            <span>{projekt.adresse}</span>
-            <span className="titel-judek"><JudekLogo /></span>
+            <div className="titel-fuss">
+              <span>{projekt.adresse}</span>
+              <span className="titel-judek"><JudekLogo /></span>
+            </div>
           </div>
         </div>
       </section>
