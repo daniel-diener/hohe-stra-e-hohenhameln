@@ -55,7 +55,7 @@ export function LageBlatt({ nr }: { nr: string }) {
 }
 
 export function KontaktBlatt({ nr }: { nr: string }) {
-  // Bewusst allgemein, ohne Personen: Das Exposé bleibt gültig, wenn die Betreuung wechselt.
+  // Namen aus projekt.exposeAnsprechpartner, Telefon und Mail aus projekt.ansprechpartner.
   const p = projekt.ansprechpartner;
   const bild = projekt.bilder[2];
   const web = projekt.web;
@@ -73,7 +73,8 @@ export function KontaktBlatt({ nr }: { nr: string }) {
               ersten Besichtigung bis zur Schlüsselübergabe. Sprechen Sie uns an, wir vereinbaren gern
               einen Termin.
             </p>
-            <p className="ex-ansprechpartnerin">Projekt {projekt.name} {projekt.ort}</p>
+            <p className="ex-ansprechpartnerin">Ihre Ansprechpartner</p>
+            <p className="ex-namen klein-namen">{projekt.exposeAnsprechpartner.join(" & ")}</p>
             <p className="ex-kontaktzeile"><Icon name="telefon" size={16} /> {p.telefon}</p>
             <p className="ex-kontaktzeile"><Icon name="mail" size={16} /> {p.email}</p>
             <p className="ex-kontaktzeile"><Icon name="ort" size={16} /> {web}</p>
