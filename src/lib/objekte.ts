@@ -67,6 +67,13 @@ export const projekt = {
   /** Günstigster Kaufpreis im Haus; Einzelpreise auf Anfrage. */
   abPreis: 228370,
   provision: "provisionsfrei",
+  /** Erwartete Kaltmiete je m² Wohnfläche, für das Rechenbeispiel im Exposé. */
+  kaltmieteJeQm: 11.5,
+  /**
+   * Anteil des Gebäudes am Kaufpreis (Rest: Grundstück), Grundlage der Abschreibung.
+   * TODO: vom Bauherrn bzw. Steuerberater; solange leer, zeigt das Exposé „folgt“.
+   */
+  gebaeudeanteil: undefined as number | undefined,
   einleitung:
     "Neubau eines Mehrfamilienhauses als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG): 16 Wohnungen von 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
