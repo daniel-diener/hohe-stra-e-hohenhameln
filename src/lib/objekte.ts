@@ -60,6 +60,8 @@ export const projekt = {
   name: "Hohe Straße",
   ort: "Hohenhameln",
   adresse: "Hohe Straße 11, 31249 Hohenhameln",
+  /** Webadresse für Druck und Exposé — fest, damit ein lokal erzeugtes PDF nicht „localhost“ zeigt. */
+  web: "hohe-strasse.judek-projekt.de",
   claim: "16 Eigentumswohnungen in Hohenhameln",
   fertigstellung: "Ende 2027",
   /** Günstigster Kaufpreis im Haus; Einzelpreise auf Anfrage. */

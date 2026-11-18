@@ -8,7 +8,6 @@ import { formatEuro, formatFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { geschossName, projekt, type Objekt } from "@/lib/objekte";
 import { anbieter } from "@/lib/rechtliches";
-import { seitenUrl } from "@/lib/seite";
 
 /** Bausteine des Exposés, gemeinsam für das Gesamt-Exposé und die Wohnungs-Exposés. */
 
@@ -59,7 +58,7 @@ export function KontaktBlatt({ nr }: { nr: string }) {
   // Bewusst allgemein, ohne Personen: Das Exposé bleibt gültig, wenn die Betreuung wechselt.
   const p = projekt.ansprechpartner;
   const bild = projekt.bilder[2];
-  const web = seitenUrl.host;
+  const web = projekt.web;
   return (
       <Blatt nr={nr} titel="Ihr Kontakt">
         <div className="ex-kontakt">
