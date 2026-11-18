@@ -34,21 +34,33 @@ export default function Expose() {
         <DruckKnopf />
       </div>
 
-      {/* ── 1 Titel ───────────────────────────────────────────── */}
-      <section className="blatt titelblatt">
+      {/* ── 1 Titel: oben im Himmel, Daten unten, die Fassade bleibt frei ── */}
+      <section className="blatt titelblatt titelblatt-himmel">
         <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" unoptimized className="titel-bild" />
         <div className="titel-inhalt">
-          <p className="titel-marke"><Hauszeichen size={40} /> Exposé</p>
-          <div>
+          <div className="titel-oben">
+            <p className="titel-marke"><Hauszeichen size={40} /> Exposé</p>
             <h1>{projekt.name}<br /><span>{projekt.ort}</span></h1>
-            <p className="titel-zeile">
-              {objekte.length} Eigentumswohnungen · Effizienzhaus QNG 40 · Fertigstellung {projekt.fertigstellung}
-            </p>
-            <ul className="titel-vorteile">{projekt.vorteile.map((v) => <li key={v}>{v}</li>)}</ul>
           </div>
-          <div className="titel-fuss">
-            <span>{projekt.adresse}</span>
-            <span className="titel-judek"><JudekLogo /></span>
+          <div className="titel-unten">
+            <dl className="titel-daten">
+              <div><dt>Wohnungen</dt><dd>{objekte.length}</dd></div>
+              <div><dt>Wohnfläche</dt><dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd></div>
+              <div><dt>Zimmer</dt><dd>2 bis 4</dd></div>
+              <div><dt>Fertigstellung</dt><dd>{projekt.fertigstellung}</dd></div>
+            </dl>
+            <ul className="titel-vorteile">
+              <li>Effizienzhaus QNG 40</li>
+              <li>KfW-Kredit bis 150.000 €</li>
+              <li>Provisionsfrei</li>
+              <li>Eigene PV-Anlage</li>
+              <li>Barrierefrei</li>
+              <li>Aufzug</li>
+            </ul>
+            <div className="titel-fuss">
+              <span>{projekt.adresse}</span>
+              <span className="titel-judek"><JudekLogo /></span>
+            </div>
           </div>
         </div>
       </section>
