@@ -4,12 +4,16 @@ import type { ObjektStatus } from "@/lib/objekte";
 
 /** Ein Grundriss: ganz zeigen, nie beschneiden — ein halber Plan lügt. */
 export function Plan({
-  src, alt, breite, hoehe, sizes, status = "verfuegbar", schild = true,
-}: { src: string; alt: string; breite: number; hoehe: number; sizes: string; status?: ObjektStatus; schild?: boolean }) {
+  src, alt, breite, hoehe, sizes, status = "verfuegbar", schild = true, original = false,
+}: {
+  src: string; alt: string; breite: number; hoehe: number; sizes: string; status?: ObjektStatus; schild?: boolean;
+  /** Originaldatei statt verkleinerter Webversion, fürs Exposé (Druck). */
+  original?: boolean;
+}) {
   const vergeben = status !== "verfuegbar";
   return (
     <div className={`plan ${vergeben ? "plan-reserviert" : ""}`}>
-      <Image src={src} alt={alt} width={breite} height={hoehe} sizes={sizes} />
+      <Image src={src} alt={alt} width={breite} height={hoehe} sizes={sizes} unoptimized={original} />
       {vergeben && schild && <StatusSchild verkauft={status === "verkauft"} />}
     </div>
   );

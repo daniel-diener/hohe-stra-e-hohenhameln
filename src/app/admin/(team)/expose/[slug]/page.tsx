@@ -79,7 +79,7 @@ export default async function WohnungsExpose({ params }: Props) {
       {/* ── Titel ─────────────────────────────────────────────── */}
       {/* Titel oben im Himmel, Daten unten: die Fassade in der Mitte bleibt frei. */}
       <section className="blatt titelblatt titelblatt-himmel">
-        <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" className="titel-bild" />
+        <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" unoptimized className="titel-bild" />
         <div className="titel-inhalt">
           <div className="titel-oben">
             <p className="titel-marke"><Hauszeichen size={40} /> Exposé · Wohnung {o.we}</p>
@@ -152,7 +152,7 @@ function LageImHaus({ nr, o }: { nr: string; o: Objekt }) {
         <div><dt>Abstellraum im UG</dt><dd>{formatFlaeche(o.keller)}</dd></div>
       </dl>
       <figure className="ex-bild ex-bild-gross">
-        <Image src={projekt.bilder[1].src} alt={projekt.bilder[1].alt} fill sizes="182mm" loading="eager" />
+        <Image src={projekt.bilder[1].src} alt={projekt.bilder[1].alt} fill sizes="182mm" loading="eager" unoptimized />
       </figure>
       <div className="ex-kasten">
         <p>

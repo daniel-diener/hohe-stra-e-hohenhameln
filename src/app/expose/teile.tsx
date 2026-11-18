@@ -29,8 +29,8 @@ export function HausBlatt({ nr }: { nr: string }) {
           ))}
         </div>
         <div className="ex-bildpaar">
-          <figure className="ex-bild"><Image src={garten.src} alt={garten.alt} fill sizes="90mm" loading="eager" /></figure>
-          <figure className="ex-bild"><Image src={zufahrt.src} alt={zufahrt.alt} fill sizes="90mm" loading="eager" /></figure>
+          <figure className="ex-bild"><Image src={garten.src} alt={garten.alt} fill sizes="90mm" loading="eager" unoptimized /></figure>
+          <figure className="ex-bild"><Image src={zufahrt.src} alt={zufahrt.alt} fill sizes="90mm" loading="eager" unoptimized /></figure>
         </div>
         <div className="ex-kasten">
           <span className="merkmal-icon"><Icon name="auto" size={18} /></span>
@@ -64,7 +64,7 @@ export function KontaktBlatt({ nr }: { nr: string }) {
       <Blatt nr={nr} titel="Ihr Kontakt">
         <div className="ex-kontakt">
           <figure className="ex-team ex-kontakt-bild">
-            <Image src={bild.src} alt={bild.alt} fill sizes="80mm" loading="eager" />
+            <Image src={bild.src} alt={bild.alt} fill sizes="80mm" loading="eager" unoptimized />
           </figure>
           <div>
             <p className="eyebrow">Bauherr und Verkauf</p>
@@ -172,7 +172,7 @@ export function WohnungsBlatt({ o }: { o: Objekt }) {
       <div className="ex-grundriss">
         <Plan
           src={o.grundriss.src} alt={`Grundriss ${o.titel}`} breite={o.grundriss.breite} hoehe={o.grundriss.hoehe}
-          sizes="182mm" status={o.status}
+          sizes="182mm" status={o.status} original
         />
         <p className="ex-klein">
           {o.grundriss.baugleichMit ? `Grundriss baugleich mit WE ${o.grundriss.baugleichMit}, daher deren Nummer im Plan. ` : ""}

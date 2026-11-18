@@ -36,7 +36,7 @@ export default function Expose() {
 
       {/* ── 1 Titel ───────────────────────────────────────────── */}
       <section className="blatt titelblatt">
-        <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" className="titel-bild" />
+        <Image src={eingang.src} alt={eingang.alt} fill sizes="210mm" loading="eager" unoptimized className="titel-bild" />
         <div className="titel-inhalt">
           <p className="titel-marke"><Hauszeichen size={40} /> Exposé</p>
           <div>
@@ -65,7 +65,7 @@ export default function Expose() {
           <div><dt>Fertigstellung</dt><dd>{projekt.fertigstellung}</dd></div>
         </dl>
         <figure className="ex-bild ex-bild-gross">
-          <Image src={luftbild.src} alt={luftbild.alt} fill sizes="182mm" loading="eager" />
+          <Image src={luftbild.src} alt={luftbild.alt} fill sizes="182mm" loading="eager" unoptimized />
         </figure>
         <dl className="ex-fakten">
           <div><dt>Adresse</dt><dd>{projekt.adresse}</dd></div>
