@@ -791,3 +791,22 @@ label.haken input { margin-top: 3px; }
 .au-kontakt .ex-namen { margin: 0; line-height: 1.25; }
 .au-kontakt .ex-namen.klein-namen { margin-bottom: 2mm; }
 .au-kontakt .ex-kontaktzeile:last-child { margin-bottom: 0; }
+
+/* Grünton Judek (#BECE43) als Akzent in der Ausstattung. Zu hell für Schrift auf
+ * Weiß (1,6:1), deshalb nur als Fläche, Linie oder Schrift auf dunklem Grund. */
+.ausstattung { --gruen: #bece43; --gruen-hell: #f2f5d9; }
+.ausstattung .titelblatt h1 span { color: var(--gruen); }
+.ausstattung .au-titel-zeile { padding-left: 4mm; border-left: 1.2mm solid var(--gruen); }
+.ausstattung .au-kapitel::before { content: ""; width: 6mm; height: 1.2mm; border-radius: 1mm; background: var(--gruen); }
+.ausstattung .au-kapitel { gap: 2.5mm; }
+.ausstattung .merkmal-icon { background: var(--gruen); border-color: var(--gruen); }
+.ausstattung .au-haus dt { border-top: 1.2mm solid var(--gruen); padding-top: 2mm; }
+.ausstattung .au-nummern .mono { display: inline-grid; place-items: center; width: 6.5mm; height: 6.5mm; padding: 0; border-radius: 50%; background: var(--gruen); color: #18181b; font-size: 7.5pt; }
+.ausstattung .au-option { background: var(--gruen-hell); }
+.ausstattung .au-qng { background: var(--gruen-hell); }
+.ausstattung .au-box-plus { border-color: var(--gruen); background: var(--gruen-hell); }
+.ausstattung .au-box-plus li::before { content: "+"; display: inline-grid; place-items: center; flex: none; width: 4.2mm; height: 4.2mm; border-radius: 50%; background: var(--gruen); color: #18181b; font-size: 8pt; line-height: 1; }
+.ausstattung .au-box-plus li { align-items: center; }
+.ausstattung .au-kontakt { box-shadow: inset 1.5mm 0 0 var(--gruen); }
+.ausstattung .au-kontakt .eyebrow { color: var(--gruen); }
+.ausstattung .au-kennzahlen { border-top: 1.2mm solid var(--gruen); }
