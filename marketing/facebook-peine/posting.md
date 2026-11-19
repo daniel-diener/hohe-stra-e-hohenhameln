@@ -31,7 +31,7 @@ In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimme
 🌱 KfW-Kredit bis 150.000 € möglich
 🔑 Einzug Ende 2027
 
-Neugierig? Grundrisse gibt's hier 👉 https://hohe-strasse.judek-projekt.de
+Neugierig? Grundrisse gibt's hier 👉 https://hohe-strasse.judek-projekt.de/?utm_source=facebook&utm_medium=social&utm_campaign=fb-gruppe-peine
 Oder einfach bei Lena melden: 📞 +49 155 10336973 – oder per PN 😊
 
 Abbildungen sind Visualisierungen.
