@@ -53,5 +53,6 @@ try {
 } finally {
   try { process.kill(-server.pid); } catch {}
   await rm(ROUTE, { recursive: true, force: true });
-  await rm(".next/types/app/pdf-vorschau-ausstattung", { recursive: true, force: true });
+  // Next legt für die Vorschau-Route Typen an; ohne Aufräumen meldet `npm run typecheck` sie als fehlend.
+  await rm(".next/types", { recursive: true, force: true });
 }
