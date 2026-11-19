@@ -9,7 +9,8 @@
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "expose": "node scripts/expose-pdf.mjs"
+    "expose": "node scripts/expose-pdf.mjs",
+    "ausstattung-pdf": "node scripts/ausstattung-pdf.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",

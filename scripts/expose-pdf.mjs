@@ -28,4 +28,4 @@ await seite.evaluate(async () => {
 await seite.emulateMedia({ media: "print" });
 await seite.pdf({ path: datei, format: "A4", printBackground: true, preferCSSPageSize: true });
 await browser.close();
-console.log(`Exposé gespeichert: ${datei}`);
+console.log(`PDF gespeichert: ${datei}`);
