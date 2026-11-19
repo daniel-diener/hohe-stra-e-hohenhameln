@@ -5,33 +5,18 @@ Neu erzeugen: `node marketing/facebook-peine/render.mjs` (Fakten stehen im Skrip
 
 ---
 
-🏡 NEUBAU IM LANDKREIS PEINE – provisionsfreie Eigentumswohnungen in Hohenhameln
+🏡 Neubau in Hohenhameln – und noch 9 von 16 Wohnungen frei!
 
-In der Hohen Straße 11 in Hohenhameln entsteht ein modernes Mehrfamilienhaus mit 16 Eigentumswohnungen – und 9 davon sind noch zu haben.
+In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse. Dazu Aufzug, Wärmepumpe, Photovoltaik – alles barrierefrei und als Effizienzhaus 40 mit QNG.
 
-✨ Das Wichtigste auf einen Blick:
-✅ 2 bis 4 Zimmer, 55 bis 122 m² Wohnfläche
-✅ Effizienzhaus 40 mit QNG-Siegel – Wärmepumpe, Fußbodenheizung, Photovoltaik
-✅ Barrierefrei mit Aufzug vom Gartengeschoss bis zur Dachterrasse
-✅ Jede Wohnung mit Terrasse, Balkon oder Dachterrasse (bis 50 m²)
-✅ Gartenwohnungen mit eigenem Gartenanteil
-✅ Stellplätze und Carports am Haus, Wallbox auf Wunsch
-✅ Fertigstellung Ende 2027
+💶 Ab 228.370 €, provisionsfrei
+🌱 KfW-Kredit bis 150.000 € möglich
+📍 20 Minuten nach Peine, 15 Minuten zur A2
+🔑 Einzug Ende 2027
 
-💶 Kaufpreise ab 228.370 € – provisionsfrei direkt vom Bauträger.
+Neugierig? Grundrisse gibt's hier 👉 https://hohe-strasse.judek-projekt.de
+Oder einfach bei Lena melden: 📞 +49 155 10336973 – oder per PN 😊
 
-🌱 Förderung: Durch den Effizienzhaus-40-Standard mit QNG sind KfW-Kredite bis 150.000 € je Wohnung möglich. Kapitalanleger profitieren zusätzlich von der Sonderabschreibung nach § 7b EStG.
+Abbildungen sind Visualisierungen.
 
-📍 Ruhig wohnen, schnell überall: ca. 20 Minuten nach Peine und Hildesheim, 15 Minuten zur A2, unter 40 Minuten nach Hannover und Braunschweig. Einkauf, Ärzte, Schule und Kitas sind zu Fuß erreichbar.
-
-Ob erste eigene Wohnung, mehr Platz für die Familie, barrierefrei wohnen im Alter oder Kapitalanlage: Hier ist für jede Lebensphase etwas dabei.
-
-👉 Alle Wohnungen mit Grundrissen: https://hohe-strasse.judek-projekt.de
-📞 Exposé und Besichtigung: Lena Mylin, +49 155 10336973
-✉️ hohe-strasse@judek-projekt.de
-
-Gern auch per PN – wir freuen uns auf Ihre Nachricht!
-
-Bauherr: Judek Projekt GmbH · Abbildungen sind Visualisierungen, Abweichungen möglich. Förderbedingungen können sich ändern.
-
-#Hohenhameln #Peine #LandkreisPeine #Eigentumswohnung #Neubau #Wohnungkaufen #KfW40 #Kapitalanlage
+#Hohenhameln #Peine #Eigentumswohnung #Neubau
