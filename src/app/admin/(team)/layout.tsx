@@ -26,6 +26,7 @@ export default async function TeamLayout({ children }: { children: React.ReactNo
             <Link href="/admin">Leads</Link>
             <Link href="/admin/statistik">Statistik</Link>
             <Link href="/admin/ausstattung">Ausstattung</Link>
+            <a href="/admin/ausstattung/pdf" download>Ausstattung (PDF)</a>
             <a href="/expose" target="_blank" rel="noopener">Exposé</a>
             <a href="/admin/export">CSV-Export</a>
           </nav>

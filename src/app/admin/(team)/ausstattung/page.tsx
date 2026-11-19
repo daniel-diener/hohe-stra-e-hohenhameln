@@ -6,15 +6,15 @@ import { Hauszeichen } from "@/components/Logo";
 import { objekte, projekt } from "@/lib/objekte";
 import { anbieter } from "@/lib/rechtliches";
 import { seitenUrl } from "@/lib/seite";
-import { DruckKnopf } from "@/app/expose/DruckKnopf";
 import { STAND } from "@/app/expose/teile";
 
 /**
  * „Materialien & Ausstattung" als druckfertige A4-Seiten im Layout des Exposés:
  * Böden, Fliesen, Bad, Beschläge, Elektro und Haustechnik laut Baubeschreibung.
  * Nur intern: liegt im Vertriebsbereich und ist nur angemeldet erreichbar.
- * Der Vertrieb speichert die Seite über „Als PDF speichern" und schickt das
- * PDF von Hand an Interessenten; die automatischen Mails verlinken sie nicht.
+ * Der Vertrieb lädt das fertige PDF über „PDF herunterladen" (Route ./pdf) und
+ * schickt es von Hand an Interessenten; die automatischen Mails verlinken es nicht.
+ * Nach jeder Änderung hier: `npm run ausstattung-pdf` und das PDF mit committen.
  */
 export const metadata: Metadata = {
   title: "Materialien & Ausstattung",
@@ -78,7 +78,7 @@ export default function Ausstattung() {
     <div className="expose ausstattung">
       <div className="expose-leiste">
         <p>Materialien &amp; Ausstattung · 8 Seiten im A4-Format</p>
-        <DruckKnopf />
+        <a className="knopf cta" href="/admin/ausstattung/pdf" download>PDF herunterladen</a>
       </div>
 
       {/* ── Titel ─────────────────────────────────────────────── */}
