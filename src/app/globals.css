@@ -527,6 +527,7 @@ label.haken input { margin-top: 3px; }
 .ex-merkmale p { margin: 0; color: hsl(var(--muted-foreground)); font-size: 9pt; }
 .ex-kasten { display: flex; gap: 3mm; align-items: flex-start; padding: 4mm 5mm; border-radius: 2mm; background: hsl(var(--muted)); }
 .ex-kasten p { margin: 0; }
+.ex-kasten .merkmal-icon { flex-shrink: 0; }
 
 .ex-lage { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; }
 .ex-lage li { display: flex; gap: 4mm; padding: 3mm 0; border-bottom: 1px solid hsl(var(--border)); }
