@@ -81,7 +81,7 @@ const kacheln = {
       <div>Wärmepumpe &amp; Fußbodenheizung</div><div>Photovoltaik auf dem Dach</div>
       <div>Aufzug in alle Geschosse</div><div>Bodentiefe Fenster</div>
       <div>Elektrische Außenjalousien</div><div>Tageslichtbäder, ebenerdige Dusche</div>
-      <div>Parkett in den Wohnräumen</div><div>Stellplatz oder Carport, Wallbox optional</div>
+      <div>Echtholzparkett in den Wohnräumen</div><div>Stellplatz oder Carport, Wallbox optional</div>
     </div></div>
   ${fuss}</div>`,
 

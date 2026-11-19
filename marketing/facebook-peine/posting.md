@@ -14,7 +14,7 @@ In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimme
 • Aufzug in alle Etagen, komplett barrierefrei
 • Bodentiefe Fenster mit elektrischen Außenjalousien
 • Helle Bäder mit Fenster und ebenerdiger Dusche
-• Parkett in den Wohnräumen
+• Echtholzparkett in den Wohnräumen
 • Video-Gegensprechanlage
 • Eigener Abstellraum im Keller
 • Gartenanteil für die Wohnungen im Garten- und Erdgeschoss
