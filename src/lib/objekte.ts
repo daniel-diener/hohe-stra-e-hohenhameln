@@ -70,7 +70,7 @@ export const projekt = {
   /** Erwartete Kaltmiete je m² Wohnfläche, für das Rechenbeispiel im Exposé. */
   kaltmieteJeQm: 11.5,
   einleitung:
-    "Neubau eines Mehrfamilienhauses als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG): 16 Wohnungen von 55 bis 122 m², " +
+    "Neubau eines Mehrfamilienhauses als Effizienzhaus 40 mit Qualitätssiegel Nachhaltiges Gebäude (QNG): 16 Wohnungen von ca. 55 bis 122 m², " +
     "förderfähig, barrierefrei, mit Terrasse oder Balkon. Fertigstellung Ende 2027.",
   /** Die drei Kernaussagen, groß im Titelbild. */
   vorteile: ["Effizienzhaus QNG 40", "Barrierefrei", "Mit Terrasse oder Balkon"],
@@ -89,7 +89,7 @@ export const projekt = {
     },
     {
       icon: "waerme", fuer: "Alle Käufer", titel: "Niedrige Energiekosten",
-      text: "Wärmepumpe, Fußbodenheizung und Photovoltaik auf dem Dach. Der Effizienzhaus-40-Standard braucht nur einen Bruchteil der Energie eines Bestandsbaus.",
+      text: "Wärmepumpe, Fußbodenheizung und für jede Wohnung eine eigene PV-Anlage mit eigenem Stromspeicher. Der Effizienzhaus-40-Standard braucht nur einen Bruchteil der Energie eines Bestandsbaus.",
     },
   ],
   bauherr: "Judek Projekt GmbH",
@@ -103,12 +103,12 @@ export const projekt = {
   ],
   haus: [
     { icon: "blatt", titel: "Effizienzhaus QNG 40", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
-    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
+    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu für jede Wohnung eine eigene PV-Anlage mit Stromspeicher." },
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
     { icon: "tropfen", titel: "Tageslichtbäder", text: "Mit ebenerdiger Dusche und hochwertiger Sanitärausstattung." },
-    { icon: "schichten", titel: "Parkett und Fliesen", text: "Parkett in den Wohnräumen, Fliesen in Bad und Küche." },
-    { icon: "kiste", titel: "Abstellraum im UG", text: "Für jede Wohnung, rund 4 bis 9 m²." },
+    { icon: "schichten", titel: "Echtholzparkett und Fliesen", text: "Echtholzparkett in den Wohnräumen, Fliesen in Bad und Küche." },
+    { icon: "kiste", titel: "Abstellraum im UG", text: "Für jede Wohnung, ca. 4 bis 8 m²." },
     { icon: "baum", titel: "Eigene Gärten", text: "Sondernutzung für die Wohnungen im Garten- und Erdgeschoss." },
   ],
   stellplaetze:
@@ -130,7 +130,7 @@ export const projekt = {
     bild: { src: "/projekt/team.jpg", breite: 1194, hoehe: 1317, alt: "Lena Mylin und Daniel Diener, Projektmanagement Hohe Straße" },
   },
   /** Ansprechpartner auf der Kontaktseite der Exposés (Website und Mails: nur Lena Mylin). */
-  exposeAnsprechpartner: ["Lena Mylin", "Rene Judek"],
+  exposeAnsprechpartner: ["René Judek", "Lena Mylin"],
   ansprechpartner: {
     // Immer Lena Mylin als Ansprechpartnerin — auf der Seite, in Mails und Antwortvorlagen.
     name: "Lena Mylin",
@@ -210,7 +210,7 @@ export const objekte: Objekt[] = [
     we: 1, plan: "we-1", geschoss: "UG", zimmer: 4, baeder: 2, wohnflaeche: 122.03,
     titel: "WE 1 · 4 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.58, seite: "Süd" }, garten: true, keller: 8.52,
-    kurz: "Die größte Wohnung des Hauses: über 40 m² Wohnen mit offener Küche, drei Schlafzimmer, zwei Bäder und ein eigener Garten nach Süden.",
+    kurz: "Die größte Wohnung des Hauses: ca. 40 m² Wohnen mit offener Küche, drei Schlafzimmer, zwei Bäder und ein eigener Garten nach Süden.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse nach Süden", "Zwei Duschbäder", "Abstellraum in der Wohnung"],
     raeume: [...R_4ZI(40.77), { name: "Abstellraum", flaeche: 3.68 }],
   }),
@@ -226,7 +226,7 @@ export const objekte: Objekt[] = [
     we: 3, status: "reserviert", plan: "we-3", geschoss: "UG", zimmer: 3, baeder: 1, wohnflaeche: 89.14,
     titel: "WE 3 · 3 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 9.58, seite: "Süd" }, garten: true, keller: 5.12,
-    kurz: "Drei Zimmer mit 38 m² Wohn- und Essbereich, Terrasse und eigenem Garten nach Süden.",
+    kurz: "Drei Zimmer mit ca. 38 m² Wohn- und Essbereich, Terrasse und eigenem Garten nach Süden.",
     merkmale: ["Privater Garten (Sondernutzung)", "Terrasse nach Süden"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 38.2 },
@@ -275,9 +275,9 @@ export const objekte: Objekt[] = [
     we: 8, plan: "we-8-13", geschoss: "EG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
     titel: "WE 8 · 2 Zimmer mit Garten",
     freisitz: { art: "Terrasse", flaeche: 10.66, seite: "Nord" }, garten: true, keller: 6.24,
-    kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad, Terrasse und Garten.",
+    kurz: "Großzügige Zweizimmerwohnung mit ca. 34 m² Wohnbereich, ca. 8 m² Duschbad, Terrasse und Garten.",
     // TODO: „rollstuhlgerecht" nur mit Bestätigung der Planung (DIN 18040-2 R) bewerben.
-    merkmale: ["Privater Garten (Sondernutzung)", "Terrasse", "Großes Duschbad (8 m²)"],
+    merkmale: ["Privater Garten (Sondernutzung)", "Terrasse", "Großes Duschbad (ca. 8 m²)"],
     raeume: R_2ZI_NORD,
   }),
 
@@ -332,8 +332,8 @@ export const objekte: Objekt[] = [
     we: 13, status: "verkauft", plan: "we-8-13", baugleichMit: 8, geschoss: "OG", zimmer: 2, baeder: 1, wohnflaeche: 76.18,
     titel: "WE 13 · 2 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 10.66, seite: "Nord" }, garten: false, keller: 4.42,
-    kurz: "Großzügige Zweizimmerwohnung mit fast 35 m² Wohnbereich, 8 m² Duschbad und Balkon.",
-    merkmale: ["Balkon", "Großes Duschbad (8 m²)"],
+    kurz: "Großzügige Zweizimmerwohnung mit ca. 34 m² Wohnbereich, ca. 8 m² Duschbad und Balkon.",
+    merkmale: ["Balkon", "Großes Duschbad (ca. 8 m²)"],
     raeume: R_2ZI_NORD,
   }),
 
@@ -342,8 +342,8 @@ export const objekte: Objekt[] = [
     we: 14, plan: "we-14", geschoss: "SG", zimmer: 3, baeder: 2, wohnflaeche: 113.12,
     titel: "WE 14 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.56, seite: "Süd/Ost" }, garten: false, keller: 6.09,
-    kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Osten und zwei Tageslichtbädern.",
-    merkmale: ["Dachterrasse nach Süd/Ost (46,56 m²)", "Zwei Tageslichtbäder"],
+    kurz: "Penthouse-Wohnung mit ca. 46 m² Dachterrasse nach Süden und Osten und zwei Tageslichtbädern.",
+    merkmale: ["Dachterrasse nach Süd/Ost (ca. 46 m²)", "Zwei Tageslichtbäder"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 34.25 },
       { name: "Schlafzimmer", flaeche: 18.78 },
@@ -356,10 +356,10 @@ export const objekte: Objekt[] = [
   }),
   wohnung({
     we: 15, plan: "we-15", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 110.63,
-    titel: "WE 15 · Maisonette mit 50 m² Dachterrasse",
+    titel: "WE 15 · Maisonette mit ca. 50 m² Dachterrasse",
     freisitz: { art: "Dachterrasse", flaeche: 50, seite: "Süd" }, garten: false, keller: 5.71,
-    kurz: "Maisonette über zwei Ebenen: fast 39 m² Wohnen an der 50 m² großen Südterrasse, darunter ein Gäste- oder Arbeitszimmer.",
-    merkmale: ["Dachterrasse nach Süden (50 m²)", "Maisonette über zwei Etagen"],
+    kurz: "Maisonette über zwei Ebenen: ca. 38 m² Wohnen an der ca. 50 m² großen Südterrasse, darunter ein Gäste- oder Arbeitszimmer.",
+    merkmale: ["Dachterrasse nach Süden (ca. 50 m²)", "Maisonette über zwei Etagen"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 38.82 },
       { name: "Gast / Büro (Obergeschoss)", flaeche: 16.9 },
@@ -373,8 +373,8 @@ export const objekte: Objekt[] = [
     we: 16, status: "verkauft", plan: "we-16", geschoss: "SG", zimmer: 3, baeder: 1, wohnflaeche: 111.15,
     titel: "WE 16 · Dachterrasse über Eck",
     freisitz: { art: "Dachterrasse", flaeche: 46.33, seite: "Süd/West" }, garten: false, keller: 5.48,
-    kurz: "Penthouse-Wohnung mit über 46 m² Dachterrasse nach Süden und Westen, Abendsonne inklusive.",
-    merkmale: ["Dachterrasse nach Süd/West (46,33 m²)", "Ankleide am Schlafzimmer"],
+    kurz: "Penthouse-Wohnung mit ca. 46 m² Dachterrasse nach Süden und Westen, Abendsonne inklusive.",
+    merkmale: ["Dachterrasse nach Süd/West (ca. 46 m²)", "Ankleide am Schlafzimmer"],
     raeume: [
       { name: "Wohnen / Essen / Kochen", flaeche: 34.56 },
       { name: "Schlafzimmer", flaeche: 17.3 },

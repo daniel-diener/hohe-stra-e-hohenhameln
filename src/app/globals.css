@@ -521,7 +521,7 @@ label.haken input { margin-top: 3px; }
 .ex-fakten dd, .ex-details dd { margin: 0.5mm 0 0; }
 
 .ex-merkmale { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 8mm; }
-.ex-merkmale > div { display: grid; grid-template-columns: auto 1fr; column-gap: 3mm; align-items: start; }
+.ex-merkmale > div { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; column-gap: 3mm; align-items: start; }
 .ex-merkmale .merkmal-icon { grid-row: span 2; }
 .ex-merkmale h3 { margin: 0; }
 .ex-merkmale p { margin: 0; color: hsl(var(--muted-foreground)); font-size: 9pt; }

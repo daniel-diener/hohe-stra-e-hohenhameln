@@ -4,7 +4,7 @@ import { JudekLogo } from "@/components/JudekLogo";
 import { Hauszeichen } from "@/components/Logo";
 import { Plan } from "@/components/Plan";
 import { untertitel } from "@/components/ObjektKarte";
-import { formatEuro, formatFlaeche, formatZahl, preisText } from "@/lib/format";
+import { formatEuro, formatFlaeche, formatRaumFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { geschossName, projekt, type Objekt } from "@/lib/objekte";
 import { anbieter } from "@/lib/rechtliches";
@@ -184,9 +184,9 @@ export function WohnungsBlatt({ o }: { o: Objekt }) {
           <h3>Räume</h3>
           <table className="ex-raeume">
             <tbody>
-              {o.raeume.map((r, n) => <tr key={n}><td>{r.name}</td><td className="mono">{formatFlaeche(r.flaeche)}</td></tr>)}
-              <tr><td>{o.freisitz.art} (zur Hälfte)</td><td className="mono">{formatFlaeche(o.freisitz.flaeche / 2)}</td></tr>
-              <tr className="summe"><td>Wohnfläche</td><td className="mono">{formatFlaeche(o.wohnflaeche)}</td></tr>
+              {o.raeume.map((r, n) => <tr key={n}><td>{r.name}</td><td className="mono">{formatRaumFlaeche(r.flaeche)}</td></tr>)}
+              <tr><td>{o.freisitz.art} (zur Hälfte)</td><td className="mono">{formatRaumFlaeche(o.freisitz.flaeche / 2)}</td></tr>
+              <tr className="summe"><td>Wohnfläche</td><td className="mono">{formatRaumFlaeche(o.wohnflaeche)}</td></tr>
             </tbody>
           </table>
         </div>

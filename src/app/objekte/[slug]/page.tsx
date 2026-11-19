@@ -6,7 +6,7 @@ import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Plan } from "@/components/Plan";
 import { Icon, type IconName } from "@/components/Icon";
 import { untertitel } from "@/components/ObjektKarte";
-import { formatFlaeche, formatZahl, preisText } from "@/lib/format";
+import { formatFlaeche, formatRaumFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { adresseLd, geschossName, objektNach, objekte, projekt } from "@/lib/objekte";
 import { seitenUrl } from "@/lib/seite";
@@ -126,13 +126,13 @@ export default async function ObjektSeite({ params }: Props) {
             <table className="raeume">
               <tbody>
                 {o.raeume.map((r, n) => (
-                  <tr key={n}><td>{r.name}</td><td className="mono">{formatFlaeche(r.flaeche)}</td></tr>
+                  <tr key={n}><td>{r.name}</td><td className="mono">{formatRaumFlaeche(r.flaeche)}</td></tr>
                 ))}
                 <tr>
                   <td>{o.freisitz.art} <span className="leise">({formatFlaeche(o.freisitz.flaeche)}, zur Hälfte)</span></td>
-                  <td className="mono">{formatFlaeche(o.freisitz.flaeche / 2)}</td>
+                  <td className="mono">{formatRaumFlaeche(o.freisitz.flaeche / 2)}</td>
                 </tr>
-                <tr className="summe"><td>Wohnfläche</td><td className="mono">{formatFlaeche(o.wohnflaeche)}</td></tr>
+                <tr className="summe"><td>Wohnfläche</td><td className="mono">{formatRaumFlaeche(o.wohnflaeche)}</td></tr>
               </tbody>
             </table>
             <p className="klein leise">

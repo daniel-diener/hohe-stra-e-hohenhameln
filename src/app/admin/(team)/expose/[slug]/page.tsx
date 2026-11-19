@@ -101,7 +101,7 @@ export default async function WohnungsExpose({ params }: Props) {
               <li>KfW-Kredit bis 150.000 €</li>
               <li>Provisionsfrei</li>
               <li>Fertigstellung {projekt.fertigstellung}</li>
-              <li>Eigene PV-Anlage</li>
+              <li>Eigene PV-Anlage mit Speicher</li>
               <li>Barrierefrei</li>
               <li>Aufzug</li>
             </ul>
@@ -217,7 +217,7 @@ function KostenBlatt({ nr, o, preise }: { nr: string; o: Objekt; preise: Preise 
 
       <div className="ex-spalten">
         <div className="ex-kasten"><p><strong>Hausgeld.</strong> Voraussichtliches monatliches Hausgeld: <Folgt /></p></div>
-        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Die einbehaltenen 5 % sichern die rechtzeitige Fertigstellung ohne wesentliche Mängel.</p></div>
+        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Die 5 % behält der Käufer bis zur Fertigstellung ein.</p></div>
       </div>
       <p className="ex-klein">
         Richtwerte ohne Gewähr. Maßgeblich sind der notarielle Kaufvertrag und der darin vereinbarte Zahlungsplan.
@@ -283,7 +283,7 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
 
       <p className="ex-klein">
         Förderung und Steuervorteile hängen von den jeweils gültigen Programmbedingungen und Ihrer persönlichen
-        Situation ab; die Sonderabschreibung setzt unter anderem Baukosten von höchstens 5.200 € je m² voraus.
+        Situation ab.
         Keine Steuer- oder Finanzierungsberatung. Bitte sprechen Sie mit Ihrer Bank und Ihrem Steuerberater.
       </p>
     </Blatt>

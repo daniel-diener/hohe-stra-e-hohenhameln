@@ -3,7 +3,7 @@ import Image from "next/image";
 import { JudekLogo } from "@/components/JudekLogo";
 import { Hauszeichen } from "@/components/Logo";
 import { untertitel } from "@/components/ObjektKarte";
-import { formatEuro, formatFlaeche, formatZahl, preisText } from "@/lib/format";
+import { formatEuro, formatFlaeche, formatFlaechenSpanne, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
 import { geschossName, geschosse, objekte, projekt } from "@/lib/objekte";
 import { DruckKnopf } from "./DruckKnopf";
@@ -45,7 +45,7 @@ export default function Expose() {
           <div className="titel-unten">
             <dl className="titel-daten">
               <div><dt>Wohnungen</dt><dd>{objekte.length}</dd></div>
-              <div><dt>Wohnfläche</dt><dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd></div>
+              <div><dt>Wohnfläche</dt><dd>{formatFlaechenSpanne(flaechen)}</dd></div>
               <div><dt>Zimmer</dt><dd>2 bis 4</dd></div>
               <div><dt>Fertigstellung</dt><dd>{projekt.fertigstellung}</dd></div>
             </dl>
@@ -53,7 +53,7 @@ export default function Expose() {
               <li>Effizienzhaus QNG 40</li>
               <li>KfW-Kredit bis 150.000 €</li>
               <li>Provisionsfrei</li>
-              <li>Eigene PV-Anlage</li>
+              <li>Eigene PV-Anlage mit Speicher</li>
               <li>Barrierefrei</li>
               <li>Aufzug</li>
             </ul>
@@ -70,7 +70,7 @@ export default function Expose() {
         <p className="ex-einleitung">{projekt.einleitung}</p>
         <dl className="ex-kennzahlen">
           <div><dt>Wohnungen</dt><dd>{objekte.length}</dd></div>
-          <div><dt>Wohnfläche</dt><dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd></div>
+          <div><dt>Wohnfläche</dt><dd>{formatFlaechenSpanne(flaechen)}</dd></div>
           <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
           <div><dt>Effizienzhaus</dt><dd>QNG 40</dd></div>
           <div><dt>Provision</dt><dd>Provisionsfrei</dd></div>
@@ -105,7 +105,7 @@ export default function Expose() {
                   <td>{untertitel(o)}</td>
                   <td>{o.zimmer}</td>
                   <td className="mono">{formatFlaeche(o.wohnflaeche)}</td>
-                  <td>{o.freisitz.art} {formatZahl(o.freisitz.flaeche)} m², {o.freisitz.seite}</td>
+                  <td>{o.freisitz.art} {formatFlaeche(o.freisitz.flaeche)}, {o.freisitz.seite}</td>
                   <td>{o.garten ? "Ja" : "Nein"}</td>
                   <td><span className={`status-punkt ${o.status}`}>{objektStatusLabel[o.status]}</span></td>
                   <td>{o.kaufpreis || o.status === "verkauft" ? preisText(o) : "auf Anfrage"}</td>
