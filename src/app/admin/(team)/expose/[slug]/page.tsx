@@ -217,7 +217,7 @@ function KostenBlatt({ nr, o, preise }: { nr: string; o: Objekt; preise: Preise 
 
       <div className="ex-spalten">
         <div className="ex-kasten"><p><strong>Hausgeld.</strong> Voraussichtliches monatliches Hausgeld: <Folgt /></p></div>
-        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Die einbehaltenen 5 % sichern die rechtzeitige Fertigstellung ohne wesentliche Mängel.</p></div>
+        <div className="ex-kasten"><p><strong>Sicherheit.</strong> Die 5 % behält der Käufer bis zur Fertigstellung ein.</p></div>
       </div>
       <p className="ex-klein">
         Richtwerte ohne Gewähr. Maßgeblich sind der notarielle Kaufvertrag und der darin vereinbarte Zahlungsplan.
