@@ -1,13 +1,13 @@
 # Facebook-Posting „Mieten-Kaufen-Wohnen in Peine"
 
 Bilder in dieser Reihenfolge hochladen: 01-titel → 02-wohnungen → 03-ausstattung → 04-lage → 05-foerderung.
-Neu erzeugen: `node marketing/facebook-peine/render.mjs` (Fakten stehen im Skript, Quelle `src/lib/objekte.ts`).
+Wohnflächen immer mit „ca.“ und abgerundet. Neu erzeugen: `node marketing/facebook-peine/render.mjs` (Fakten stehen im Skript, Quelle `src/lib/objekte.ts`).
 
 ---
 
 🏡 Neubau in Hohenhameln – und noch 9 von 16 Wohnungen frei!
 
-In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse – oben sogar mit bis zu 50 m² Dachterrasse.
+In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, ca. 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse – oben sogar mit bis zu 50 m² Dachterrasse.
 
 ✨ Was drin steckt:
 • Fußbodenheizung mit Wärmepumpe, Photovoltaik auf dem Dach – Effizienzhaus 40 mit QNG

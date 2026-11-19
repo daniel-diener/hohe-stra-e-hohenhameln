@@ -1,4 +1,5 @@
 // Erzeugt die Bildkacheln fürs Facebook-Posting (1080×1350, 4:5) aus den Visualisierungen.
+// Wohnflächen immer mit „ca.“ und abgerundet (Vorgabe Vertrieb).
 // Aufruf aus dem Repo-Stamm: node marketing/facebook-peine/render.mjs
 import { createRequire } from "node:module";
 const { chromium } = createRequire(import.meta.url)("playwright"); // global vorinstalliert oder aus node_modules
@@ -54,7 +55,7 @@ const kacheln = {
   <div class="inhalt" style="top:200px"><span class="tag">Neubau · Provisionsfrei</span>
     <h1 style="margin-top:26px">16 Eigentums&shy;wohnungen<br>in Hohenhameln</h1></div>
   <div class="inhalt" style="bottom:136px">
-    <div class="chips" style="margin-bottom:30px"><span class="chip">Effizienzhaus 40 QNG</span><span class="chip">Barrierefrei mit Aufzug</span><span class="chip">55–122 m²</span></div>
+    <div class="chips" style="margin-bottom:30px"><span class="chip">Effizienzhaus 40 QNG</span><span class="chip">Barrierefrei mit Aufzug</span><span class="chip">ca. 55–122 m²</span></div>
     <div class="preis"><span>ab</span><b>228.370 €</b></div>
     <div class="unter" style="margin-top:6px">Fertigstellung Ende 2027</div></div>
   ${fuss}</div>`,
@@ -64,10 +65,10 @@ const kacheln = {
   <div class="ov" style="background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 40%,rgba(0,0,0,.25) 60%)"></div>
   <div class="inhalt" style="top:72px"><h2>Für jede Lebens&shy;phase<br>die passende Wohnung</h2></div>
   <div class="inhalt" style="bottom:136px"><div class="karte" style="--sp:250px"><div class="liste">
-    <div class="zeile"><b>2 Zimmer</b><span>55–76 m² – ideal für Singles, Paare und Kapitalanleger</span></div>
-    <div class="zeile"><b>3 Zimmer</b><span>84–99 m² – Platz für die kleine Familie</span></div>
-    <div class="zeile"><b>4 Zimmer</b><span>bis 122 m², zwei Bäder – mit Garten oder Balkon</span></div>
-    <div class="zeile"><b>Penthouse</b><span>3 Zimmer, 110–113 m², bis zu 50 m² Dachterrasse</span></div>
+    <div class="zeile"><b>2 Zimmer</b><span>ca. 55–76 m² – ideal für Singles, Paare und Kapitalanleger</span></div>
+    <div class="zeile"><b>3 Zimmer</b><span>ca. 83–98 m² – Platz für die kleine Familie</span></div>
+    <div class="zeile"><b>4 Zimmer</b><span>bis ca. 122 m², zwei Bäder – mit Garten oder Balkon</span></div>
+    <div class="zeile"><b>Penthouse</b><span>3 Zimmer, ca. 110–113 m², bis zu 50 m² Dachterrasse</span></div>
   </div><p class="klein" style="margin-top:26px;color:#555;opacity:1">Jede Wohnung mit Terrasse, Balkon oder Dachterrasse und eigenem Abstellraum. Garten­wohnungen mit Sondernutzungsrecht.</p></div></div>
   ${fuss}</div>`,
 
