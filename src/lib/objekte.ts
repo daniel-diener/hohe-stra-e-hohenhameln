@@ -402,3 +402,25 @@ export const geschosse: Geschoss[] = ["SG", "OG", "EG", "UG"];
 export function objektNach(slug: string | null | undefined): Objekt | undefined {
   return slug ? objekte.find((o) => o.slug === slug) : undefined;
 }
+
+const HIMMELSRICHTUNG: Record<string, string> = {
+  Süd: "Süden", Nord: "Norden", Ost: "Osten", West: "Westen",
+  "Süd/Ost": "Süden und Osten", "Süd/West": "Süden und Westen",
+};
+
+/**
+ * „Das Haus“ für das Exposé einer Wohnung: Wohnungen ohne Garten bekommen statt
+ * „Eigene Gärten“ ihren eigenen Freisitz (Dachterrasse oder Balkon) — der Garten
+ * ist für sie nicht relevant. Ohne Wohnung (Gesamt-Exposé) bleibt die Liste, wie sie ist.
+ */
+export function hausMerkmale(o?: Objekt): { icon: string; titel: string; text: string }[] {
+  if (!o || o.garten) return [...projekt.haus];
+  const f = o.freisitz;
+  const richtung = HIMMELSRICHTUNG[f.seite] ?? f.seite;
+  const flaeche = `ca.\u00a0${Math.floor(f.flaeche + 1e-9)}\u00a0m²`;
+  const ersatz =
+    f.art === "Dachterrasse"
+      ? { icon: "gelaender", titel: "Eigene Dachterrasse", text: `${flaeche} nach ${richtung}, direkt an der Wohnung im Staffelgeschoss.` }
+      : { icon: "gelaender", titel: `Eigene${f.art === "Balkon" ? "r" : ""} ${f.art}`, text: `${flaeche} nach ${richtung}.` };
+  return projekt.haus.map((m) => (m.titel === "Eigene Gärten" ? ersatz : m));
+}

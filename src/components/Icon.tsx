@@ -40,6 +40,12 @@ const PFADE = {
       <path d="M12 22v-3" />
     </>
   ),
+  gelaender: (
+    <>
+      <path d="M3 21h18" /><path d="M3 13h18" /><path d="M5 13v8" /><path d="M10 13v8" /><path d="M14 13v8" /><path d="M19 13v8" />
+      <circle cx="16.5" cy="6" r="2.5" /><path d="M16.5 1.5v.5M21 6h-.5M12.5 6h-.5M19.7 2.8l-.35.35M13.3 2.8l.35.35" />
+    </>
+  ),
   pfeil: (
     <>
       <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />

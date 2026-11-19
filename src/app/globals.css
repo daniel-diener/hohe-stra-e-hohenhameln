@@ -19,14 +19,17 @@
   --input: 240 5.9% 90%;
   --primary: 240 5.9% 10%;
   --primary-foreground: 0 0% 98%;
-  --ring: 224 76% 42%;
+  --ring: 66 67% 24%;
   --radius: 0.5rem;
 
-  /* weißer Text auf CTA 8,01:1, CTA-Text auf weiß 8,01:1 — beides AAA */
-  --cta: 224 76% 42%;
-  --cta-foreground: 0 0% 100%;
-  --cta-hover: 224 76% 36%;
-  --cta-muted: 214 95% 93%;
+  /* Hausgrün #BECE43 (Judek-Logo). Hell, darum dunkle Schrift auf Grün (9,7:1).
+   * Für Text und Links auf Weiß reicht das Grün nicht (1,7:1) — dafür --cta-text,
+   * derselbe Ton dunkler (#5C6614, 6,2:1). */
+  --cta: 67 59% 54%;
+  --cta-foreground: 68 51% 8%;
+  --cta-hover: 67 59% 47%;
+  --cta-muted: 67 62% 90%;
+  --cta-text: 66 67% 24%;
   --success: 142 71% 29%;
   --success-muted: 141 79% 93%;
   --warning: 32 95% 30%;
@@ -50,11 +53,12 @@
     --input: 240 3.7% 20%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
-    --ring: 213 94% 68%;
-    --cta: 213 94% 68%;
-    --cta-foreground: 226 57% 10%;
-    --cta-hover: 213 94% 76%;
-    --cta-muted: 216 50% 16%;
+    --ring: 67 59% 54%;
+    --cta: 67 59% 54%;
+    --cta-foreground: 68 51% 8%;
+    --cta-hover: 67 59% 62%;
+    --cta-muted: 67 30% 16%;
+    --cta-text: 67 59% 54%;
     --success: 142 60% 45%;
     --success-muted: 143 40% 14%;
     --warning: 38 85% 55%;
@@ -79,7 +83,7 @@ h1 { font-size: clamp(2.5rem, 6.5vw, 5rem); letter-spacing: -0.045em; line-heigh
 h2 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); letter-spacing: -0.035em; }
 h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 p { margin: 0 0 1em; }
-a { color: hsl(var(--cta)); text-decoration: none; }
+a { color: hsl(var(--cta-text)); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Links mitten im Fließtext brauchen mehr als Farbe, um als Link erkennbar zu sein. */
 .text p a, .formular label a { text-decoration: underline; text-underline-offset: 3px; }
@@ -171,14 +175,14 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .held h1 { max-width: 14ch; }
 .held-vorteile { list-style: none; padding: 0; margin: 20px 0 16px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; font-size: clamp(1rem, 1.8vw, 1.25rem); }
 .held-vorteile li { display: flex; align-items: center; gap: 8px; }
-.held-vorteile li::before { content: "✓"; color: #4ade80; }
+.held-vorteile li::before { content: "✓"; color: #bece43; }
 .held-text { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: rgba(255, 255, 255, 0.82); max-width: 600px; }
 .badge {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; margin-bottom: 24px;
   font: 500 0.8125rem var(--font-mono); color: #fff; background: rgba(9, 9, 11, 0.55); border: 1px solid rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
-.punkt { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25); }
+.punkt { width: 7px; height: 7px; border-radius: 50%; background: #bece43; box-shadow: 0 0 0 3px rgba(190, 206, 67, 0.3); }
 
 .kennzahlen { border-bottom: 1px solid hsl(var(--border)); }
 .kennzahlen-raster { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 auto; }
@@ -205,7 +209,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .dunkel-abschnitt {
   --background: 240 10% 3.9%; --foreground: 0 0% 98%; --muted: 240 3.7% 15.9%; --muted-foreground: 240 5% 64.9%;
   --border: 240 3.7% 18%; --card: 240 10% 6%;
-  --cta: 213 94% 68%; --cta-foreground: 226 57% 10%; --cta-hover: 213 94% 76%; --ring: 213 94% 68%;
+  --cta: 67 59% 54%; --cta-foreground: 68 51% 8%; --cta-hover: 67 59% 62%; --ring: 67 59% 54%; --cta-text: 67 59% 54%;
   background: hsl(var(--background)); color: hsl(var(--foreground));
 }
 
@@ -266,7 +270,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   display: flex; justify-content: space-between; align-items: center; font-weight: 600;
 }
 .preis .icon { color: hsl(var(--muted-foreground)); transition: transform 0.15s, color 0.15s; }
-.objekt-karte:hover .preis .icon { transform: translateX(3px); color: hsl(var(--cta)); }
+.objekt-karte:hover .preis .icon { transform: translateX(3px); color: hsl(var(--cta-text)); }
 
 /* Grundrisse sind farbige Pläne auf Weiß — auch im Dunkelmodus auf Weiß lassen. */
 .plan { position: relative; aspect-ratio: 4 / 3; background: #fff; margin: 12px 12px 14px; border-radius: var(--radius); }
@@ -328,7 +332,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .lage-liste { list-style: none; margin: 0; padding: 0; border-top: 1px solid hsl(var(--border)); display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
 @media (max-width: 860px) { .lage-liste { grid-template-columns: 1fr; } }
 .lage-liste li { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid hsl(var(--border)); }
-.lage-liste .mono { color: hsl(var(--cta)); font-size: 0.875rem; padding-top: 1px; }
+.lage-liste .mono { color: hsl(var(--cta-text)); font-size: 0.875rem; padding-top: 1px; }
 .lage-adresse { display: inline-flex; align-items: center; gap: 6px; margin: 24px 0 0; font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
 
 /* ── Kontakt ──────────────────────────────────────────────── */
@@ -424,7 +428,7 @@ label.haken input { margin-top: 3px; }
 .marke.lead-notartermin { background: hsl(var(--warning-muted)); color: hsl(var(--warning)); border-color: transparent; }
 .marke.lead-abgesagt { color: hsl(var(--muted-foreground)); }
 .marke.lead-neu { background: hsl(var(--destructive-muted)); color: hsl(var(--destructive)); border-color: transparent; }
-.marke.lead-kontaktiert, .marke.lead-besichtigung, .marke.lead-finanzierung { background: hsl(var(--cta-muted)); color: hsl(var(--cta)); border-color: transparent; }
+.marke.lead-kontaktiert, .marke.lead-besichtigung, .marke.lead-finanzierung { background: hsl(var(--cta-muted)); color: hsl(var(--cta-text)); border-color: transparent; }
 
 .eckdaten-tabelle {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1px; margin: 24px 0;
@@ -567,7 +571,7 @@ label.haken input { margin-top: 3px; }
 .titelblatt h1 span { color: rgba(255, 255, 255, 0.75); }
 .titel-zeile { font-size: 12pt; margin: 0 0 4mm; color: rgba(255, 255, 255, 0.85); }
 .titel-vorteile { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 2mm 6mm; font-size: 12pt; font-weight: 600; }
-.titel-vorteile li::before { content: "✓ "; color: #4ade80; }
+.titel-vorteile li::before { content: "✓ "; color: #bece43; }
 .titel-fuss { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; font-size: 9pt; color: rgba(255, 255, 255, 0.85); }
 .titel-judek { background: rgba(255, 255, 255, 0.92); padding: 3mm 4mm; border-radius: 2mm; }
 .titel-judek .judek-logo { width: 34mm; margin: 0; }
@@ -700,6 +704,6 @@ label.haken input { margin-top: 3px; }
 .termin-gebucht p { margin: 0 0 6px; }
 .termin-gebucht p:last-child { margin: 10px 0 0; }
 .termin-gebucht-wann { font-size: clamp(1.25rem, 2.6vw, 1.625rem); font-weight: 600; letter-spacing: -0.02em; }
-.termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta)); padding: 6px 0; width: fit-content; }
+.termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta-text)); padding: 6px 0; width: fit-content; }
 .termin-verschieben[open] > summary { margin-bottom: 8px; }
 .termin-verschieben .termin-wahl { margin-top: 16px; }
