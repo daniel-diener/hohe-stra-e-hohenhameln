@@ -19,7 +19,7 @@ export type Mail = { betreff: string; text: string; html: string };
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const FARBE = { text: "#18181b", leise: "#52525b", linie: "#e4e4e7", flaeche: "#f4f4f5", blau: "#1d4ed8" };
+const FARBE = { text: "#18181b", leise: "#52525b", linie: "#e4e4e7", flaeche: "#f4f4f5", gruen: "#5c6614" }; // Hausgrün #BECE43, für Links auf Weiß abgedunkelt (lesbar)
 const SCHRIFT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif";
 
 export function bestaetigung(a: Anfrage, objekt: Objekt | undefined, basis: URL): Mail {
@@ -123,7 +123,7 @@ export function bestaetigung(a: Anfrage, objekt: Objekt | undefined, basis: URL)
           </table>
         </td></tr>
         <tr><td style="padding:10px 20px 18px;">
-          <a href="${esc(url(`/objekte/${objekt.slug}`))}" style="font-size:14px;font-weight:600;color:${FARBE.blau};text-decoration:none;">Grundriss und Details ansehen →</a>
+          <a href="${esc(url(`/objekte/${objekt.slug}`))}" style="font-size:14px;font-weight:600;color:${FARBE.gruen};text-decoration:none;">Grundriss und Details ansehen →</a>
         </td></tr>
       </table>`)
     : "";
@@ -161,7 +161,7 @@ export function bestaetigung(a: Anfrage, objekt: Objekt | undefined, basis: URL)
     <div style="font-size:14px;color:${FARBE.leise};margin-top:2px;">Projektmanagement ${esc(projekt.name)} ${esc(projekt.ort)}</div>
     <div style="font-size:14px;margin-top:10px;line-height:1.7;">
       <a href="tel:${esc(p.telefon.replace(/\s/g, ""))}" style="color:${FARBE.text};text-decoration:none;">${esc(p.telefon)}</a><br>
-      <a href="mailto:${esc(p.email)}" style="color:${FARBE.blau};text-decoration:none;">${esc(p.email)}</a>
+      <a href="mailto:${esc(p.email)}" style="color:${FARBE.gruen};text-decoration:none;">${esc(p.email)}</a>
     </div>`, "padding-bottom:32px;")}
   <tr><td style="padding:20px 32px 24px;border-top:1px solid ${FARBE.linie};font-size:12px;line-height:1.6;color:${FARBE.leise};">
     ${pflicht.map(esc).join("<br>")}<br>
@@ -210,7 +210,7 @@ function rahmen(o: { betreff: string; vorschau: string; inhalt: string; basis: U
     <div style="font-size:14px;color:${FARBE.leise};margin-top:2px;">Projektmanagement ${esc(projekt.name)} ${esc(projekt.ort)}</div>
     <div style="font-size:14px;margin-top:10px;line-height:1.7;">
       <a href="tel:${esc(p.telefon.replace(/\s/g, ""))}" style="color:${FARBE.text};text-decoration:none;">${esc(p.telefon)}</a><br>
-      <a href="mailto:${esc(p.email)}" style="color:${FARBE.blau};text-decoration:none;">${esc(p.email)}</a>
+      <a href="mailto:${esc(p.email)}" style="color:${FARBE.gruen};text-decoration:none;">${esc(p.email)}</a>
     </div>
   </td></tr>`}
   <tr><td style="padding:20px 32px 24px;border-top:1px solid ${FARBE.linie};font-size:12px;line-height:1.6;color:${FARBE.leise};">
@@ -280,7 +280,7 @@ export function terminBestaetigung(l: Empfaenger, objekt: Objekt | undefined, be
     hAbsatz(`Guten Tag ${esc(l.name)},`) + hAbsatz(esc(s1)) +
     hKasten([["Wann", `<strong>${esc(wann)}</strong>`], ["Wo", ortHtml], ["Mit", esc(TERMIN.gastgeber)]]) +
     hAbsatz(esc(s2)) + hAbsatz(esc(s3)) + hAbsatz(esc(s4)) +
-    `<p style="margin:0 0 20px;"><a href="${esc(link)}" style="color:${FARBE.blau};font-weight:600;text-decoration:none;">Termin ändern →</a></p>`;
+    `<p style="margin:0 0 20px;"><a href="${esc(link)}" style="color:${FARBE.gruen};font-weight:600;text-decoration:none;">Termin ändern →</a></p>`;
   return { betreff, text, html: rahmen({ betreff, vorschau: `${wann}, ${TERMIN.ort.name}`, inhalt, basis }) };
 }
 
@@ -311,7 +311,7 @@ export function terminInfo(l: Empfaenger & { id: string }, objekt: Objekt | unde
     hAbsatz("Ein neuer Termin wurde vereinbart.") +
     hKasten(daten.map(([k, v]) => [k, k === "Wann" ? `<strong>${esc(v)}</strong>` : esc(v)])) +
     (l.nachricht ? hAbsatz(`<span style="color:${FARBE.leise};font-size:14px;">Nachricht aus der Anfrage</span><br>${esc(l.nachricht).replace(/\n/g, "<br>")}`) : "") +
-    hAbsatz(`<a href="${esc(lead)}" style="color:${FARBE.blau};font-weight:600;text-decoration:none;">Lead im Vertriebsbereich öffnen →</a>`) +
+    hAbsatz(`<a href="${esc(lead)}" style="color:${FARBE.gruen};font-weight:600;text-decoration:none;">Lead im Vertriebsbereich öffnen →</a>`) +
     hAbsatz(`<span style="color:${FARBE.leise};font-size:14px;">Die Kalenderdatei hängt an. Der Interessent hat eine Bestätigung mit demselben Termin bekommen.</span>`);
   return { betreff, text, html: rahmen({ betreff, vorschau: `${wann} · ${l.name}`, inhalt, basis, gruss: false }) };
 }
