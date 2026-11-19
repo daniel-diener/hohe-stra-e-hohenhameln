@@ -15,7 +15,7 @@ describe("Eingangsbestätigung", () => {
     expect(m.betreff).toBe("Ihre Anfrage zu WE 1 · Hohe Straße Hohenhameln");
     expect(m.html).toContain("https://hohe-strasse.judek-projekt.de/objekte/wohnung-1");
     expect(m.html).toContain("https://hohe-strasse.judek-projekt.de/expose");
-    expect(m.html).toContain("122,03 m²");
+    expect(m.html).toContain("ca.\u00a0122\u00a0m²");
     expect(m.html).toContain("HRB 206991");
     expect(m.text).toContain("ruft Sie zeitnah unter 0151 123 zurück");
   });

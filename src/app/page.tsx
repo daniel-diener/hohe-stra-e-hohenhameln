@@ -4,7 +4,7 @@ import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Icon, type IconName } from "@/components/Icon";
 import { Wohnungen } from "@/components/Wohnungen";
 import { adresseLd, objekte, projekt } from "@/lib/objekte";
-import { formatEuro } from "@/lib/format";
+import { formatEuro, formatFlaechenSpanne } from "@/lib/format";
 import { seitenUrl } from "@/lib/seite";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -56,7 +56,7 @@ export default function Start() {
           <div><dt>Eigentumswohnungen</dt><dd>{objekte.length}</dd></div>
           <div>
             <dt>Wohnfläche</dt>
-            <dd>{Math.floor(Math.min(...flaechen))} bis {Math.round(Math.max(...flaechen))} m²</dd>
+            <dd>{formatFlaechenSpanne(flaechen)}</dd>
           </div>
           <div><dt>Kaufpreise ab</dt><dd>{formatEuro(projekt.abPreis)}</dd></div>
           <div><dt>Effizienzhaus</dt><dd>QNG 40</dd></div>
@@ -69,7 +69,7 @@ export default function Start() {
             <p className="eyebrow">01 · Wohnungen</p>
             <h2>Zwei bis vier Zimmer, auf vier Ebenen.</h2>
             <p className="leise gross-text">
-              Gärten im Erdgeschoss, Balkone darüber, Dachterrassen bis 50 m² ganz oben. Alle Wohnungen
+              Gärten im Erdgeschoss, Balkone darüber, Dachterrassen bis ca. 50 m² ganz oben. Alle Wohnungen
               barrierefrei über den Aufzug erreichbar.
             </p>
           </header>

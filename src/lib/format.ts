@@ -9,8 +9,11 @@ const datumZeit = new Intl.DateTimeFormat("de-DE", {
 });
 
 export const formatEuro = (n: number) => euro.format(n);
-const flaeche = new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-export const formatFlaeche = (n: number) => `${flaeche.format(n)} m²`;
+/** Flächen immer mit „ca.“ und auf volle m² abgerundet (Vorgabe Vertrieb) — nie größer, als sie sind. */
+export const formatFlaeche = (n: number) => `ca.\u00a0${Math.floor(n + 1e-9)}\u00a0m²`;
+/** Spanne, z. B. „ca. 55 bis 122 m²“. */
+export const formatFlaechenSpanne = (werte: number[]) =>
+  `ca.\u00a0${Math.floor(Math.min(...werte))} bis ${Math.floor(Math.max(...werte))}\u00a0m²`;
 export const formatZahl = (n: number) => zahl.format(n);
 export const formatDatum = (iso: string) => datumZeit.format(new Date(iso));
 
