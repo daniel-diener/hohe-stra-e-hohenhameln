@@ -290,7 +290,7 @@ export default function Ausstattung() {
         <p className="ex-klein">Leuchten nicht enthalten (außer Balkon/Terrasse).</p>
 
         <div className="au-komfort">
-          <Bild datei="wohnraum-fenster.jpg" alt="Helle Wohnräume mit großen Fensterflächen" sizes="62mm" />
+          <Bild datei="haus-fenster.jpg" alt="Visualisierung: Gartenseite mit Fenstern, Außenjalousien und Balkonen" sizes="62mm" />
           <div>
             <p className="eyebrow">Komfort &amp; Energie</p>
             <h2 className="au-zwischentitel">Komfort, den man spürt</h2>
