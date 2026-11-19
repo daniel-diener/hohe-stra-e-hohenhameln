@@ -283,7 +283,7 @@ function FoerderBlatt({ nr, o }: { nr: string; o: Objekt }) {
 
       <p className="ex-klein">
         Förderung und Steuervorteile hängen von den jeweils gültigen Programmbedingungen und Ihrer persönlichen
-        Situation ab; die Sonderabschreibung setzt unter anderem Baukosten von höchstens 5.200 € je m² voraus.
+        Situation ab.
         Keine Steuer- oder Finanzierungsberatung. Bitte sprechen Sie mit Ihrer Bank und Ihrem Steuerberater.
       </p>
     </Blatt>
