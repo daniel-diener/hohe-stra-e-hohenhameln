@@ -78,7 +78,7 @@ const kacheln = {
   <div class="inhalt" style="top:64px"><h2>Wohnen auf Neubau-Niveau</h2></div>
   <div class="inhalt" style="top:860px;left:0;right:0;bottom:96px;background:#fff;color:#111;padding:52px 72px">
     <div class="haken">
-      <div>Wärmepumpe &amp; Fußbodenheizung</div><div>Photovoltaik auf dem Dach</div>
+      <div>Wärmepumpe &amp; Fußbodenheizung</div><div>Eigene PV-Anlage mit Stromspeicher je Wohnung</div>
       <div>Aufzug in alle Geschosse</div><div>Bodentiefe Fenster</div>
       <div>Elektrische Außenjalousien</div><div>Tageslichtbäder, ebenerdige Dusche</div>
       <div>Echtholzparkett in den Wohnräumen</div><div>Stellplatz oder Carport, Wallbox optional</div>

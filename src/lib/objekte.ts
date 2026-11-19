@@ -89,7 +89,7 @@ export const projekt = {
     },
     {
       icon: "waerme", fuer: "Alle Käufer", titel: "Niedrige Energiekosten",
-      text: "Wärmepumpe, Fußbodenheizung und Photovoltaik auf dem Dach. Der Effizienzhaus-40-Standard braucht nur einen Bruchteil der Energie eines Bestandsbaus.",
+      text: "Wärmepumpe, Fußbodenheizung und für jede Wohnung eine eigene PV-Anlage mit eigenem Stromspeicher. Der Effizienzhaus-40-Standard braucht nur einen Bruchteil der Energie eines Bestandsbaus.",
     },
   ],
   bauherr: "Judek Projekt GmbH",
@@ -103,7 +103,7 @@ export const projekt = {
   ],
   haus: [
     { icon: "blatt", titel: "Effizienzhaus QNG 40", text: "Mit Qualitätssiegel Nachhaltiges Gebäude: höchste Förderstufe für Neubauten." },
-    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu Photovoltaik auf dem Dach." },
+    { icon: "waerme", titel: "Wärmepumpe und Fußbodenheizung", text: "In allen Räumen, dazu für jede Wohnung eine eigene PV-Anlage mit Stromspeicher." },
     { icon: "aufzug", titel: "Aufzug in alle Geschosse", text: "Barrierefrei vom Garten bis zur Dachterrasse." },
     { icon: "sonne", titel: "Bodentiefe Fenster", text: "Elektrische Außenjalousien, Video-Gegensprechanlage." },
     { icon: "tropfen", titel: "Tageslichtbäder", text: "Mit ebenerdiger Dusche und hochwertiger Sanitärausstattung." },

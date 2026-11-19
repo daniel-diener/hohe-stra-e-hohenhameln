@@ -53,7 +53,7 @@ export default function Expose() {
               <li>Effizienzhaus QNG 40</li>
               <li>KfW-Kredit bis 150.000 €</li>
               <li>Provisionsfrei</li>
-              <li>Eigene PV-Anlage</li>
+              <li>Eigene PV-Anlage mit Speicher</li>
               <li>Barrierefrei</li>
               <li>Aufzug</li>
             </ul>

@@ -101,7 +101,7 @@ export default async function WohnungsExpose({ params }: Props) {
               <li>KfW-Kredit bis 150.000 €</li>
               <li>Provisionsfrei</li>
               <li>Fertigstellung {projekt.fertigstellung}</li>
-              <li>Eigene PV-Anlage</li>
+              <li>Eigene PV-Anlage mit Speicher</li>
               <li>Barrierefrei</li>
               <li>Aufzug</li>
             </ul>

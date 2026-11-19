@@ -10,7 +10,8 @@ Wohnflächen immer mit „ca.“ und abgerundet. Neu erzeugen: `node marketing/f
 In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, ca. 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse – oben sogar mit bis zu ca. 50 m² Dachterrasse.
 
 ✨ Was drin steckt:
-• Fußbodenheizung mit Wärmepumpe, Photovoltaik auf dem Dach – Effizienzhaus 40 mit QNG
+• Fußbodenheizung mit Wärmepumpe – Effizienzhaus 40 mit QNG
+• Jede Wohnung mit eigener PV-Anlage und eigenem Stromspeicher
 • Aufzug in alle Etagen, komplett barrierefrei
 • Bodentiefe Fenster mit elektrischen Außenjalousien
 • Helle Bäder mit Fenster und ebenerdiger Dusche
