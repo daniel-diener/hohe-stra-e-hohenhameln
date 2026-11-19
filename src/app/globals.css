@@ -810,3 +810,10 @@ label.haken input { margin-top: 3px; }
 .ausstattung .au-kontakt { box-shadow: inset 1.5mm 0 0 var(--gruen); }
 .ausstattung .au-kontakt .eyebrow { color: var(--gruen); }
 .ausstattung .au-kennzahlen { border-top: 1.2mm solid var(--gruen); }
+
+/* ── Admin: Dokumente ── */
+.dokumente { margin: 24px 0 12px; }
+.dokumente td { vertical-align: middle; }
+.dokument-aktionen { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.dokument-wohnungen { max-width: 360px; margin-left: auto; }
+.dokument-wohnungen .knopf { min-width: 64px; justify-content: center; }
