@@ -130,7 +130,7 @@ export const projekt = {
     bild: { src: "/projekt/team.jpg", breite: 1194, hoehe: 1317, alt: "Lena Mylin und Daniel Diener, Projektmanagement Hohe Straße" },
   },
   /** Ansprechpartner auf der Kontaktseite der Exposés (Website und Mails: nur Lena Mylin). */
-  exposeAnsprechpartner: ["Rene Judek", "Lena Mylin"],
+  exposeAnsprechpartner: ["René Judek", "Lena Mylin"],
   ansprechpartner: {
     // Immer Lena Mylin als Ansprechpartnerin — auf der Seite, in Mails und Antwortvorlagen.
     name: "Lena Mylin",
