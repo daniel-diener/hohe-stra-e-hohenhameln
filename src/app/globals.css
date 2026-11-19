@@ -802,7 +802,6 @@ label.haken input { margin-top: 3px; }
 .ausstattung .merkmal-icon { background: var(--gruen); border-color: var(--gruen); }
 .ausstattung .au-haus dt { border-top: 1.2mm solid var(--gruen); padding-top: 2mm; }
 .ausstattung .au-nummern .mono { display: inline-grid; place-items: center; width: 6.5mm; height: 6.5mm; padding: 0; border-radius: 50%; background: var(--gruen); color: #18181b; font-size: 7.5pt; }
-.ausstattung .au-option { background: var(--gruen-hell); }
 .ausstattung .au-qng { background: var(--gruen-hell); }
 .ausstattung .au-box-plus { border-color: var(--gruen); background: var(--gruen-hell); }
 .ausstattung .au-box-plus li::before { content: "+"; display: inline-grid; place-items: center; flex: none; width: 4.2mm; height: 4.2mm; border-radius: 50%; background: var(--gruen); color: #18181b; font-size: 8pt; line-height: 1; }
