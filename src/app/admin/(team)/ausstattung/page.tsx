@@ -32,7 +32,7 @@ const palette = [
 ] as const;
 
 const ueberblick: { icon: IconName; titel: string; text: string }[] = [
-  { icon: "schichten", titel: "Echtholz-Parkett", text: "Eichenparkett in allen Wohn-, Schlaf- und Flurbereichen." },
+  { icon: "schichten", titel: "Echtholzparkett", text: "Eichenparkett in allen Wohn-, Schlaf- und Flurbereichen." },
   { icon: "waerme", titel: "Fußbodenheizung", text: "In jedem Raum einzeln regelbar, gespeist von einer effizienten Wärmepumpe." },
   { icon: "sonne", titel: "3-fach-Verglasung", text: "Mit elektrischen Außenjalousien an allen Wohnungsfenstern." },
   { icon: "tropfen", titel: "Bodenebene Dusche", text: "Geberit CleanFloor30 und Thermostat-Brausegarnitur." },
@@ -84,7 +84,7 @@ export default function Ausstattung() {
       {/* ── Titel ─────────────────────────────────────────────── */}
       <section className="blatt titelblatt">
         <Image
-          src={`${BILD}/wohnraum-parkett.jpg`} alt="Wohnraum mit Echtholz-Eichenparkett"
+          src={`${BILD}/wohnraum-parkett.jpg`} alt="Wohnraum mit Echtholzparkett in Eiche"
           fill sizes="210mm" loading="eager" unoptimized className="titel-bild"
         />
         <div className="titel-inhalt">
@@ -126,13 +126,13 @@ export default function Ausstattung() {
         </div>
 
         <div className="au-boeden">
-          <Bild datei="wohnraum-parkett.jpg" alt="Wohnraum mit Echtholz-Eichenparkett" sizes="84mm" />
+          <Bild datei="wohnraum-parkett.jpg" alt="Wohnraum mit Echtholzparkett in Eiche" sizes="84mm" />
           <div>
             <p className="eyebrow">Böden</p>
             <h2 className="au-zwischentitel">Echtes Holz unter den Füßen</h2>
             <dl className="au-liste">
               <div>
-                <dt>Echtholz-Parkett Eiche</dt>
+                <dt>Echtholzparkett Eiche</dt>
                 <dd>Wohnen, Schlafen, Kochen, Flur</dd>
               </div>
               <div>
