@@ -26,8 +26,8 @@ const BEISPIEL = "Abbildungen beispielhaft · Ausführung gemäß Baubeschreibun
 
 const palette = [
   { name: "Eiche", bild: "parkett-eiche.jpg" },
-  { name: "Beige", bild: "fliese-beige.jpg" },
-  { name: "Anthrazit", bild: "fliese-anthrazit.jpg" },
+  { name: "Beige", bild: "fliese-beige-boden.jpg" },
+  { name: "Anthrazit", bild: "fliese-anthrazit-boden.jpg" },
   { name: "Weiß", bild: null },
 ] as const;
 
@@ -41,8 +41,8 @@ const ueberblick: { icon: IconName; titel: string; text: string }[] = [
 ];
 
 const fliesen = [
-  { farbe: "Beige", wand: "fliese-beige.jpg", boden: "fliese-beige.jpg" },
-  { farbe: "Anthrazit", wand: "fliese-anthrazit-wand.jpg", boden: "fliese-anthrazit.jpg" },
+  { farbe: "Beige", wand: "fliese-beige-wand.jpg", boden: "fliese-beige-boden.jpg" },
+  { farbe: "Anthrazit", wand: "fliese-anthrazit-wand.jpg", boden: "fliese-anthrazit-boden.jpg" },
 ];
 
 const elektro: [raum: string, steckdosen: string, cat7: string, extras: string][] = [
