@@ -799,7 +799,8 @@ label.haken input { margin-top: 3px; }
 .ausstattung .au-titel-zeile { padding-left: 4mm; border-left: 1.2mm solid var(--gruen); }
 .ausstattung .au-kapitel::before { content: ""; width: 6mm; height: 1.2mm; border-radius: 1mm; background: var(--gruen); }
 .ausstattung .au-kapitel { gap: 2.5mm; }
-.ausstattung .merkmal-icon { background: var(--gruen); border-color: var(--gruen); }
+.ausstattung .merkmal-icon { color: var(--gruen); }
+.ausstattung .merkmal-icon .icon { stroke-width: 2.25; }
 .ausstattung .au-haus dt { border-top: 1.2mm solid var(--gruen); padding-top: 2mm; }
 .ausstattung .au-nummern .mono { display: inline-grid; place-items: center; width: 6.5mm; height: 6.5mm; padding: 0; border-radius: 50%; background: var(--gruen); color: #18181b; font-size: 7.5pt; }
 .ausstattung .au-qng { background: var(--gruen-hell); }
