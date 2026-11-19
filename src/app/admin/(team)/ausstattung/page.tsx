@@ -37,7 +37,7 @@ const ueberblick: { icon: IconName; titel: string; text: string }[] = [
   { icon: "sonne", titel: "3-fach-Verglasung", text: "Mit elektrischen Außenjalousien an allen Wohnungsfenstern." },
   { icon: "tropfen", titel: "Bodenebene Dusche", text: "Geberit CleanFloor30 und Thermostat-Brausegarnitur." },
   { icon: "kiste", titel: "Markenprodukte", text: "Geberit, Hoppe, Gira und Vigour: bewährte Hersteller." },
-  { icon: "blatt", titel: "PV-Anlage", text: "Für jede Wohnung, inklusive Stromspeicher." },
+  { icon: "blatt", titel: "Eigene PV-Anlage", text: "Für jede Wohnung, inklusive Stromspeicher." },
 ];
 
 const fliesen = [
