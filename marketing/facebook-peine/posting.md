@@ -7,7 +7,7 @@ Wohnflächen immer mit „ca.“ und abgerundet. Neu erzeugen: `node marketing/f
 
 🏡 Neubau in Hohenhameln – und noch 9 von 16 Wohnungen frei!
 
-In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, ca. 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse – oben sogar mit bis zu 50 m² Dachterrasse.
+In der Hohen Straße 11 entsteht gerade ein richtig schönes Haus: 2 bis 4 Zimmer, ca. 55 bis 122 m², jede Wohnung mit Terrasse, Balkon oder Dachterrasse – oben sogar mit bis zu ca. 50 m² Dachterrasse.
 
 ✨ Was drin steckt:
 • Fußbodenheizung mit Wärmepumpe, Photovoltaik auf dem Dach – Effizienzhaus 40 mit QNG

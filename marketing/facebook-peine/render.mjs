@@ -68,7 +68,7 @@ const kacheln = {
     <div class="zeile"><b>2 Zimmer</b><span>ca. 55–76 m² – ideal für Singles, Paare und Kapitalanleger</span></div>
     <div class="zeile"><b>3 Zimmer</b><span>ca. 83–98 m² – Platz für die kleine Familie</span></div>
     <div class="zeile"><b>4 Zimmer</b><span>bis ca. 122 m², zwei Bäder – mit Garten oder Balkon</span></div>
-    <div class="zeile"><b>Penthouse</b><span>3 Zimmer, ca. 110–113 m², bis zu 50 m² Dachterrasse</span></div>
+    <div class="zeile"><b>Penthouse</b><span>3 Zimmer, ca. 110–113 m², bis zu ca. 50 m² Dachterrasse</span></div>
   </div><p class="klein" style="margin-top:26px;color:#555;opacity:1">Jede Wohnung mit Terrasse, Balkon oder Dachterrasse und eigenem Abstellraum. Garten­wohnungen mit Sondernutzungsrecht.</p></div></div>
   ${fuss}</div>`,
 
