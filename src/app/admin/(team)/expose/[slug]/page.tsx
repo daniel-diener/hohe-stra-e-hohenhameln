@@ -117,7 +117,7 @@ export default async function WohnungsExpose({ params }: Props) {
       <LageImHaus nr="02" o={o} />
       <KostenBlatt nr="03" o={o} preise={preise} />
       <FoerderBlatt nr="04" o={o} />
-      <HausBlatt nr="05" />
+      <HausBlatt nr="05" o={o} />
       <LageBlatt nr="06" />
       <KontaktBlatt nr="07" />
     </div>

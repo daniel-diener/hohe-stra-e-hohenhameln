@@ -6,20 +6,21 @@ import { Plan } from "@/components/Plan";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, formatRaumFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { geschossName, projekt, type Objekt } from "@/lib/objekte";
+import { geschossName, hausMerkmale, projekt, type Objekt } from "@/lib/objekte";
 import { anbieter } from "@/lib/rechtliches";
 
 /** Bausteine des Exposés, gemeinsam für das Gesamt-Exposé und die Wohnungs-Exposés. */
 
 export const STAND = "November 2026";
 
-export function HausBlatt({ nr }: { nr: string }) {
+/** Mit Wohnung: „Eigene Gärten“ nur, wenn sie einen Garten hat — sonst ihr Freisitz. */
+export function HausBlatt({ nr, o }: { nr: string; o?: Objekt }) {
   const [, , garten, zufahrt] = projekt.bilder;
   return (
       <Blatt nr={nr} titel="Das Haus">
         <p className="ex-einleitung">Effizient, barrierefrei, durchdacht. Ein Haus, das heute schon die Standards von morgen erfüllt.</p>
         <div className="ex-merkmale">
-          {projekt.haus.map((m) => (
+          {hausMerkmale(o).map((m) => (
             <div key={m.titel}>
               <span className="merkmal-icon"><Icon name={m.icon as IconName} size={18} /></span>
               <h3>{m.titel}</h3>
