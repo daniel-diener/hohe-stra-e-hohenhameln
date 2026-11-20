@@ -3,7 +3,17 @@
 import { useActionState, useState } from "react";
 import { type FreigabeStand, erneuereCode, erstelleFreigabe } from "../../freigaben";
 
-type Dok = { datei: string; titel: string; beschreibung: string; gruppe: string };
+type Dok = {
+  datei: string;
+  titel: string;
+  beschreibung: string;
+  gruppe: string;
+  /** Wohnung reserviert oder verkauft: als Hinweis neben dem Titel. */
+  stand?: { wert: "reserviert" | "verkauft"; label: string };
+};
+
+/** Gruppe für Exposés reservierter und verkaufter Wohnungen — zugeklappt, nie vorausgewählt. */
+export const GRUPPE_VERGEBEN = "Exposés · reserviert oder verkauft";
 
 function Kopieren({ text }: { text: string }) {
   const [kopiert, setKopiert] = useState(false);
@@ -34,9 +44,8 @@ function Ergebnis({ stand }: { stand: FreigabeStand }) {
   return null;
 }
 
-export function NeueFreigabe({ leadId, email, dokumente, vorausgewaehlt, laufzeiten }: {
+export function NeueFreigabe({ leadId, dokumente, vorausgewaehlt, laufzeiten }: {
   leadId: string;
-  email: string;
   dokumente: Dok[];
   vorausgewaehlt: string[];
   laufzeiten: readonly number[];
@@ -48,26 +57,42 @@ export function NeueFreigabe({ leadId, email, dokumente, vorausgewaehlt, laufzei
     <>
       <form action={aktion} className="freigabe-formular">
         <input type="hidden" name="id" value={leadId} />
-        {gruppen.map((g) => (
-          <fieldset key={g}>
-            <legend className="klein leise">{g}</legend>
+        {gruppen.map((g) => {
+          const auswahl = (
             <div className="freigabe-auswahl">
               {dokumente.filter((d) => d.gruppe === g).map((d) => (
                 <label key={d.datei} className="haken klein">
-                  <input type="checkbox" name="datei" value={d.datei} defaultChecked={vorausgewaehlt.includes(d.datei)} />
-                  <span><span className="vorn">{d.titel}</span><br />{d.beschreibung}</span>
+                  <input
+                    type="checkbox" name="datei" value={d.datei}
+                    defaultChecked={!d.stand && vorausgewaehlt.includes(d.datei)}
+                  />
+                  <span>
+                    <span className="vorn">{d.titel}</span>
+                    {d.stand && <> <span className={`marke ${d.stand.wert}`}>{d.stand.label}</span></>}
+                    <br />{d.beschreibung}
+                  </span>
                 </label>
               ))}
             </div>
-          </fieldset>
-        ))}
+          );
+          return g === GRUPPE_VERGEBEN ? (
+            <details key={g} className="freigabe-vergeben">
+              <summary className="klein">
+                {g} ({dokumente.filter((d) => d.gruppe === g).length}) — nur gezielt auswählen
+              </summary>
+              {auswahl}
+            </details>
+          ) : (
+            <fieldset key={g}>
+              <legend className="klein leise">{g}</legend>
+              {auswahl}
+            </fieldset>
+          );
+        })}
         <div className="filter">
           <select name="tage" defaultValue={String(laufzeiten.includes(30) ? 30 : laufzeiten[0])} aria-label="Gültigkeit">
             {laufzeiten.map((t) => <option key={t} value={t}>{t} Tage gültig</option>)}
           </select>
-          <label className="haken klein">
-            <input type="checkbox" name="mail" /> Link per E-Mail an {email} senden (ohne Code)
-          </label>
         </div>
         <button className="knopf klein" disabled={laeuft}>{laeuft ? "PDFs werden erstellt …" : "Freigabe erstellen"}</button>
       </form>

@@ -63,8 +63,10 @@ solange die Freigabe gilt:
 - einen Link `/unterlagen/<token>` (192 Bit Zufall, nicht zu erraten) und
 - der Zugangscode (`XXXXX-XXXXX`), nur fürs Team lesbar. *Neuer Code* ersetzt ihn.
 
-Link und Code auf getrennten Wegen weitergeben (Link per Mail — auf Wunsch direkt
-aus dem Formular, ohne Code —, Code am Telefon/SMS). Nach 10 falschen Codes ist
+Das System verschickt dabei **keine** Mail — Link und Code schickt das Team selbst,
+am besten auf getrennten Wegen (Link per Mail, Code am Telefon/SMS). Exposés
+reservierter oder verkaufter Wohnungen stehen in einer eigenen, zugeklappten Gruppe
+mit Hinweis und sind nie vorausgewählt. Nach 10 falschen Codes ist
 der Link gesperrt, bis das Team einen neuen Code erzeugt. *Widerrufen* schaltet
 den Link sofort ab und löscht die PDFs; beim Löschen eines Leads gehen sie mit.
 Der erste Abruf erscheint im Verlauf des Leads.
