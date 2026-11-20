@@ -14,7 +14,7 @@ import { type Freigabe, GUELTIGKEIT_TAGE, sperrgrund } from "@/lib/freigabe";
 import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
 import { widerrufeFreigabe } from "../../freigaben";
 import { seitenUrl } from "@/lib/seite";
-import { CodeErneuern, LinkUndCode, NeueFreigabe } from "./Freigaben";
+import { CodeErneuern, GRUPPE_VERGEBEN, LinkUndCode, NeueFreigabe } from "./Freigaben";
 
 /** Eine Freigabe druckt die gewählten Exposés — das kann bei vielen bis zu einer Minute dauern. */
 export const maxDuration = 300;
@@ -216,8 +216,15 @@ export default async function LeadSeite({ params }: Props) {
             )}
             <NeueFreigabe
               leadId={lead.id}
-              email={lead.email}
-              dokumente={dokumente().map(({ datei, titel, beschreibung, gruppe }) => ({ datei, titel, beschreibung, gruppe }))}
+              dokumente={dokumente().map(({ datei, titel, beschreibung, gruppe }) => {
+                // Exposés reservierter oder verkaufter Wohnungen kommen in eine eigene Gruppe.
+                const o = objekte.find((x) => `expose-wohnung-${x.we}.pdf` === datei);
+                if (!o || o.status === "verfuegbar") return { datei, titel, beschreibung, gruppe };
+                return {
+                  datei, titel, beschreibung, gruppe: GRUPPE_VERGEBEN,
+                  stand: { wert: o.status, label: objektStatusLabel[o.status] },
+                };
+              })}
               vorausgewaehlt={objekt ? [`expose-wohnung-${objekt.we}.pdf`] : []}
               laufzeiten={GUELTIGKEIT_TAGE}
             />

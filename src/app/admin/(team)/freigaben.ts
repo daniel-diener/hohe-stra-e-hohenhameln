@@ -8,7 +8,6 @@ import {
   BUCKET, type Freigabe, type FreigabeDatei, GUELTIGKEIT_TAGE, neuerCode, neuerToken, speicherPfad,
 } from "@/lib/freigabe";
 import type { Lead } from "@/lib/leads";
-import { sendeUnterlagenLink } from "@/lib/mail";
 import { pdfsErzeugen } from "@/lib/pdf";
 import { seitenUrl } from "@/lib/seite";
 import { teamMitglied } from "@/lib/supabase-server";
@@ -43,7 +42,7 @@ export async function erstelleFreigabe(_vorher: FreigabeStand, form: FormData): 
   if (!liste.length) return { stand: "fehler", meldung: "Bitte mindestens ein Dokument auswählen." };
   if (!GUELTIGKEIT_TAGE.includes(tage as (typeof GUELTIGKEIT_TAGE)[number])) return { stand: "fehler", meldung: "Ungültige Laufzeit." };
 
-  const { data: lead } = await supabase.from("leads").select("id, name, email").eq("id", leadId).maybeSingle<Pick<Lead, "id" | "name" | "email">>();
+  const { data: lead } = await supabase.from("leads").select("id").eq("id", leadId).maybeSingle<Pick<Lead, "id">>();
   if (!lead) return { stand: "fehler", meldung: "Lead nicht gefunden." };
 
   // Die Exposés einmal drucken — mit den Cookies dieser Person, wie im Reiter „Dokumente“.
@@ -83,25 +82,15 @@ export async function erstelleFreigabe(_vorher: FreigabeStand, form: FormData): 
     return { stand: "fehler", meldung: "Die Freigabe konnte nicht gespeichert werden." };
   }
 
-  const link = linkZu(token);
-  const titel = dateien.map((d) => d.titel);
-  let hinweis: string | undefined;
-  let gemailt = false;
-  if (form.get("mail") === "on") {
-    gemailt = await sendeUnterlagenLink(lead, link, titel, gueltigBis);
-    hinweis = gemailt
-      ? `Link per E-Mail an ${lead.email} versendet — den Code bitte telefonisch oder per SMS durchgeben.`
-      : "Die E-Mail konnte nicht versendet werden (Mailversand prüfen). Link und Code bitte selbst weitergeben.";
-  }
-
+  // Bewusst keine Mail: Das Team schickt Link und Code selbst an den Kunden.
   await supabase.from("lead_aktivitaeten").insert({
     lead_id: lead.id,
-    art: gemailt ? "email" : "notiz",
-    text: `Unterlagen online freigegeben (bis ${datumKurz(gueltigBis)}): ${titel.join(", ")}.${gemailt ? " Link per E-Mail versendet." : ""}`,
+    art: "notiz",
+    text: `Unterlagen online freigegeben (bis ${datumKurz(gueltigBis)}): ${dateien.map((d) => d.titel).join(", ")}.`,
     created_by: user.id,
   });
   revalidatePath(`/admin/leads/${lead.id}`);
-  return { stand: "fertig", link, code, hinweis };
+  return { stand: "fertig", link: linkZu(token), code };
 }
 
 /** Neuer Zugangscode, etwa wenn der alte verloren ging oder der Link nach Fehlversuchen gesperrt ist. */
