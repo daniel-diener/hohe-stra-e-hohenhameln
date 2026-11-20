@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { BUCKET, type Freigabe, speicherPfad } from "@/lib/freigabe";
 import { AKTIVITAET, LEAD_STATUS, istEines, leadStatusLabel } from "@/lib/labels";
 import type { Lead } from "@/lib/leads";
 import { sendeEinladung, sendeTerminAbsage } from "@/lib/mail";
@@ -96,6 +97,11 @@ export async function loesche(form: FormData) {
   const { supabase } = await team();
   const id = String(form.get("id"));
   if (form.get("bestaetigt") !== "on") return;
+  // Die Zeilen in `freigaben` gehen per Kaskade mit, die abgelegten PDFs nicht von selbst.
+  const { data: freigaben } = await supabase.from("freigaben").select("id, dateien").eq("lead_id", id)
+    .returns<Pick<Freigabe, "id" | "dateien">[]>();
+  const pfade = (freigaben ?? []).flatMap((f) => f.dateien.map((d) => speicherPfad(f.id, d.datei)));
+  if (pfade.length) await supabase.storage.from(BUCKET).remove(pfade);
   const { error } = await supabase.from("leads").delete().eq("id", id);
   if (error) throw error;
   revalidatePath("/admin");
