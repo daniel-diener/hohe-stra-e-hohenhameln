@@ -6,7 +6,10 @@ import { teamMitglied } from "@/lib/supabase-server";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-/** Ein Exposé als PDF, frisch aus der Seite gedruckt — also immer mit aktuellen Preisen. */
+/**
+ * Ein Dokument als PDF: Exposés frisch aus der Seite gedruckt (also immer mit
+ * aktuellen Preisen), Vorlagen aus `vorlagen/`. Mit `?ansehen` im Browser statt als Download.
+ */
 export async function GET(req: NextRequest, { params }: { params: Promise<{ datei: string }> }) {
   if (!(await teamMitglied())) return new NextResponse("Kein Zugang", { status: 403 });
   const dokument = dokumentNach((await params).datei);
@@ -17,7 +20,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ date
     return new NextResponse(Buffer.from(pdf), {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${dokument.datei}"`,
+        "Content-Disposition": `${req.nextUrl.searchParams.has("ansehen") ? "inline" : "attachment"}; filename="${dokument.datei}"`,
         "Cache-Control": "no-store",
       },
     });

@@ -1,4 +1,6 @@
 import "server-only";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import puppeteer, { type Browser } from "puppeteer-core";
 import type { Dokument } from "./dokumente";
 
@@ -46,25 +48,33 @@ async function drucken(browser: Browser, url: string): Promise<Uint8Array> {
 }
 
 /**
- * Erzeugt die PDFs zu den Dokumenten, in derselben Reihenfolge. Mehrere Seiten
- * gleichzeitig, aber nicht alle: Chromium braucht je Tab spürbar Speicher.
+ * Liefert die PDFs zu den Dokumenten, in derselben Reihenfolge: feste Dateien
+ * direkt von der Platte, Seiten frisch gedruckt. Mehrere Seiten gleichzeitig,
+ * aber nicht alle: Chromium braucht je Tab spürbar Speicher.
  */
 export async function pdfsErzeugen(origin: string, cookies: Cookie[], liste: Dokument[], gleichzeitig = 3) {
+  const ergebnis: Uint8Array[] = new Array(liste.length);
+  const zuDrucken: number[] = [];
+  for (const [i, d] of liste.entries()) {
+    if (d.quelle.art === "datei") ergebnis[i] = await readFile(path.join(process.cwd(), d.quelle.pfad));
+    else zuDrucken.push(i);
+  }
+  if (!zuDrucken.length) return ergebnis;
+
   const browser = await browserStarten();
   try {
     const { hostname } = new URL(origin);
     if (cookies.length) {
       await browser.setCookie(...cookies.map((c) => ({ name: c.name, value: c.value, domain: hostname, path: "/" })));
     }
-    const ergebnis: Uint8Array[] = new Array(liste.length);
     let naechstes = 0;
     const arbeiter = async () => {
-      while (naechstes < liste.length) {
-        const i = naechstes++;
-        ergebnis[i] = await drucken(browser, new URL(liste[i].pfad, origin).toString());
+      while (naechstes < zuDrucken.length) {
+        const i = zuDrucken[naechstes++];
+        ergebnis[i] = await drucken(browser, new URL(liste[i].quelle.pfad, origin).toString());
       }
     };
-    await Promise.all(Array.from({ length: Math.min(gleichzeitig, liste.length) }, arbeiter));
+    await Promise.all(Array.from({ length: Math.min(gleichzeitig, zuDrucken.length) }, arbeiter));
     return ergebnis;
   } finally {
     await browser.close();

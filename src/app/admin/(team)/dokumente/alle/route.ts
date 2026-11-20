@@ -7,7 +7,7 @@ import { teamMitglied } from "@/lib/supabase-server";
 export const runtime = "nodejs";
 export const maxDuration = 300;
 
-/** Alle Exposés als ZIP. PDFs sind schon komprimiert — im ZIP nur abgelegt (level 0). */
+/** Alle Dokumente als ZIP. PDFs sind schon komprimiert — im ZIP nur abgelegt (level 0). */
 export async function GET(req: NextRequest) {
   if (!(await teamMitglied())) return new NextResponse("Kein Zugang", { status: 403 });
   const liste = dokumente();
@@ -19,12 +19,12 @@ export async function GET(req: NextRequest) {
     return new NextResponse(Buffer.from(zip), {
       headers: {
         "Content-Type": "application/zip",
-        "Content-Disposition": `attachment; filename="exposes-hohe-strasse-${datum}.zip"`,
+        "Content-Disposition": `attachment; filename="dokumente-hohe-strasse-${datum}.zip"`,
         "Cache-Control": "no-store",
       },
     });
   } catch (fehler) {
     console.error("ZIP fehlgeschlagen", fehler);
-    return new NextResponse("Exposés konnten nicht erzeugt werden", { status: 500 });
+    return new NextResponse("Dokumente konnten nicht erzeugt werden", { status: 500 });
   }
 }
