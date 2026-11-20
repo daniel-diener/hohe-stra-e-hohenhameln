@@ -14,6 +14,11 @@
  * Baugleiche Wohnungen teilen sich einen Plan; er trägt die Nummer der ersten.
  */
 
+/**
+ * Grundstand. Leads mit Wohnung auf „Reserviert“, „Notartermin“ oder „Verkauft“
+ * heben ihn auf der Website automatisch an (lib/verkaufsstand.ts) — hier nur
+ * pflegen, was ohne Lead im System verkauft oder reserviert ist.
+ */
 export type ObjektStatus = "verfuegbar" | "reserviert" | "verkauft";
 
 export type Geschoss = "UG" | "EG" | "OG" | "SG";
@@ -321,7 +326,7 @@ export const objekte: Objekt[] = [
     ],
   }),
   wohnung({
-    we: 12, status: "reserviert", plan: "we-7-12", baugleichMit: 7, geschoss: "OG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
+    we: 12, plan: "we-7-12", baugleichMit: 7, geschoss: "OG", zimmer: 3, baeder: 1, wohnflaeche: 83.58,
     titel: "WE 12 · 3 Zimmer mit Balkon",
     freisitz: { art: "Balkon", flaeche: 9.58, seite: "Süd" }, garten: false, keller: 4.91,
     kurz: "Eckwohnung mit Wohn- und Essbereich zum Südbalkon, Schlafzimmer und Kinderzimmer an der Giebelseite.",

@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
-import { objekte } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { seitenUrl } from "@/lib/seite";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const objekte = await objekteMitStand();
   const url = (pfad: string) => new URL(pfad, seitenUrl).href;
   return [
     { url: url("/"), changeFrequency: "weekly", priority: 1 },

@@ -2,22 +2,21 @@ import Link from "next/link";
 import { formatFlaeche } from "@/lib/format";
 import { leadStatusLabel, objektStatusLabel } from "@/lib/labels";
 import type { Lead } from "@/lib/leads";
-import { geschosse, geschossName, objekte, type ObjektStatus } from "@/lib/objekte";
+import { geschosse, geschossName, type ObjektStatus } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { teamMitglied } from "@/lib/supabase-server";
-
-/** Lead-Status, bei denen die Wohnung auf der Website nicht mehr frei sein sollte. */
-const GEBUNDEN: Lead["status"][] = ["reserviert", "notartermin", "verkauft"];
 
 type Anfrage = Pick<Lead, "id" | "name" | "objekt_slug" | "status">;
 
 /**
- * Verkaufsstand je Wohnung. Der Status kommt aus src/lib/objekte.ts (wie auf
- * der Website), die Anfragen aus den Leads — abgesagte zählen nicht.
+ * Verkaufsstand je Wohnung, wie auf der Website (Grundstand aus objekte.ts,
+ * angehoben durch reservierte/verkaufte Leads), dazu die Anfragen — abgesagte zählen nicht.
  */
 export default async function Wohnungen() {
   const mitglied = await teamMitglied();
   if (!mitglied) return null;
 
+  const objekte = await objekteMitStand();
   const { data, error } = await mitglied.supabase
     .from("leads")
     .select("id, name, objekt_slug, status")
@@ -74,12 +73,7 @@ export default async function Wohnungen() {
                       <td><Link href={`/admin?objekt=${o.slug}`}><strong>{o.titel}</strong></Link></td>
                       <td>{o.zimmer}</td>
                       <td className="klein">{formatFlaeche(o.wohnflaeche)}</td>
-                      <td>
-                        <span className={`marke ${o.status}`}>{o.status === "verfuegbar" ? "Frei" : objektStatusLabel[o.status]}</span>
-                        {o.status === "verfuegbar" && liste.some((a) => GEBUNDEN.includes(a.status)) && (
-                          <p className="klein text-verkauft">Lead ist schon reserviert – Website noch auf „Frei“</p>
-                        )}
-                      </td>
+                      <td><span className={`marke ${o.status}`}>{o.status === "verfuegbar" ? "Frei" : objektStatusLabel[o.status]}</span></td>
                       <td>{liste.length > 0 ? personen(liste) : <span className="leer klein">–</span>}</td>
                     </tr>
                   );

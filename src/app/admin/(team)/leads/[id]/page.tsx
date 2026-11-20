@@ -5,7 +5,8 @@ import {
   AKTIVITAET, LEAD_STATUS, aktivitaetLabel, finanzierungLabel, leadStatusLabel, objektStatusLabel, zweckLabel,
 } from "@/lib/labels";
 import type { Lead, LeadAktivitaet } from "@/lib/leads";
-import { objektNach, objekte, projekt } from "@/lib/objekte";
+import { projekt } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { teamMitglied } from "@/lib/supabase-server";
 import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
 import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
@@ -38,7 +39,8 @@ export default async function LeadSeite({ params }: Props) {
   const frei = freieTermine(jetzt, (gebucht ?? []).filter((t) => t.lead_id !== lead.id).map((t) => t.beginn))
     .filter((t) => !termin || new Date(termin.beginn).getTime() !== t.getTime());
 
-  const objekt = objektNach(lead.objekt_slug);
+  const objekte = await objekteMitStand();
+  const objekt = objekte.find((o) => o.slug === lead.objekt_slug);
   const bezug = objekt?.titel ?? `${projekt.name}, ${projekt.ort}`;
   const mail = new URLSearchParams({
     subject: `Ihre Anfrage: ${bezug}`,

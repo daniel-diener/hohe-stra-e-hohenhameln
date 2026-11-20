@@ -15,6 +15,11 @@ import { terminText } from "@/lib/termine";
  * entscheidet, nicht diese Datei. Der Test auf `teamMitglied` ist nur dafür
  * da, eine verständliche Meldung statt eines stillen Nichts zu geben.
  */
+/** Status und Wohnung eines Leads bestimmen den Stand auf der Website — dort sofort auffrischen. */
+function standAuffrischen() {
+  revalidatePath("/", "layout");
+}
+
 async function team() {
   const m = await teamMitglied();
   if (!m) throw new Error("Kein Zugang");
@@ -40,6 +45,7 @@ export async function setzeStatus(form: FormData) {
   });
   revalidatePath(`/admin/leads/${id}`);
   revalidatePath("/admin");
+  standAuffrischen();
 }
 
 /** Ordnet den Lead einer Wohnung zu (leer = allgemeine Anfrage). Erscheint so im Reiter „Wohnungen“. */
@@ -64,6 +70,7 @@ export async function setzeWohnung(form: FormData) {
   revalidatePath(`/admin/leads/${id}`);
   revalidatePath("/admin");
   revalidatePath("/admin/wohnungen");
+  standAuffrischen();
 }
 
 export async function notiere(form: FormData) {
@@ -92,6 +99,7 @@ export async function loesche(form: FormData) {
   const { error } = await supabase.from("leads").delete().eq("id", id);
   if (error) throw error;
   revalidatePath("/admin");
+  standAuffrischen();
   redirect("/admin");
 }
 
