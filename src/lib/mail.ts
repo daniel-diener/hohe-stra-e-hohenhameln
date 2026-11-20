@@ -5,6 +5,7 @@ import { finanzierungLabel, zweckLabel } from "./labels";
 import type { Lead } from "./leads";
 import { bestaetigung, einladung, terminBestaetigung, terminInfo } from "./mail-vorlagen";
 import { objektNach, projekt } from "./objekte";
+import { objektMitStand } from "./verkaufsstand";
 import { seitenUrl } from "./seite";
 import { TERMIN, kalenderDatei, terminOrt, terminText } from "./termine";
 
@@ -80,7 +81,7 @@ function herkunft(q: Record<string, string>) {
 }
 
 export async function meldeNeueAnfrage(id: string, a: Anfrage) {
-  const objekt = objektNach(a.objekt_slug);
+  const objekt = await objektMitStand(a.objekt_slug);
   const bezug = objekt?.titel ?? "Allgemeine Anfrage";
   const aufgaben: Promise<boolean>[] = [];
 

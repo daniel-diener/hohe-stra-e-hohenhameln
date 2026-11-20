@@ -5,7 +5,8 @@ import { Hauszeichen } from "@/components/Logo";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, formatFlaechenSpanne, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { geschossName, geschosse, objekte, projekt } from "@/lib/objekte";
+import { geschossName, geschosse, projekt } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { DruckKnopf } from "./DruckKnopf";
 import { Blatt, HausBlatt, KontaktBlatt, LageBlatt, WohnungsBlatt } from "./teile";
 
@@ -22,7 +23,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function Expose() {
+export const revalidate = 300;
+
+export default async function Expose() {
+  const objekte = await objekteMitStand();
   const [eingang, luftbild] = projekt.bilder;
   const flaechen = objekte.map((o) => o.wohnflaeche);
   const sortiert = [...objekte].sort((a, b) => a.we - b.we);
