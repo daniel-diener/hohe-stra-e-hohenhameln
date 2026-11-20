@@ -62,8 +62,8 @@ const euroCent = new Intl.NumberFormat("de-DE", { style: "currency", currency: "
 const formatEuroCent = (n: number) => euroCent.format(n);
 const prozent = (n: number) => `${(n * 100).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} %`;
 
-function Folgt({ text = "folgt" }: { text?: string }) {
-  return <span className="ex-offen">{text}</span>;
+function Folgt() {
+  return <span className="ex-offen">folgt</span>;
 }
 
 export default async function WohnungsExpose({ params }: Props) {
@@ -180,7 +180,7 @@ function KostenBlatt({ nr, o, preise }: { nr: string; o: Objekt; preise: Preise 
               <tr><td>Wohnung {o.we}</td><td className="mono">{preis ? formatEuro(preis) : o.status === "verkauft" ? preisText(o) : <Folgt />}</td></tr>
               <tr><td>Stellplatz (optional)</td><td className="mono">{preise.stellplatz ? formatEuro(preise.stellplatz) : <Folgt />}</td></tr>
               <tr><td>Stellplatz mit Carport (optional)</td><td className="mono">{preise.carport ? formatEuro(preise.carport) : <Folgt />}</td></tr>
-              <tr><td>Ladestation (optional)</td><td className="mono"><Folgt text="gegen Aufpreis" /></td></tr>
+              <tr><td>Ladestation (optional)</td><td className="mono">gegen Aufpreis</td></tr>
             </tbody>
           </table>
         </div>

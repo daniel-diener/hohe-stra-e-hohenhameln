@@ -661,7 +661,7 @@ label.haken input { margin-top: 3px; }
 .ex-absatz { margin: 0 0 3mm; }
 .ex-mabv td:nth-child(2) { text-align: right; width: 16mm; color: hsl(var(--muted-foreground)); }
 .ex-mabv td:last-child { width: 30mm; }
-.ex-offen { display: inline-block; padding: 0 1.5mm; border-radius: 1mm; background: #fef08a; color: #713f12; font-family: var(--font-sans); font-size: 8.5pt; }
+.ex-offen { display: inline-block; padding: 0 1.5mm; border-radius: 1mm; border: 0.25mm solid hsl(var(--muted-foreground) / 0.5); color: hsl(var(--muted-foreground)); font-family: var(--font-sans); font-size: 8.5pt; }
 .ex-foerder { border: 1px solid hsl(var(--border)); border-radius: 2mm; padding: 5mm; display: flex; flex-direction: column; gap: 2mm; }
 .ex-foerder p { margin: 0; font-size: 9pt; }
 .ex-foerder .eyebrow { margin: 0; }
