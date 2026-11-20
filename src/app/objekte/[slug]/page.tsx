@@ -8,19 +8,21 @@ import { Icon, type IconName } from "@/components/Icon";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatFlaeche, formatRaumFlaeche, formatZahl, preisText } from "@/lib/format";
 import { objektStatusLabel } from "@/lib/labels";
-import { adresseLd, geschossName, objektNach, objekte, projekt } from "@/lib/objekte";
+import { adresseLd, geschossName, objekte, projekt } from "@/lib/objekte";
+import { objekteMitStand, objektMitStand } from "@/lib/verkaufsstand";
 import { seitenUrl } from "@/lib/seite";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return objekte.map((o) => ({ slug: o.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const o = objektNach((await params).slug);
+  const o = await objektMitStand((await params).slug);
   if (!o) return {};
   const description = `${o.zimmer}-Zimmer-Wohnung, ${formatFlaeche(o.wohnflaeche)}, ${geschossName[o.geschoss]}, ${preisText(o)}. ${o.kurz}`;
   const bild = o.bilder[0] ?? projekt.bilder[0];
@@ -41,8 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ObjektSeite({ params }: Props) {
-  const o = objektNach((await params).slug);
+  const o = await objektMitStand((await params).slug);
   if (!o) notFound();
+  const alle = await objekteMitStand();
 
   const kopfwerte: [string, string][] = [
     ["Kaufpreis", preisText(o)],
@@ -60,8 +63,8 @@ export default async function ObjektSeite({ params }: Props) {
     ...(o.provision ? [["Käuferprovision", o.provision] as [string, string]] : []),
   ];
 
-  const i = objekte.indexOf(o);
-  const [vorher, nachher] = [objekte[i - 1], objekte[i + 1]];
+  const i = alle.findIndex((x) => x.slug === o.slug);
+  const [vorher, nachher] = [alle[i - 1], alle[i + 1]];
   const bilder = o.bilder.length > 0 ? o.bilder : projekt.bilder.slice(0, 3);
 
   // Strukturierte Daten für Suchmaschinen.

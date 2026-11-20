@@ -14,6 +14,11 @@
  * Baugleiche Wohnungen teilen sich einen Plan; er trägt die Nummer der ersten.
  */
 
+/**
+ * Grundstand. Leads mit Wohnung auf „Reserviert“, „Notartermin“ oder „Verkauft“
+ * heben ihn auf der Website automatisch an (lib/verkaufsstand.ts) — hier nur
+ * pflegen, was ohne Lead im System verkauft oder reserviert ist.
+ */
 export type ObjektStatus = "verfuegbar" | "reserviert" | "verkauft";
 
 export type Geschoss = "UG" | "EG" | "OG" | "SG";

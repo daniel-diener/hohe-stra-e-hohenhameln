@@ -3,13 +3,18 @@ import Image from "next/image";
 import { AnfrageFormular } from "@/components/AnfrageFormular";
 import { Icon, type IconName } from "@/components/Icon";
 import { Wohnungen } from "@/components/Wohnungen";
-import { adresseLd, objekte, projekt } from "@/lib/objekte";
+import { adresseLd, projekt } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { formatEuro, formatFlaechenSpanne } from "@/lib/format";
 import { seitenUrl } from "@/lib/seite";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
-export default function Start() {
+// Verkaufsstand kommt aus den Leads; das Team-Backend frischt bei Änderungen sofort auf.
+export const revalidate = 300;
+
+export default async function Start() {
+  const objekte = await objekteMitStand();
   const frei = objekte.filter((o) => o.status === "verfuegbar").length;
   const flaechen = objekte.map((o) => o.wohnflaeche);
   const p = projekt.ansprechpartner;
@@ -73,7 +78,7 @@ export default function Start() {
               barrierefrei über den Aufzug erreichbar.
             </p>
           </header>
-          <Wohnungen />
+          <Wohnungen objekte={objekte} />
         </div>
       </section>
 

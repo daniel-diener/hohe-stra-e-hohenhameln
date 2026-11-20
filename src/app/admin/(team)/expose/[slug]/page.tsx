@@ -6,6 +6,7 @@ import { Hauszeichen } from "@/components/Logo";
 import { untertitel } from "@/components/ObjektKarte";
 import { formatEuro, formatFlaeche, preisText } from "@/lib/format";
 import { geschossName, geschosse, objektNach, objekte, projekt, type Objekt } from "@/lib/objekte";
+import { objektMitStand } from "@/lib/verkaufsstand";
 import { DruckKnopf } from "@/app/expose/DruckKnopf";
 import { supabaseSitzung } from "@/lib/supabase-server";
 import { Blatt, HausBlatt, KontaktBlatt, LageBlatt, WohnungsBlatt } from "@/app/expose/teile";
@@ -67,7 +68,7 @@ function Folgt() {
 }
 
 export default async function WohnungsExpose({ params }: Props) {
-  const gefunden = objektNach((await params).slug);
+  const gefunden = await objektMitStand((await params).slug);
   if (!gefunden) notFound();
   const preise = await preiseLaden(gefunden.we);
   const o: Objekt = { ...gefunden, kaufpreis: preise.wohnung ?? gefunden.kaufpreis };

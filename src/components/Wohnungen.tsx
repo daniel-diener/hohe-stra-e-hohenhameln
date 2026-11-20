@@ -1,4 +1,4 @@
-import { geschossName, geschosse, objekte, type Objekt } from "@/lib/objekte";
+import { geschossName, geschosse, type Objekt } from "@/lib/objekte";
 import { ObjektKarte } from "./ObjektKarte";
 import { WohnungsFilter } from "./WohnungsFilter";
 
@@ -16,7 +16,7 @@ function treffer(liste: Objekt[]) {
   return FILTER.filter((f) => liste.some(f.passt)).map((f) => f.id).join(" ");
 }
 
-export function Wohnungen() {
+export function Wohnungen({ objekte }: { objekte: Objekt[] }) {
   return (
     <WohnungsFilter filter={FILTER.map((f) => ({ id: f.id, label: f.label, anzahl: objekte.filter(f.passt).length }))}>
       {geschosse.map((g) => {

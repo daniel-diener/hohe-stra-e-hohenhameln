@@ -2,19 +2,21 @@ import Link from "next/link";
 import { formatFlaeche } from "@/lib/format";
 import { leadStatusLabel, objektStatusLabel } from "@/lib/labels";
 import type { Lead } from "@/lib/leads";
-import { geschosse, geschossName, objekte, type ObjektStatus } from "@/lib/objekte";
+import { geschosse, geschossName, type ObjektStatus } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { teamMitglied } from "@/lib/supabase-server";
 
 type Anfrage = Pick<Lead, "id" | "name" | "objekt_slug" | "status">;
 
 /**
- * Verkaufsstand je Wohnung. Der Status kommt aus src/lib/objekte.ts (wie auf
- * der Website), die Anfragen aus den Leads — abgesagte zählen nicht.
+ * Verkaufsstand je Wohnung, wie auf der Website (Grundstand aus objekte.ts,
+ * angehoben durch reservierte/verkaufte Leads), dazu die Anfragen — abgesagte zählen nicht.
  */
 export default async function Wohnungen() {
   const mitglied = await teamMitglied();
   if (!mitglied) return null;
 
+  const objekte = await objekteMitStand();
   const { data, error } = await mitglied.supabase
     .from("leads")
     .select("id, name, objekt_slug, status")

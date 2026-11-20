@@ -5,7 +5,8 @@ import {
   AKTIVITAET, LEAD_STATUS, aktivitaetLabel, finanzierungLabel, leadStatusLabel, objektStatusLabel, zweckLabel,
 } from "@/lib/labels";
 import type { Lead, LeadAktivitaet } from "@/lib/leads";
-import { objektNach, objekte, projekt } from "@/lib/objekte";
+import { projekt } from "@/lib/objekte";
+import { objekteMitStand } from "@/lib/verkaufsstand";
 import { teamMitglied } from "@/lib/supabase-server";
 import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
 import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
@@ -38,7 +39,8 @@ export default async function LeadSeite({ params }: Props) {
   const frei = freieTermine(jetzt, (gebucht ?? []).filter((t) => t.lead_id !== lead.id).map((t) => t.beginn))
     .filter((t) => !termin || new Date(termin.beginn).getTime() !== t.getTime());
 
-  const objekt = objektNach(lead.objekt_slug);
+  const objekte = await objekteMitStand();
+  const objekt = objekte.find((o) => o.slug === lead.objekt_slug);
   const bezug = objekt?.titel ?? `${projekt.name}, ${projekt.ort}`;
   const mail = new URLSearchParams({
     subject: `Ihre Anfrage: ${bezug}`,
@@ -54,9 +56,49 @@ export default async function LeadSeite({ params }: Props) {
         <p><Link href="/admin">← Alle Leads</Link></p>
         <div className="zwei-spalten">
           <section>
-            <span className={`marke lead-${lead.status}`}>{leadStatusLabel[lead.status]}</span>
             <h1>{lead.name}</h1>
-            <p className="klein">Eingang {formatDatum(lead.created_at)} · {objekt?.titel ?? "Allgemeine Anfrage"}</p>
+            <p className="klein">Eingang {formatDatum(lead.created_at)}</p>
+
+            <div className="lead-stand">
+              <div>
+                <p className="lead-stand-titel">Status</p>
+                <p className="lead-stand-wert"><span className={`marke lead-${lead.status}`}>{leadStatusLabel[lead.status]}</span></p>
+                <form action={setzeStatus} className="filter">
+                  <input type="hidden" name="id" value={lead.id} />
+                  <select name="status" defaultValue={lead.status} aria-label="Status ändern">
+                    {LEAD_STATUS.map((s) => <option key={s} value={s}>{leadStatusLabel[s]}</option>)}
+                  </select>
+                  <button className="knopf klein">Speichern</button>
+                </form>
+              </div>
+              <div>
+                <p className="lead-stand-titel">Wohnung</p>
+                <p className="lead-stand-wert">
+                  {objekt ? (
+                    <>
+                      <strong>{objekt.titel}</strong>{" "}
+                      <span className={`marke ${objekt.status}`}>
+                        {objekt.status === "verfuegbar" ? "Frei" : objektStatusLabel[objekt.status]} auf der Website
+                      </span>
+                    </>
+                  ) : (
+                    <span className="leise">Keine bestimmte Wohnung</span>
+                  )}
+                </p>
+                <form action={setzeWohnung} className="filter">
+                  <input type="hidden" name="id" value={lead.id} />
+                  <select name="objekt" defaultValue={objekt?.slug ?? ""} aria-label="Wohnung zuordnen">
+                    <option value="">Keine bestimmte Wohnung</option>
+                    {[...objekte].sort((a, b) => a.we - b.we).map((o) => (
+                      <option key={o.slug} value={o.slug}>
+                        {o.titel}{o.status === "verfuegbar" ? "" : ` (${objektStatusLabel[o.status]})`}
+                      </option>
+                    ))}
+                  </select>
+                  <button className="knopf klein">Zuordnen</button>
+                </form>
+              </div>
+            </div>
 
             <div className="aktionen">
               <a className="knopf" href={mailto}>E-Mail schreiben</a>
@@ -120,29 +162,6 @@ export default async function LeadSeite({ params }: Props) {
                 <span className="klein leise">Der Interessent wählt den Termin dann selbst online.</span>
               </form>
             )}
-
-            <h2>Status</h2>
-            <form action={setzeStatus} className="filter">
-              <input type="hidden" name="id" value={lead.id} />
-              <select name="status" defaultValue={lead.status}>
-                {LEAD_STATUS.map((s) => <option key={s} value={s}>{leadStatusLabel[s]}</option>)}
-              </select>
-              <button className="knopf klein">Speichern</button>
-            </form>
-
-            <h2>Wohnung</h2>
-            <form action={setzeWohnung} className="filter">
-              <input type="hidden" name="id" value={lead.id} />
-              <select name="objekt" defaultValue={objekt?.slug ?? ""}>
-                <option value="">Keine bestimmte Wohnung</option>
-                {[...objekte].sort((a, b) => a.we - b.we).map((o) => (
-                  <option key={o.slug} value={o.slug}>
-                    {o.titel}{o.status === "verfuegbar" ? "" : ` (${objektStatusLabel[o.status]})`}
-                  </option>
-                ))}
-              </select>
-              <button className="knopf klein">Zuordnen</button>
-            </form>
 
             <details className="gefahr">
               <summary>Lead löschen</summary>
