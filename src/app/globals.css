@@ -713,3 +713,12 @@ label.haken input { margin-top: 3px; }
 .wohnung-anfragen { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .wohnung-anfragen li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .wohnung-allgemein { margin-top: 32px; font-size: 1.125rem; }
+
+/* Admin: Status und Wohnung oben auf der Lead-Seite */
+.lead-stand { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 20px 0 24px; background: hsl(var(--border)); border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); overflow: hidden; }
+.lead-stand > div { background: hsl(var(--card)); padding: 16px 20px; }
+.lead-stand-titel { margin: 0 0 6px; font: 0.75rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: hsl(var(--muted-foreground)); }
+.lead-stand-wert { margin: 0 0 12px; font-size: 1.125rem; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.lead-stand-wert .marke { font-size: 0.875rem; height: auto; padding: 4px 12px; margin: 0; }
+.lead-stand .filter { margin: 0; }
+@media (max-width: 640px) { .lead-stand { grid-template-columns: 1fr; } }

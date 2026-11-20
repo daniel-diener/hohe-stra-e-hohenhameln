@@ -5,6 +5,9 @@ import type { Lead } from "@/lib/leads";
 import { geschosse, geschossName, objekte, type ObjektStatus } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
 
+/** Lead-Status, bei denen die Wohnung auf der Website nicht mehr frei sein sollte. */
+const GEBUNDEN: Lead["status"][] = ["reserviert", "notartermin", "verkauft"];
+
 type Anfrage = Pick<Lead, "id" | "name" | "objekt_slug" | "status">;
 
 /**
@@ -71,7 +74,12 @@ export default async function Wohnungen() {
                       <td><Link href={`/admin?objekt=${o.slug}`}><strong>{o.titel}</strong></Link></td>
                       <td>{o.zimmer}</td>
                       <td className="klein">{formatFlaeche(o.wohnflaeche)}</td>
-                      <td><span className={`marke ${o.status}`}>{o.status === "verfuegbar" ? "Frei" : objektStatusLabel[o.status]}</span></td>
+                      <td>
+                        <span className={`marke ${o.status}`}>{o.status === "verfuegbar" ? "Frei" : objektStatusLabel[o.status]}</span>
+                        {o.status === "verfuegbar" && liste.some((a) => GEBUNDEN.includes(a.status)) && (
+                          <p className="klein text-verkauft">Lead ist schon reserviert – Website noch auf „Frei“</p>
+                        )}
+                      </td>
                       <td>{liste.length > 0 ? personen(liste) : <span className="leer klein">–</span>}</td>
                     </tr>
                   );
