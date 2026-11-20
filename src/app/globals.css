@@ -713,3 +713,6 @@ label.haken input { margin-top: 3px; }
 .wohnung-anfragen { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .wohnung-anfragen li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .wohnung-allgemein { margin-top: 32px; font-size: 1.125rem; }
+.dokumente-kopf { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.dokumente-kopf p { margin-bottom: 0; }
+.dokumente-aktionen { display: flex; align-items: center; justify-content: flex-end; gap: 16px; white-space: nowrap; }
