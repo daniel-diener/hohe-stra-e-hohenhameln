@@ -315,3 +315,29 @@ export function terminInfo(l: Empfaenger & { id: string }, objekt: Objekt | unde
     hAbsatz(`<span style="color:${FARBE.leise};font-size:14px;">Die Kalenderdatei hängt an. Der Interessent hat eine Bestätigung mit demselben Termin bekommen.</span>`);
   return { betreff, text, html: rahmen({ betreff, vorschau: `${wann} · ${l.name}`, inhalt, basis, gruss: false }) };
 }
+
+const tagFormat = new Intl.DateTimeFormat("de-DE", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
+
+/**
+ * Link zu den freigegebenen Unterlagen. Der Zugangscode steht bewusst NICHT
+ * darin — er kommt auf einem zweiten Weg (Telefon, SMS), damit eine
+ * weitergeleitete oder mitgelesene Mail allein nicht reicht.
+ */
+export function unterlagenLink(l: Pick<Lead, "name">, basis: URL, link: string, titel: string[], gueltigBis: Date | string): Mail {
+  const bis = tagFormat.format(new Date(gueltigBis));
+  const betreff = `Ihre Unterlagen · ${projekt.name} ${projekt.ort}`;
+  const s1 = `wie besprochen stellen wir Ihnen die Unterlagen zur ${projekt.name} online zum Herunterladen bereit.`;
+  const s2 = "Zum Öffnen brauchen Sie zusätzlich Ihren persönlichen Zugangscode. Den erhalten Sie aus Sicherheitsgründen getrennt von dieser E-Mail von uns.";
+  const s3 = `Der Link ist bis zum ${bis} gültig und nur für Sie bestimmt. Bitte geben Sie ihn nicht weiter.`;
+  const text = [
+    `Guten Tag ${l.name},`, "", s1, "",
+    ...titel.map((t) => `• ${t}`), "",
+    `Unterlagen öffnen: ${link}`, "", s2, "", s3, "",
+    ...grussText(), "", ...pflichtText(basis),
+  ].join("\n");
+  const inhalt =
+    hAbsatz(`Guten Tag ${esc(l.name)},`) + hAbsatz(esc(s1)) +
+    hKasten(titel.map((t, i) => [i === 0 ? "Unterlagen" : "", esc(t)])) +
+    hKnopf(link, "Unterlagen öffnen") + hAbsatz(esc(s2)) + hAbsatz(`<span style="color:${FARBE.leise};font-size:14px;">${esc(s3)}</span>`);
+  return { betreff, text, html: rahmen({ betreff, vorschau: s1, inhalt, basis }) };
+}

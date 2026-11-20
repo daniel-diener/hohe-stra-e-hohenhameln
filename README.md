@@ -52,6 +52,28 @@ sind also immer auf dem aktuellen Stand. Lokal auf macOS/Windows dafür `CHROMIU
 auf ein installiertes Chrome setzen, z. B.
 `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
 
+### Unterlagen für einen Kunden online bereitstellen
+
+Im Lead unter **Unterlagen online bereitstellen** Exposés (und ggf. die
+Reservierungsvereinbarung) anhaken, Laufzeit wählen, *Freigabe erstellen*.
+Die PDFs werden dabei einmal gedruckt und im privaten Supabase-Bucket
+`freigaben` abgelegt (Stand vom Tag der Freigabe). Das Team bekommt einmalig:
+
+- einen Link `/unterlagen/<token>` (192 Bit Zufall, nicht zu erraten) und
+- einen Zugangscode (`XXXXX-XXXXX`). Gespeichert wird nur sein scrypt-Hash —
+  geht er verloren, im Lead *Neuer Code*.
+
+Link und Code auf getrennten Wegen weitergeben (Link per Mail — auf Wunsch direkt
+aus dem Formular, ohne Code —, Code am Telefon/SMS). Nach 10 falschen Codes ist
+der Link gesperrt, bis das Team einen neuen Code erzeugt. *Widerrufen* schaltet
+den Link sofort ab und löscht die PDFs; beim Löschen eines Leads gehen sie mit.
+Der erste Abruf erscheint im Verlauf des Leads.
+
+Die Seiten sind nicht indexierbar: `noindex` als Meta-Tag und als
+`X-Robots-Tag`-Header (`next.config.ts`), `Disallow: /unterlagen` in der
+robots.txt, kein Referrer, `Cache-Control: private, no-store`. Voraussetzung:
+Migration `0009_freigaben.sql` (Tabelle, Bucket, Policies).
+
 Alles mit **TODO** fehlt noch — Energieausweis, Provision,
 Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 

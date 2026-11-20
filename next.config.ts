@@ -8,6 +8,18 @@ const config: NextConfig = {
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
   outputFileTracingIncludes: {
     "/admin/dokumente/**": ["./node_modules/@sparticuz/chromium/bin/**", "./vorlagen/**"],
+    // Freigaben im Lead drucken dieselben PDFs.
+    "/admin/leads/**": ["./node_modules/@sparticuz/chromium/bin/**", "./vorlagen/**"],
+  },
+  // Kunden-Downloads: nie in Suchmaschinen, den geheimen Link nie als Referrer weitergeben.
+  async headers() {
+    return [{
+      source: "/unterlagen/:pfad*",
+      headers: [
+        { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive, nosnippet" },
+        { key: "Referrer-Policy", value: "no-referrer" },
+      ],
+    }];
   },
   images: {
     // AVIF ist bei den Visualisierungen rund ein Drittel kleiner als WebP —

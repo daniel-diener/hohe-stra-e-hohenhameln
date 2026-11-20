@@ -3,7 +3,7 @@ import nodemailer, { type Transporter } from "nodemailer";
 import type { Anfrage } from "./anfrage";
 import { finanzierungLabel, zweckLabel } from "./labels";
 import type { Lead } from "./leads";
-import { bestaetigung, einladung, terminBestaetigung, terminInfo } from "./mail-vorlagen";
+import { bestaetigung, einladung, terminBestaetigung, terminInfo, unterlagenLink } from "./mail-vorlagen";
 import { objektNach, projekt } from "./objekte";
 import { objektMitStand } from "./verkaufsstand";
 import { seitenUrl } from "./seite";
@@ -131,6 +131,14 @@ type LeadFuerMail = Pick<Lead, "id" | "name" | "email" | "telefon" | "zweck" | "
 /** Einladung ins Büro mit persönlichem Buchungslink. */
 export async function sendeEinladung(lead: LeadFuerMail, token: string): Promise<boolean> {
   const m = einladung(lead, objektNach(lead.objekt_slug), seitenUrl, token);
+  return senden(lead.email, m.betreff, m.text, projekt.ansprechpartner.email, m.html);
+}
+
+/** Link zu freigegebenen Unterlagen — ohne Zugangscode, der geht getrennt raus. */
+export async function sendeUnterlagenLink(
+  lead: Pick<Lead, "name" | "email">, link: string, titel: string[], gueltigBis: string,
+): Promise<boolean> {
+  const m = unterlagenLink(lead, seitenUrl, link, titel, gueltigBis);
   return senden(lead.email, m.betreff, m.text, projekt.ansprechpartner.email, m.html);
 }
 
