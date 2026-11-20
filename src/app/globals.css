@@ -713,6 +713,9 @@ label.haken input { margin-top: 3px; }
 .wohnung-anfragen { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .wohnung-anfragen li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .wohnung-allgemein { margin-top: 32px; font-size: 1.125rem; }
+.dokumente-kopf { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.dokumente-kopf p { margin-bottom: 0; }
+.dokumente-aktionen { display: flex; align-items: center; justify-content: flex-end; gap: 16px; white-space: nowrap; }
 
 /* Admin: Status und Wohnung oben auf der Lead-Seite */
 .lead-stand { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 20px 0 24px; background: hsl(var(--border)); border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); overflow: hidden; }

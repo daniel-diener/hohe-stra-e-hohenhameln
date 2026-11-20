@@ -44,6 +44,14 @@ Kaufpreise (Wohnungen und Stellplätze, ohne Verkaufsstand) liegen in Supabase i
 und `stellplaetze` (nur fürs Team lesbar, Quelle: Kaufpreisliste vom 15.09.2026);
 das Wohnungs-Exposé unter `/admin/expose/<slug>` liest sie von dort.
 
+Im Admin unter **Dokumente** (`/admin/dokumente`) liegen die Reservierungsvereinbarung
+(Vorlage, `vorlagen/` — bewusst nicht in `public/`) und alle Exposés als PDF,
+einzeln oder zusammen als ZIP. Die Exposé-PDFs werden bei jedem Klick frisch
+aus den Exposé-Seiten gedruckt (`src/lib/pdf.ts`, Chromium aus `@sparticuz/chromium`),
+sind also immer auf dem aktuellen Stand. Lokal auf macOS/Windows dafür `CHROMIUM_PATH`
+auf ein installiertes Chrome setzen, z. B.
+`/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
+
 Alles mit **TODO** fehlt noch — Energieausweis, Provision,
 Kontaktdaten, Impressum und Datenschutz. Vor dem Livegang ersetzen.
 
