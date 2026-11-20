@@ -57,11 +57,11 @@ auf ein installiertes Chrome setzen, z. B.
 Im Lead unter **Unterlagen online bereitstellen** Exposés (und ggf. die
 Reservierungsvereinbarung) anhaken, Laufzeit wählen, *Freigabe erstellen*.
 Die PDFs werden dabei einmal gedruckt und im privaten Supabase-Bucket
-`freigaben` abgelegt (Stand vom Tag der Freigabe). Das Team bekommt einmalig:
+`freigaben` abgelegt (Stand vom Tag der Freigabe). Im Lead stehen danach,
+solange die Freigabe gilt:
 
 - einen Link `/unterlagen/<token>` (192 Bit Zufall, nicht zu erraten) und
-- einen Zugangscode (`XXXXX-XXXXX`). Gespeichert wird nur sein scrypt-Hash —
-  geht er verloren, im Lead *Neuer Code*.
+- der Zugangscode (`XXXXX-XXXXX`), nur fürs Team lesbar. *Neuer Code* ersetzt ihn.
 
 Link und Code auf getrennten Wegen weitergeben (Link per Mail — auf Wunsch direkt
 aus dem Formular, ohne Code —, Code am Telefon/SMS). Nach 10 falschen Codes ist

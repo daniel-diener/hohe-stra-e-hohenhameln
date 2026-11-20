@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-  MAX_FEHLVERSUCHE, TOKEN, codeHash, codeNormalisieren, codePruefen, neuerCode, neuerToken, sitzungPruefen, sitzungsWert, sperrgrund,
+  MAX_FEHLVERSUCHE, TOKEN, codePruefen, neuerCode, neuerToken, sitzungPruefen, sitzungsWert, sperrgrund,
 } from "./freigabe";
 
 describe("Freigabe", () => {
@@ -16,24 +16,18 @@ describe("Freigabe", () => {
 
   it("Code wird beim Prüfen großzügig gelesen, aber nur der richtige passt", () => {
     const code = "K7MQ2-XR9PA";
-    const hash = codeHash(code);
-    expect(hash).not.toContain("K7MQ2");
-    expect(codePruefen("k7mq2 xr9pa", hash)).toBe(true);
-    expect(codePruefen("K7MQ2XR9PA", hash)).toBe(true);
-    expect(codePruefen("K7MQ2-XR9PB", hash)).toBe(false);
-    expect(codePruefen("", hash)).toBe(false);
-    expect(codePruefen(code, "kaputt")).toBe(false);
-  });
-
-  it("Gleicher Code, anderer Hash (Salz)", () => {
-    expect(codeHash("AAAAA-BBBBB")).not.toBe(codeHash("AAAAA-BBBBB"));
+    expect(codePruefen("k7mq2 xr9pa", code)).toBe(true);
+    expect(codePruefen("K7MQ2XR9PA", code)).toBe(true);
+    expect(codePruefen("K7MQ2-XR9PB", code)).toBe(false);
+    expect(codePruefen("", code)).toBe(false);
+    expect(codePruefen("", "")).toBe(false);
   });
 
   it("Cookie gilt nur für diese Freigabe und diesen Code", () => {
-    const f = { id: "1b4e28ba-2fa1-11d2-883f-0016d3cca427", code_hash: codeHash("AAAAA-BBBBB") };
+    const f = { id: "1b4e28ba-2fa1-11d2-883f-0016d3cca427", code: "AAAAA-BBBBB" };
     const wert = sitzungsWert(f, "geheim");
     expect(sitzungPruefen(wert, f, "geheim")).toBe(true);
-    expect(sitzungPruefen(wert, { ...f, code_hash: codeHash("AAAAA-BBBBB") }, "geheim")).toBe(false);
+    expect(sitzungPruefen(wert, { ...f, code: "AAAAA-BBBBC" }, "geheim")).toBe(false);
     expect(sitzungPruefen(wert, { ...f, id: "anders" }, "geheim")).toBe(false);
     expect(sitzungPruefen(wert, f, "anderes-geheimnis")).toBe(false);
     expect(sitzungPruefen(undefined, f, "geheim")).toBe(false);

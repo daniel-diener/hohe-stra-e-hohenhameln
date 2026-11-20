@@ -4,8 +4,8 @@
 --     einmal gedruckt und im privaten Bucket `freigaben` abgelegt — der Kunde
 --     bekommt also den Stand vom Tag der Freigabe, auch wenn sich Preise ändern.
 --   * Der Kunde erreicht sie über /unterlagen/<token> (zufällig, 192 Bit) und
---     braucht zusätzlich einen Zugangscode. Vom Code steht hier nur der
---     scrypt-Hash; ihn selbst sieht das Team genau einmal beim Anlegen.
+--     braucht zusätzlich einen Zugangscode. Der Code steht hier im Klartext,
+--     damit das Team ihn im Lead jederzeit nachsehen kann — lesen darf ihn nur das Team (RLS).
 --   * Die öffentliche Seite liest über den Server mit dem geheimen Schlüssel.
 --     Anonym gibt es weder auf die Tabelle noch auf den Bucket eine Policy.
 
@@ -13,7 +13,7 @@ create table public.freigaben (
   id                    uuid primary key default gen_random_uuid(),
   lead_id               uuid not null references public.leads (id) on delete cascade,
   token                 text not null unique check (length(token) >= 32),
-  code_hash             text not null,
+  code                  text not null,
   -- [{ "datei": "expose-wohnung-5.pdf", "titel": "Exposé WE 5" }, …]
   dateien               jsonb not null check (jsonb_typeof(dateien) = 'array' and jsonb_array_length(dateien) > 0),
   gueltig_bis           timestamptz not null,

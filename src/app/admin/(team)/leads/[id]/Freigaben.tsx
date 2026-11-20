@@ -5,35 +5,33 @@ import { type FreigabeStand, erneuereCode, erstelleFreigabe } from "../../freiga
 
 type Dok = { datei: string; titel: string; beschreibung: string; gruppe: string };
 
-/** Link und Code einmalig anzeigen — der Code steht danach nirgends mehr im Klartext. */
-function Ergebnis({ stand }: { stand: FreigabeStand }) {
-  const [kopiert, setKopiert] = useState<string | null>(null);
-  if (stand.stand === "offen") return null;
-  if (stand.stand === "fehler") return <p className="fehler">{stand.meldung}</p>;
-
-  const kopieren = async (was: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setKopiert(was);
-    } catch {}
-  };
+function Kopieren({ text }: { text: string }) {
+  const [kopiert, setKopiert] = useState(false);
   return (
-    <div className="karte erfolg freigabe-ergebnis">
-      <p className="klein"><strong>Jetzt notieren:</strong> Der Code wird nur dieses eine Mal angezeigt.</p>
-      <dl>
-        <div>
-          <dt>Link</dt>
-          <dd><code>{stand.link}</code> <button type="button" className="knopf-link klein" onClick={() => kopieren("link", stand.link)}>{kopiert === "link" ? "kopiert" : "kopieren"}</button></dd>
-        </div>
-        <div>
-          <dt>Zugangscode</dt>
-          <dd><code className="freigabe-code">{stand.code}</code> <button type="button" className="knopf-link klein" onClick={() => kopieren("code", stand.code)}>{kopiert === "code" ? "kopiert" : "kopieren"}</button></dd>
-        </div>
-      </dl>
-      {stand.hinweis && <p className="klein">{stand.hinweis}</p>}
-      <p className="klein leise">Link und Code am besten auf getrennten Wegen weitergeben, z. B. Link per E-Mail, Code am Telefon oder per SMS.</p>
-    </div>
+    <button
+      type="button" className="knopf-link klein"
+      onClick={async () => { try { await navigator.clipboard.writeText(text); setKopiert(true); } catch {} }}
+    >
+      {kopiert ? "kopiert" : "kopieren"}
+    </button>
   );
+}
+
+/** Link und Code einer Freigabe — stehen dauerhaft im Lead, solange die Freigabe gilt. */
+export function LinkUndCode({ link, code }: { link: string; code: string }) {
+  return (
+    <dl className="freigabe-daten">
+      <div><dt>Link</dt><dd><code>{link}</code> <Kopieren text={link} /></dd></div>
+      <div><dt>Zugangscode</dt><dd><code className="freigabe-code">{code}</code> <Kopieren text={code} /></dd></div>
+    </dl>
+  );
+}
+
+/** Nur Fehler und Hinweise — Link und Code erscheinen danach in der Liste darüber. */
+function Ergebnis({ stand }: { stand: FreigabeStand }) {
+  if (stand.stand === "fehler") return <p className="fehler">{stand.meldung}</p>;
+  if (stand.stand === "fertig" && stand.hinweis) return <p className="klein">{stand.hinweis}</p>;
+  return null;
 }
 
 export function NeueFreigabe({ leadId, email, dokumente, vorausgewaehlt, laufzeiten }: {

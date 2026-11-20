@@ -13,7 +13,8 @@ import { dokumente } from "@/lib/dokumente";
 import { type Freigabe, GUELTIGKEIT_TAGE, sperrgrund } from "@/lib/freigabe";
 import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
 import { widerrufeFreigabe } from "../../freigaben";
-import { CodeErneuern, NeueFreigabe } from "./Freigaben";
+import { seitenUrl } from "@/lib/seite";
+import { CodeErneuern, LinkUndCode, NeueFreigabe } from "./Freigaben";
 
 /** Eine Freigabe druckt die gewählten Exposés — das kann bei vielen bis zu einer Minute dauern. */
 export const maxDuration = 300;
@@ -38,10 +39,10 @@ export default async function LeadSeite({ params }: Props) {
       .returns<LeadAktivitaet[]>(),
     supabase
       .from("freigaben")
-      .select("id, dateien, gueltig_bis, widerrufen_at, fehlversuche, abrufe, zuletzt_abgerufen_at, created_at")
+      .select("id, token, code, dateien, gueltig_bis, widerrufen_at, fehlversuche, abrufe, zuletzt_abgerufen_at, created_at")
       .eq("lead_id", id)
       .order("created_at", { ascending: false })
-      .returns<Omit<Freigabe, "lead_id" | "token" | "code_hash">[]>(),
+      .returns<Omit<Freigabe, "lead_id">[]>(),
   ]);
   if (!lead) notFound();
 
@@ -181,7 +182,8 @@ export default async function LeadSeite({ params }: Props) {
             <h2>Unterlagen online bereitstellen</h2>
             <p className="klein leise">
               Die gewählten Dokumente werden einmal als PDF erstellt und unter einem persönlichen Link abgelegt.
-              Zum Öffnen braucht der Kunde zusätzlich einen Zugangscode. Die Seite ist nicht in Suchmaschinen.
+              Zum Öffnen braucht der Kunde zusätzlich den Zugangscode. Link und Code stehen hier, solange die
+              Freigabe gilt. Die Seite ist nicht in Suchmaschinen.
             </p>
             {(freigaben ?? []).length > 0 && (
               <ul className="freigaben">
@@ -195,6 +197,9 @@ export default async function LeadSeite({ params }: Props) {
                         {" · "}{f.abrufe === 0 ? "noch nicht abgerufen" : `${f.abrufe}× abgerufen, zuletzt ${formatDatum(f.zuletzt_abgerufen_at!)}`}
                       </p>
                       <p className="klein leise">{f.dateien.map((d) => d.titel).join(" · ")}</p>
+                      {(!grund || grund === "gesperrt") && (
+                        <LinkUndCode link={new URL(`/unterlagen/${f.token}`, seitenUrl).href} code={f.code} />
+                      )}
                       {!f.widerrufen_at && (
                         <div className="freigabe-knoepfe">
                           <CodeErneuern freigabeId={f.id} />

@@ -1,4 +1,4 @@
-import { createHmac, randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
+import { createHmac, randomBytes, randomInt, timingSafeEqual } from "node:crypto";
 
 /**
  * Freigaben: Unterlagen für einen Kunden unter /unterlagen/<token>, zusätzlich
@@ -8,9 +8,10 @@ import { createHmac, randomBytes, randomInt, scryptSync, timingSafeEqual } from 
  *   * Token: 24 Zufallsbytes (192 Bit), base64url — nicht zu erraten, nicht aufzuzählen.
  *   * Code: 10 Zeichen ohne Verwechsler (0/O, 1/I/L), etwa 50 Bit. Mit der Sperre
  *     nach 10 Fehlversuchen reicht das weit; am Telefon lässt er sich gut diktieren.
- *   * In der Datenbank steht nur der scrypt-Hash des Codes.
+ *   * Der Code steht in der Datenbank, nur fürs Team lesbar — so kann es ihn im Lead
+ *     jederzeit nachsehen und dem Kunden noch einmal durchgeben.
  *   * Nach richtiger Eingabe merkt sich der Browser ein Cookie mit einem HMAC über
- *     Freigabe und Code-Hash. Ein neuer Code macht alte Cookies damit ungültig.
+ *     Freigabe und Code. Ein neuer Code macht alte Cookies damit ungültig.
  */
 
 export type FreigabeDatei = { datei: string; titel: string };
@@ -19,7 +20,7 @@ export type Freigabe = {
   id: string;
   lead_id: string;
   token: string;
-  code_hash: string;
+  code: string;
   dateien: FreigabeDatei[];
   gueltig_bis: string;
   widerrufen_at: string | null;
@@ -51,18 +52,10 @@ export function codeNormalisieren(eingabe: string) {
   return eingabe.toUpperCase().replace(/[^A-Z0-9]/g, "");
 }
 
-export function codeHash(code: string) {
-  const salz = randomBytes(16);
-  const hash = scryptSync(codeNormalisieren(code), salz, 32);
-  return `scrypt$${salz.toString("base64url")}$${hash.toString("base64url")}`;
-}
-
-export function codePruefen(eingabe: string, gespeichert: string) {
-  const [art, salz, hash] = gespeichert.split("$");
-  if (art !== "scrypt" || !salz || !hash) return false;
-  const soll = Buffer.from(hash, "base64url");
-  const ist = scryptSync(codeNormalisieren(eingabe), Buffer.from(salz, "base64url"), soll.length);
-  return timingSafeEqual(ist, soll);
+export function codePruefen(eingabe: string, code: string) {
+  const ist = Buffer.from(codeNormalisieren(eingabe));
+  const soll = Buffer.from(codeNormalisieren(code));
+  return soll.length > 0 && ist.length === soll.length && timingSafeEqual(ist, soll);
 }
 
 function geheimnis() {
@@ -72,11 +65,11 @@ function geheimnis() {
 }
 
 /** Wert des Cookies, das nach richtigem Code den Zugang hält. */
-export function sitzungsWert(f: Pick<Freigabe, "id" | "code_hash">, schluessel = geheimnis()) {
-  return createHmac("sha256", `freigabe:${schluessel}`).update(`${f.id}:${f.code_hash}`).digest("base64url");
+export function sitzungsWert(f: Pick<Freigabe, "id" | "code">, schluessel = geheimnis()) {
+  return createHmac("sha256", `freigabe:${schluessel}`).update(`${f.id}:${codeNormalisieren(f.code)}`).digest("base64url");
 }
 
-export function sitzungPruefen(wert: string | undefined, f: Pick<Freigabe, "id" | "code_hash">, schluessel = geheimnis()) {
+export function sitzungPruefen(wert: string | undefined, f: Pick<Freigabe, "id" | "code">, schluessel = geheimnis()) {
   if (!wert) return false;
   const soll = Buffer.from(sitzungsWert(f, schluessel));
   const ist = Buffer.from(wert);

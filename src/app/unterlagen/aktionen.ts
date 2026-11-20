@@ -15,7 +15,7 @@ export async function entsperren(_vorher: CodeStand, form: FormData): Promise<Co
   const f = await freigabeNachToken(token);
   if (!f || sperrgrund(f)) return { meldung: "Dieser Link ist nicht mehr gültig. Bitte melden Sie sich bei uns." };
 
-  if (!codePruefen(code, f.code_hash)) {
+  if (!codePruefen(code, f.code)) {
     const versuche = f.fehlversuche + 1;
     await supabaseDienst().from("freigaben").update({ fehlversuche: versuche }).eq("id", f.id);
     // Ein bisschen bremsen, damit sich nicht in Serie raten lässt.

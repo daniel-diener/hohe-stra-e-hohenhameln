@@ -734,11 +734,9 @@ label.haken input { margin-top: 3px; }
 .freigabe-formular fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 .freigabe-formular legend { margin-bottom: 8px; padding: 0; }
 .freigabe-auswahl { display: grid; gap: 10px 16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); max-height: 340px; overflow-y: auto; }
-.freigabe-ergebnis { display: grid; gap: 8px; margin-bottom: 24px; }
-.freigabe-ergebnis p { margin: 0; }
-.freigabe-ergebnis dl { display: grid; gap: 8px; margin: 0; }
-.freigabe-ergebnis dt { font: 0.6875rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: hsl(var(--muted-foreground)); }
-.freigabe-ergebnis dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+.freigabe-daten { display: grid; gap: 8px; margin: 0; }
+.freigabe-daten dt { font: 0.6875rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: hsl(var(--muted-foreground)); }
+.freigabe-daten dd { margin: 2px 0 0; overflow-wrap: anywhere; }
 .freigabe-code { font-size: 1.25rem; font-weight: 600; letter-spacing: 0.08em; }
 .freigaben { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 12px; }
 .freigaben li { border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px); padding: 14px 16px; display: grid; gap: 8px; }

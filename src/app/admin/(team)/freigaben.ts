@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 import { dokumentNach } from "@/lib/dokumente";
 import {
-  BUCKET, type Freigabe, type FreigabeDatei, GUELTIGKEIT_TAGE, codeHash, neuerCode, neuerToken, speicherPfad,
+  BUCKET, type Freigabe, type FreigabeDatei, GUELTIGKEIT_TAGE, neuerCode, neuerToken, speicherPfad,
 } from "@/lib/freigabe";
 import type { Lead } from "@/lib/leads";
 import { sendeUnterlagenLink } from "@/lib/mail";
@@ -75,7 +75,7 @@ export async function erstelleFreigabe(_vorher: FreigabeStand, form: FormData): 
   const dateien: FreigabeDatei[] = liste.map((d) => ({ datei: d.datei, titel: d.titel }));
   const gueltigBis = new Date(Date.now() + tage * TAG).toISOString();
   const { error } = await supabase.from("freigaben").insert({
-    id, lead_id: lead.id, token, code_hash: codeHash(code), dateien, gueltig_bis: gueltigBis, created_by: user.id,
+    id, lead_id: lead.id, token, code, dateien, gueltig_bis: gueltigBis, created_by: user.id,
   });
   if (error) {
     console.error("Freigabe: Speichern fehlgeschlagen", error);
@@ -110,7 +110,7 @@ export async function erneuereCode(_vorher: FreigabeStand, form: FormData): Prom
   const id = String(form.get("freigabe"));
   const code = neuerCode();
   const { data } = await supabase
-    .from("freigaben").update({ code_hash: codeHash(code), fehlversuche: 0 }).eq("id", id).is("widerrufen_at", null)
+    .from("freigaben").update({ code, fehlversuche: 0 }).eq("id", id).is("widerrufen_at", null)
     .select("token, lead_id").maybeSingle<Pick<Freigabe, "token" | "lead_id">>();
   if (!data) return { stand: "fehler", meldung: "Freigabe nicht gefunden oder widerrufen." };
   revalidatePath(`/admin/leads/${data.lead_id}`);
