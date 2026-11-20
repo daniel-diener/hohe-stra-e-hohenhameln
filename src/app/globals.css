@@ -175,7 +175,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .held h1 { max-width: 14ch; }
 .held-vorteile { list-style: none; padding: 0; margin: 20px 0 16px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; font-size: clamp(1rem, 1.8vw, 1.25rem); }
 .held-vorteile li { display: flex; align-items: center; gap: 8px; }
-.held-vorteile li::before { content: "✓"; color: #bece43; }
+/* Haken per CSS gezeichnet, nicht als Zeichen „✓“: Das Chromium für den PDF-Druck
+   auf Vercel hat keine Schrift mit diesem Zeichen und zeigt sonst ein Kästchen. */
+.held-vorteile li::before { content: ""; flex: none; width: 0.32em; height: 0.62em; border: solid currentColor; border-width: 0 0.14em 0.14em 0; transform: translateY(-0.12em) rotate(45deg); color: #bece43; margin: 0 0.1em; }
 .held-text { font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: rgba(255, 255, 255, 0.82); max-width: 600px; }
 .badge {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; margin-bottom: 24px;
@@ -403,8 +405,8 @@ label.haken input { margin-top: 3px; }
 .raeume .summe td { font-weight: 600; border-bottom: 0; border-top: 2px solid hsl(var(--foreground)); }
 .objekt-seite .klein.leise { margin-bottom: 40px; }
 .haken-liste { list-style: none; padding: 0; margin: 0 0 40px; display: grid; gap: 10px; }
-.haken-liste li { display: flex; gap: 10px; align-items: baseline; }
-.haken-liste li::before { content: "✓"; color: hsl(var(--success)); font-weight: 700; }
+.haken-liste li { display: flex; gap: 10px; align-items: center; }
+.haken-liste li::before { content: ""; flex: none; width: 0.32em; height: 0.62em; border: solid currentColor; border-width: 0 0.14em 0.14em 0; transform: translateY(-0.12em) rotate(45deg); color: hsl(var(--success)); margin: 0 0.1em; }
 .blaettern { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
 .blaettern a {
   display: grid; gap: 4px; padding: 16px 20px; border: 1px solid hsl(var(--border)); border-radius: calc(var(--radius) + 4px);
@@ -571,7 +573,8 @@ label.haken input { margin-top: 3px; }
 .titelblatt h1 span { color: rgba(255, 255, 255, 0.75); }
 .titel-zeile { font-size: 12pt; margin: 0 0 4mm; color: rgba(255, 255, 255, 0.85); }
 .titel-vorteile { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 2mm 6mm; font-size: 12pt; font-weight: 600; }
-.titel-vorteile li::before { content: "✓ "; color: #bece43; }
+.titel-vorteile li { display: inline-flex; align-items: center; gap: 0.45em; }
+.titel-vorteile li::before { content: ""; flex: none; width: 0.32em; height: 0.62em; border: solid currentColor; border-width: 0 0.14em 0.14em 0; transform: translateY(-0.12em) rotate(45deg); color: #bece43; margin: 0 0.05em; }
 .titel-fuss { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; font-size: 9pt; color: rgba(255, 255, 255, 0.85); }
 .titel-judek { background: rgba(255, 255, 255, 0.92); padding: 3mm 4mm; border-radius: 2mm; }
 .titel-judek .judek-logo { width: 34mm; margin: 0; }
