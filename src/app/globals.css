@@ -707,3 +707,9 @@ label.haken input { margin-top: 3px; }
 .termin-verschieben > summary { cursor: pointer; font-weight: 500; color: hsl(var(--cta-text)); padding: 6px 0; width: fit-content; }
 .termin-verschieben[open] > summary { margin-bottom: 8px; }
 .termin-verschieben .termin-wahl { margin-top: 16px; }
+
+/* Admin: Wohnungsübersicht */
+.tabelle .tabelle-gruppe th { background: hsl(var(--muted)); color: hsl(var(--foreground)); font-weight: 600; }
+.wohnung-anfragen { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.wohnung-anfragen li { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.wohnung-allgemein { margin-top: 32px; font-size: 1.125rem; }
