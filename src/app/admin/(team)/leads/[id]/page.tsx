@@ -2,13 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDatum } from "@/lib/format";
 import {
-  AKTIVITAET, LEAD_STATUS, aktivitaetLabel, finanzierungLabel, leadStatusLabel, zweckLabel,
+  AKTIVITAET, LEAD_STATUS, aktivitaetLabel, finanzierungLabel, leadStatusLabel, objektStatusLabel, zweckLabel,
 } from "@/lib/labels";
 import type { Lead, LeadAktivitaet } from "@/lib/leads";
-import { objektNach, projekt } from "@/lib/objekte";
+import { objektNach, objekte, projekt } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
 import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
-import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, trageTerminEin } from "../../aktionen";
+import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -128,6 +128,20 @@ export default async function LeadSeite({ params }: Props) {
                 {LEAD_STATUS.map((s) => <option key={s} value={s}>{leadStatusLabel[s]}</option>)}
               </select>
               <button className="knopf klein">Speichern</button>
+            </form>
+
+            <h2>Wohnung</h2>
+            <form action={setzeWohnung} className="filter">
+              <input type="hidden" name="id" value={lead.id} />
+              <select name="objekt" defaultValue={objekt?.slug ?? ""}>
+                <option value="">Keine bestimmte Wohnung</option>
+                {[...objekte].sort((a, b) => a.we - b.we).map((o) => (
+                  <option key={o.slug} value={o.slug}>
+                    {o.titel}{o.status === "verfuegbar" ? "" : ` (${objektStatusLabel[o.status]})`}
+                  </option>
+                ))}
+              </select>
+              <button className="knopf klein">Zuordnen</button>
             </form>
 
             <details className="gefahr">

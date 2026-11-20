@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { AKTIVITAET, LEAD_STATUS, istEines, leadStatusLabel } from "@/lib/labels";
 import type { Lead } from "@/lib/leads";
 import { sendeEinladung, sendeTerminAbsage } from "@/lib/mail";
+import { objektNach } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
 import { bucheTermin } from "@/lib/termin-buchen";
 import { terminText } from "@/lib/termine";
@@ -39,6 +40,30 @@ export async function setzeStatus(form: FormData) {
   });
   revalidatePath(`/admin/leads/${id}`);
   revalidatePath("/admin");
+}
+
+/** Ordnet den Lead einer Wohnung zu (leer = allgemeine Anfrage). Erscheint so im Reiter „Wohnungen“. */
+export async function setzeWohnung(form: FormData) {
+  const { supabase, user } = await team();
+  const id = String(form.get("id"));
+  const wahl = String(form.get("objekt") ?? "");
+  const neu = objektNach(wahl);
+  if (wahl && !neu) throw new Error("Unbekannte Wohnung");
+
+  const { data: vorher } = await supabase.from("leads").select("objekt_slug").eq("id", id).single();
+  if (!vorher || (vorher.objekt_slug ?? "") === (neu?.slug ?? "")) return;
+
+  const { error } = await supabase.from("leads").update({ objekt_slug: neu?.slug ?? null }).eq("id", id);
+  if (error) throw error;
+  await supabase.from("lead_aktivitaeten").insert({
+    lead_id: id,
+    art: "status",
+    text: `Wohnung: ${objektNach(vorher.objekt_slug)?.titel ?? "Allgemein"} → ${neu?.titel ?? "Allgemein"}`,
+    created_by: user.id,
+  });
+  revalidatePath(`/admin/leads/${id}`);
+  revalidatePath("/admin");
+  revalidatePath("/admin/wohnungen");
 }
 
 export async function notiere(form: FormData) {
