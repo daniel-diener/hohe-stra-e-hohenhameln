@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { formatDatum } from "@/lib/format";
 import { LEAD_STATUS, finanzierungLabel, istEines, leadStatusLabel, zweckLabel } from "@/lib/labels";
-import { suchbegriff, type Lead } from "@/lib/leads";
+import { formatTag, heuteBerlin, suchbegriff, type Lead } from "@/lib/leads";
 import { objektNach, objekte } from "@/lib/objekte";
 import { teamMitglied } from "@/lib/supabase-server";
 
@@ -17,7 +17,7 @@ export default async function Leads({ searchParams }: Props) {
 
   let abfrage = supabase
     .from("leads")
-    .select("id, created_at, name, email, telefon, objekt_slug, zweck, finanzierung, rueckruf, status")
+    .select("id, created_at, name, email, telefon, objekt_slug, zweck, finanzierung, rueckruf, status, wiedervorlage_am, wiedervorlage_text")
     .order("created_at", { ascending: false })
     .limit(500);
   if (istEines(LEAD_STATUS, filter.status)) abfrage = abfrage.eq("status", filter.status);
@@ -32,6 +32,7 @@ export default async function Leads({ searchParams }: Props) {
   ]);
   if (error) throw error;
 
+  const heute = heuteBerlin();
   const anzahl = new Map<string, number>();
   for (const l of alle ?? []) anzahl.set(l.status, (anzahl.get(l.status) ?? 0) + 1);
 
@@ -79,7 +80,7 @@ export default async function Leads({ searchParams }: Props) {
                 </tr>
               </thead>
               <tbody>
-                {(leads as Pick<Lead, "id" | "created_at" | "name" | "email" | "telefon" | "objekt_slug" | "zweck" | "finanzierung" | "rueckruf" | "status">[]).map((l) => (
+                {(leads as Pick<Lead, "id" | "created_at" | "name" | "email" | "telefon" | "objekt_slug" | "zweck" | "finanzierung" | "rueckruf" | "status" | "wiedervorlage_am" | "wiedervorlage_text">[]).map((l) => (
                   <tr key={l.id}>
                     <td className="klein">{formatDatum(l.created_at)}</td>
                     <td><Link href={`/admin/leads/${l.id}`}><strong>{l.name}</strong></Link></td>
@@ -90,7 +91,20 @@ export default async function Leads({ searchParams }: Props) {
                       {l.rueckruf && <> <span className="marke reserviert">Rückruf</span></>}
                     </td>
                     <td className="klein">{zweckLabel[l.zweck]}<br />{finanzierungLabel[l.finanzierung]}</td>
-                    <td><span className={`marke lead-${l.status}`}>{leadStatusLabel[l.status]}</span></td>
+                    <td>
+                      <span className={`marke lead-${l.status}`}>{leadStatusLabel[l.status]}</span>
+                      {l.wiedervorlage_am && (
+                        <>
+                          <br />
+                          <span
+                            className={`marke ${l.wiedervorlage_am <= heute ? "lead-neu" : "lead-notartermin"}`}
+                            title={l.wiedervorlage_text ?? undefined}
+                          >
+                            Follow-up {formatTag(l.wiedervorlage_am)}
+                          </span>
+                        </>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -172,3 +172,28 @@ export async function sageTerminAb(form: FormData) {
   if (lead) await sendeTerminAbsage(lead, termin.beginn);
   revalidatePath(`/admin/leads/${id}`);
 }
+
+/** Setzt oder entfernt das Follow-up eines Leads (leeres Datum = entfernen) und hält es im Verlauf fest. */
+export async function setzeWiedervorlage(form: FormData) {
+  const { supabase, user } = await team();
+  const id = String(form.get("id"));
+  const entfernen = form.get("entfernen") === "1";
+  const am = entfernen ? "" : String(form.get("am") ?? "").trim();
+  if (am && !/^\d{4}-\d{2}-\d{2}$/.test(am)) throw new Error("Ungültiges Datum");
+  const text = entfernen ? "" : String(form.get("text") ?? "").trim().slice(0, 500);
+
+  const { error } = await supabase
+    .from("leads")
+    .update({ wiedervorlage_am: am || null, wiedervorlage_text: am ? text || null : null })
+    .eq("id", id);
+  if (error) throw error;
+  const [j, m, t] = am.split("-");
+  await supabase.from("lead_aktivitaeten").insert({
+    lead_id: id,
+    art: "notiz",
+    text: am ? `Follow-up am ${t}.${m}.${j}${text ? `: ${text}` : ""}` : "Follow-up erledigt bzw. entfernt.",
+    created_by: user.id,
+  });
+  revalidatePath(`/admin/leads/${id}`);
+  revalidatePath("/admin");
+}

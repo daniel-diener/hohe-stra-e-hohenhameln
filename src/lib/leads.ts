@@ -19,6 +19,9 @@ export type Lead = {
   termin_token: string;
   /** Wann das Team die Einladung zum Termin verschickt hat. Automatisch geht keine raus. */
   einladung_at: string | null;
+  /** Follow-up (Wiedervorlage) als Kalendertag „JJJJ-MM-TT“, leer = keins. */
+  wiedervorlage_am: string | null;
+  wiedervorlage_text: string | null;
 };
 
 export type LeadAktivitaet = {
@@ -38,4 +41,15 @@ export type LeadAktivitaet = {
 export function suchbegriff(q: string | undefined): string | null {
   const s = (q ?? "").replace(/[,().*%\\]/g, " ").trim().slice(0, 100);
   return s.length >= 2 ? s : null;
+}
+
+/** Heute als „JJJJ-MM-TT“ in Berliner Zeit — zum Vergleich mit `wiedervorlage_am`. */
+export function heuteBerlin(jetzt = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin" }).format(jetzt);
+}
+
+/** „12.12.2026“ aus „2026-12-12“ — ohne Zeitzonenrechnung, es ist ein reiner Kalendertag. */
+export function formatTag(tag: string): string {
+  const [j, m, t] = tag.split("-");
+  return `${t}.${m}.${j}`;
 }

@@ -4,14 +4,14 @@ import { formatDatum } from "@/lib/format";
 import {
   AKTIVITAET, LEAD_STATUS, aktivitaetLabel, finanzierungLabel, leadStatusLabel, objektStatusLabel, zweckLabel,
 } from "@/lib/labels";
-import type { Lead, LeadAktivitaet } from "@/lib/leads";
+import { formatTag, heuteBerlin, type Lead, type LeadAktivitaet } from "@/lib/leads";
 import { projekt } from "@/lib/objekte";
 import { objekteMitStand } from "@/lib/verkaufsstand";
 import { teamMitglied } from "@/lib/supabase-server";
 import { freieTermine, terminTag, terminText, terminUhr } from "@/lib/termine";
 import { dokumente } from "@/lib/dokumente";
 import { type Freigabe, GUELTIGKEIT_TAGE, sperrgrund } from "@/lib/freigabe";
-import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWohnung, trageTerminEin } from "../../aktionen";
+import { ladeEin, loesche, notiere, sageTerminAb, setzeStatus, setzeWiedervorlage, setzeWohnung, trageTerminEin } from "../../aktionen";
 import { widerrufeFreigabe } from "../../freigaben";
 import { seitenUrl } from "@/lib/seite";
 import { CodeErneuern, GRUPPE_VERGEBEN, LinkUndCode, NeueFreigabe } from "./Freigaben";
@@ -114,6 +114,32 @@ export default async function LeadSeite({ params }: Props) {
                   <button className="knopf klein">Zuordnen</button>
                 </form>
               </div>
+            </div>
+
+            <div className={`wiedervorlage${lead.wiedervorlage_am ? (lead.wiedervorlage_am <= heuteBerlin() ? " faellig" : " geplant") : ""}`}>
+              <p className="lead-stand-titel">Follow-up</p>
+              {lead.wiedervorlage_am ? (
+                <p className="wiedervorlage-wert">
+                  <strong>Follow-up am {formatTag(lead.wiedervorlage_am)}</strong>
+                  {lead.wiedervorlage_am <= heuteBerlin() && <span className="marke lead-neu">Fällig</span>}
+                  {lead.wiedervorlage_text && <span className="wiedervorlage-text">{lead.wiedervorlage_text}</span>}
+                </p>
+              ) : (
+                <p className="klein leise">Kein Follow-up geplant.</p>
+              )}
+              <form action={setzeWiedervorlage} className="filter">
+                <input type="hidden" name="id" value={lead.id} />
+                <input type="date" name="am" defaultValue={lead.wiedervorlage_am ?? ""} required aria-label="Datum des Follow-ups" />
+                <input name="text" defaultValue={lead.wiedervorlage_text ?? ""} maxLength={500} placeholder="Worum geht es? (optional)" aria-label="Hinweis zum Follow-up" />
+                <button className="knopf klein">{lead.wiedervorlage_am ? "Ändern" : "Follow-up setzen"}</button>
+              </form>
+              {lead.wiedervorlage_am && (
+                <form action={setzeWiedervorlage}>
+                  <input type="hidden" name="id" value={lead.id} />
+                  <input type="hidden" name="entfernen" value="1" />
+                  <button className="knopf zweit klein">Erledigt / entfernen</button>
+                </form>
+              )}
             </div>
 
             <div className="aktionen">
